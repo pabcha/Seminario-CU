@@ -1,0 +1,8 @@
+# -- --
+
+libs/*
+models/*
+storage/uploads/thumb/*
+storage/uploads/thumb_medium/*
+storage/uploads/thumb_tiny/*
+vendor/*
