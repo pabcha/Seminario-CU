@@ -22,6 +22,11 @@ class Utils
 		}
 	}
 
+	public function test()
+	{
+		
+	}
+
 	/**
 	 * Trunca un valor decimal 
 	 * devuelve 0 si no es una valor valido

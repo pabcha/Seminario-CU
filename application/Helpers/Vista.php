@@ -65,4 +65,9 @@ class Vista
 		$i++;
 		return $clase;
 	}
+
+	public function test2()
+	{
+		
+	}
 }
