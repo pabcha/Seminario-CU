@@ -1,6 +1,6 @@
 # -- --
 
-application/Config.php
+
 libs/*
 models/*
 storage/uploads/thumb/*
