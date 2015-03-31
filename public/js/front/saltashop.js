@@ -1,10 +1,4 @@
 $(document).ready(function() {
-	/*$('#inputSearch').keydown(function(e){
-		e.preventDefault();
-		if (e.keyCode == 13) {
-			alert('presiono enter');
-		}
-	});*/
 	
 	$("form[name='formNewsletter']").submit(function(){
 		$('#alerta').hide();
@@ -28,4 +22,5 @@ $(document).ready(function() {
 			location.href="http://localhost/saltaShop/index/"+$(this).attr('id');
 		}
 	});
+
 });

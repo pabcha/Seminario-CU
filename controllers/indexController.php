@@ -75,6 +75,31 @@ class indexController extends Controller
 
 	public function producto($producto_id)
 	{
+		try {
+
+			$producto = App\Models\Product::where("producto_id", $producto_id)
+				->where("producto_estado", 'A')
+				->firstOrFail();
+
+			$imagenes = $producto->images()->get();
+
+			$datos['categorias'] = App\Models\Category::where('producto_categoria_padre_id', 0)
+				->where('producto_categoria_estado', 'A')
+				->get();
+
+			$this->_view->titulo = $producto->producto_nombre.' - Salta Shop';
+			$this->_view->setJs(array('vendor/jquery.flexslider-min',
+				'front/fn_producto'));
+			$this->_view->setCss(array('vendor/flexslider',
+				'front/estilos_categorias'));
+
+			$datos['p'] = $producto;
+			$datos['imagenes'] = $imagenes;
+
+			$this->viewMake('index/producto', $datos);
+		} catch (Exception $e) {
+			$this->redireccionar('error');
+		}
 		
 	}
 }

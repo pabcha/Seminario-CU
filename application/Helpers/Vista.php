@@ -26,7 +26,7 @@ class Vista
 		{
 			foreach ($scripts as $src) 
 			{
-				$tmp .= sprintf("\t<script type='text/javascript' src='%s'></script>\n", $src);
+				$tmp .= sprintf("\t<script src='%s'></script>\n", $src);
 			}
 		}
 

@@ -16,7 +16,6 @@ try{
 	require_once APP_PATH . 'View.php';
 	require_once APP_PATH . 'DataBase.php';
 	require_once APP_PATH . 'Session.php';
-	require_once APP_PATH . 'Extensions.php';
 
 	$whoops = new \Whoops\Run;
 	$whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);

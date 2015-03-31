@@ -20,7 +20,8 @@ ul.children > li > a,
 a.nav-header,
 .catalogo-header h3,
 .media a.autor,
-.cuerpo-contacto h5 {
+.cuerpo-contacto h5
+{
 	font-family: 'Open Sans', sans-serif;
 }
 ul.nav-tabs li > a,
@@ -30,6 +31,9 @@ ul.nav-tabs li > a,
 .titulo-header-3 h3 {
 	font-family: 'Oswald', sans-serif;
 }
+
+	
+
 .catalogo-header h3 {
 	color: #595959;
 	font-weight: 400;
@@ -196,13 +200,9 @@ ul.children > li > a{
 	Producto Detalles
 */
 .wrap-short-descrip {
-	margin-bottom: 25px;
-	clear:both;
-	content:"";
-	display: table;
+	
 }
 .galeria {
-	margin-bottom: 20px;
 	text-align: center;
 }
 	.img-muestra {
@@ -697,6 +697,17 @@ tr.even td.sorting_1 {/*demo table*/
 .nav-mensajes {
 	margin-top: 15px;
 	margin-bottom: 40px;
+}
+
+/*
+slider
+*/
+
+.flexslider {
+	border-radius: 0px;
+	box-shadow: none;
+	width: 80%;
+	margin: 0 0 20px 20px;
 }
 
 /*
