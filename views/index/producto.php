@@ -68,30 +68,28 @@
 							</div>
 
 							<div class="botones">
-								<form action="<?= BASE_URL."productos/add_producto" ?>" name="formAdd2Cart" id="formAdd2Cart" method="post">								
-									<input type="hidden" name="inputIdProducto" value="<?= $p['producto_id'] ?>">
-									<input type="hidden" name="inputStock" id="stock" value="<?= $p['producto_cantidad'] ?>">
+								<!-- BASE_URL."productos/add_producto" -->
+								<div class="row-fluid">
+										<div class="span3">
+											<span style="display: inline-block; margin-top: 10px;">Cantidad:</span>
+										</div>
 
-									<div class="row-fluid">
-											<div class="span3">
-												<span style="display: inline-block; margin-top: 10px;">Cantidad:</span>
+										<div class="span6">
+											<div class="btn-cant">
+												<input type="button" class="restar" value="-">
+												<input type="text" class="inputCant" maxlength="2" value="1" id="cantidad">
+												<input type="button" class="sumar" value="+">
 											</div>
+										</div>
+								</div>
 
-											<div class="span6">
-												<div class="btn-cant">
-													<input type="button" class="restar" value="-">
-													<input type="text" class="inputCant" maxlength="2" value="1" id="cantidad">
-													<input type="button" class="sumar" value="+">
-												</div>
-											</div>
-									</div>
-
-									<div class="row-fluid" style="margin-top: 10px;">
-										<?php if ($p['producto_cantidad'] > 0): ?>
-											<button type="submit" class="boton large">Agregar al carrito</button>
-										<?php endif ?>
-									</div>
-								</form>
+								<div class="row-fluid" style="margin-top: 10px;">
+									<?php if ($p['producto_cantidad'] > 0): ?>
+										<input type="hidden" id="id" value="<?= $p['producto_id'] ?>">
+										<input type="hidden" id="stock" value="<?= $p['producto_cantidad'] ?>">
+										<button id="addCarro"class="boton large">Agregar al carrito</button>
+									<?php endif ?>
+								</div>
 							</div>
 						</div>
 					</div>

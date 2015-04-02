@@ -68,4 +68,33 @@ $(document).ready(function() {
 
 		this.submit();	
 	});*/
+	var amaranConfig = {
+			content: {
+				bgcolor: '',
+				message   :'',
+				color: '#fff'
+			},
+	        theme: 'colorful',
+	        position: 'bottom right'
+	    };
+
+	$('#addCarro').click(function (e) {
+		var stock = $('#stock').val();
+		var cantidad = $('#cantidad').val();
+
+		if ( cantidad > stock)
+		{
+			amaranConfig.content.bgcolor = '#b94a48';
+			amaranConfig.content.message = 'La cantidad solicitada no está disponible!';
+			$.amaran( amaranConfig );
+		}
+		else
+		{
+			amaranConfig.content.bgcolor = '#27ae60';
+			amaranConfig.content.message = 'El producto ha sido agregado al carrito!';
+			$.amaran( amaranConfig );
+		}
+
+		
+	});
 });

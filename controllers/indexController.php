@@ -89,9 +89,11 @@ class indexController extends Controller
 
 			$this->_view->titulo = $producto->producto_nombre.' - Salta Shop';
 			$this->_view->setJs(array('vendor/jquery.flexslider-min',
-				'front/fn_producto'));
+				'front/fn_producto',
+				'vendor/jquery.amaran.min'));
 			$this->_view->setCss(array('vendor/flexslider',
-				'front/estilos_categorias'));
+				'front/estilos_categorias',
+				'vendor/amaran/amaran.min'));
 
 			$datos['p'] = $producto;
 			$datos['imagenes'] = $imagenes;
