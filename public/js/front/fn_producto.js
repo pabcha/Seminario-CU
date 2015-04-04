@@ -55,46 +55,53 @@ $(document).ready(function() {
 		}
 	});
 
-	/*$("#formAdd2Cart").submit(function(event) {
-		event.preventDefault();
-		stock = parseInt($("#stock").val());
-		cantidad = parseInt($('#inputCantidad').val());
-		
-		if ( cantidad > stock)
-		{
-			alert("La cantidad solicitada no está disponible.");
-			return;
-		}
+	//notification
 
-		this.submit();	
-	});*/
-	var amaranConfig = {
-			content: {
-				bgcolor: '',
-				message   :'',
-				color: '#fff'
-			},
-	        theme: 'colorful',
-	        position: 'bottom right'
-	    };
+	var notiConf = {
+		msg: "",
+		position: "center",
+		bgcolor: "",
+		color: "#fff",
+		time: 2500
+	}
+
+	var options = {
+		urlAdd:  help.baseUrl + '/index/add_producto/' + $('#id').val()
+	}
 
 	$('#addCarro').click(function (e) {
-		var stock = $('#stock').val();
-		var cantidad = $('#cantidad').val();
 
-		if ( cantidad > stock)
-		{
-			amaranConfig.content.bgcolor = '#b94a48';
-			amaranConfig.content.message = 'La cantidad solicitada no está disponible!';
-			$.amaran( amaranConfig );
-		}
-		else
-		{
-			amaranConfig.content.bgcolor = '#27ae60';
-			amaranConfig.content.message = 'El producto ha sido agregado al carrito!';
-			$.amaran( amaranConfig );
+		var params = {
+			cantidad: $('#cantidad').val()
 		}
 
+		$.ajax({
+			url: options.urlAdd,
+			type: 'POST',
+			dataType: 'json',
+			data: params,
+		})
+		.done(function(data) {
+			
+			if ( data.status == 'success' )
+			{
+				notiConf['bgcolor'] = '#27ae60';
+				notiConf['msg'] = 'El producto ha sido agregado al carrito!';
+				notif( notiConf );
+
+				$("#menu-cantidad").text(data.cantidad);
+				$("#menu-total").text('$ ' + data.total.format(2, 3, '.', ','));
+			} 
+			else if ( data.status == 'error' ) 
+			{
+				notiConf['bgcolor'] = '#b94a48';
+				notiConf['msg'] = 'La cantidad solicitada no está disponible!';
+				notif( notiConf );
+			}
+		})
+		.fail(function() {
+			console.log("error");
+		});	
 		
 	});
 });

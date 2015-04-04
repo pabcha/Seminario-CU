@@ -57,40 +57,37 @@
 								<p><?= $p['producto_descripcion_corta'] ?></p>
 							</div>
 
-							<div class="prod-stock">
-								<?php if ($p['producto_cantidad'] > 0): ?>
-									<?php if ($p['producto_cantidad'] <= 5): ?>
-										<span class="label label-important" style="padding: 5px 10px 5px 10px;"><?= $p['producto_cantidad']; ?> disponibles</span>
-									<?php endif ?>											
-								<?php else: ?>
+							
+							<?php if ($p['producto_cantidad'] == 0): ?>
+								<div class="prod-stock">
 									<span class="label label-inverse" style="padding: 8px 15px 8px 15px;">producto sin stock</span>
-								<?php endif ?>
-							</div>
-
-							<div class="botones">
-								<!-- BASE_URL."productos/add_producto" -->
-								<div class="row-fluid">
-										<div class="span3">
-											<span style="display: inline-block; margin-top: 10px;">Cantidad:</span>
-										</div>
-
-										<div class="span6">
-											<div class="btn-cant">
-												<input type="button" class="restar" value="-">
-												<input type="text" class="inputCant" maxlength="2" value="1" id="cantidad">
-												<input type="button" class="sumar" value="+">
+								</div>
+							<?php endif ?>
+							
+							<?php if ($p['producto_cantidad'] > 0): ?>
+								<div class="botones">
+									<div class="row-fluid">
+											<div class="span3">
+												<span style="display: inline-block; margin-top: 10px;">Cantidad:</span>
 											</div>
-										</div>
-								</div>
 
-								<div class="row-fluid" style="margin-top: 10px;">
-									<?php if ($p['producto_cantidad'] > 0): ?>
-										<input type="hidden" id="id" value="<?= $p['producto_id'] ?>">
-										<input type="hidden" id="stock" value="<?= $p['producto_cantidad'] ?>">
-										<button id="addCarro"class="boton large">Agregar al carrito</button>
-									<?php endif ?>
+											<div class="span6">
+												<div class="btn-cant">
+													<input type="button" class="restar" value="-">
+													<input type="text" class="inputCant" maxlength="2" value="1" id="cantidad">
+													<input type="button" class="sumar" value="+">
+												</div>
+											</div>
+									</div>
+
+									<div class="row-fluid" style="margin-top: 10px;">
+										<?php if ($p['producto_cantidad'] > 0): ?>
+											<input type="hidden" id="id" value="<?= $p['producto_id'] ?>">
+											<button id="addCarro"class="boton large">Agregar al carrito</button>
+										<?php endif ?>
+									</div>
 								</div>
-							</div>
+							<?php endif ?>
 						</div>
 					</div>
 				</div>

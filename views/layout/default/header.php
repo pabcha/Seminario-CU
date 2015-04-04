@@ -91,17 +91,15 @@
 					<div class="carrito-env pull-left">
 						<ul class="carrito-boton ">
 							<li class="dropdown">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+								<a href="#">
 									<i class="icon-shopping-cart"></i>
-									<span class="hidden-phone"><?= $this->get_cantidad() ?> items</span> - $1000
+									<span id="menu-cantidad">
+										<?= App\Helpers\Vista::get_cantidad() ?>
+									</span> productos - 
+									<span id="menu-total">
+										<?= App\Helpers\Utils::to_pesos( App\Helpers\Vista::get_total() ) ?>
+									</span>
 								</a>
-								<ul class="dropdown-menu pull-right">
-									<li><span class="header-dropdown">Tu carrito de compras</span></li>
-									<li class="divider"></li>
-									<li><a href="#"><span class="product-dropdown">Nokia Lumia 900</span> <span class="precio-dropdown pull-right">1 X $500 <i class="icon-trash" id="prod-1"></i></span></a></li>
-									<li class="divider"></li>
-									<li><span class="boton-dropdown"><a href="#" class="btn btn-warning">pagar</a></span><span class="precio-dropdown"><span class="total-dropdown">Total:</span> <span class="total-val-dropdown">$2000</span></span></li>
-								</ul>
 							</li>
 						</ul>
 					</div>
@@ -109,8 +107,9 @@
 
 					<ul class="menu nav-collapse collapse">
 						<li><a href="<?= BASE_URL; ?>">Inicio</a></li>
-						<li><a href="<?= BASE_URL.'tienda'; ?>">Tienda</a></li>
-						<li><a href="<?= BASE_URL.'blog'; ?>">Blog</a></li>
+						<li><a href="<?= BASE_URL.'tienda'; ?>">Mi carrito</a></li>
+						<li><a href="<?= BASE_URL.'blog'; ?>">Mi cuenta</a></li>
+						<li><a href="<?= BASE_URL.'contacto'; ?>">Informacion</a></li>
 						<li><a href="<?= BASE_URL.'contacto'; ?>">Contactanos</a></li>
 					</ul>					
 				</div>

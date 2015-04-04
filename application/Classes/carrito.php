@@ -35,9 +35,11 @@ class Carrito
 
 		if ( static::existe($producto['producto_id']) )
 		{
-			return static::update_quantity($producto);
+			$indice = static::get_index( $producto['producto_id'] );
+			static::update_quantity($producto, $indice);
+			static::update_total_quantity($producto['cantidad'], $producto['producto_precio']);
+			return true;
 		}
-
 	}
 
 	public static function insert_producto($producto)
@@ -45,26 +47,26 @@ class Carrito
 		array_push($_SESSION['carrito']['productos'], $producto);
 	}
 
-	public static function update_quantity($producto)
+	public static function update_quantity($producto, $indice)
 	{
-		$idx = static::get_index($producto['producto_id']);
+		$_SESSION['carrito']['productos'][$indice]['cantidad'] += $producto['cantidad'];		
+	}
+
+	public static function is_less($producto_id, $cantidad, $stock)
+	{
+		$idx = static::get_index($producto_id);
 
 		if ( $idx > -1)
 		{
-			$sum = $_SESSION['carrito']['productos'][$idx]['cantidad'] + $producto['cantidad'];
+			$sum = $_SESSION['carrito']['productos'][$idx]['cantidad'] + $cantidad;
 
-			if ( $sum <= $producto['stock'])
+			if ( $sum > $stock)
 			{
-				$_SESSION['carrito']['productos'][$idx]['cantidad'] += $producto['cantidad'];
-				static::update_total_quantity($producto['cantidad'], $producto['producto_precio']);
+				return true;
 			}
-			else
-			{
-				return false;
-			}
+		}
 
-			return true;
-		}				
+		return false;
 	}
 
 	public static function update_total_quantity($cantidad, $precio)
@@ -80,7 +82,7 @@ class Carrito
 		return Arrays::contains($temp, $id);
 	}
 
-	protected static function get_index($id)
+	public static function get_index($id)
 	{
 		$carrito = $_SESSION['carrito']['productos'];
 		$index = 0;
@@ -95,5 +97,10 @@ class Carrito
 		}
 		
 		return -1;
+	}
+
+	public static function get_total()
+	{
+		return $_SESSION['carrito']['total'];
 	}
 }

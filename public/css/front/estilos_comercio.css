@@ -664,8 +664,18 @@ ul.dropdown-menu i:hover {
 	.tab-det-carro tbody {
 		/*border: 1px solid #E6E6E6;*/
 	}
-	.tab-det-carro td {
+
+	.tab-det-carro tr
+	{
 		border-top: 1px solid #E6E6E6;
+
+	}
+		.tab-det-carro tr:first-child
+		{
+			border-top: none;
+		}
+
+	.tab-det-carro td {
 		padding: 10px 0 10px 15px;
 		vertical-align: middle;
 	}
@@ -688,33 +698,30 @@ ul.dropdown-menu i:hover {
 			height: auto;
 			width: 42px;			
 		}
+
+		td.big-precio
+		{
+			padding: 15px 0 15px 0;
+			font-size:31px;
+		}
 	td.prod-precio,
 	td.prod-subtotal {
-		color: #5A9E2E;
+		color: #FF694F;
 	}
 	td.acciones {
 		padding: 10px 0 10px 15px;
-		border-bottom: 1px solid #E6E6E6;
 	}
 		td.acciones input[type="submit"],
 		td.acciones a {
 			margin-right: 10px;			
 		}
+
 /*
-	Tweet plugin
+	carrito
 */
 
-.twtr-widget .twtr-tweet-wrap { 
-	padding:0px; 
-	margin:0; 		
-}
-.twtr-doc { 
-	font-size:12px;
-}
-.twtr-hd,
-.twtr-user,
-.twtr-ft { 
-	display:none;
+.resumen-carro {
+	margin: 50px 0 30px 0;
 }
 
 /*

@@ -26,7 +26,6 @@ class View
 		extract($data);//variables para view
 
 		$rutaView = ROOT . 'views' . DS . $vistaNombre . '.php';
-		//die($rutaView);
 
 		if( is_readable( $rutaView ) ){
 			include_once $rutaView;			
@@ -60,33 +59,6 @@ class View
 			}
 		} else {
 			throw new Exception("Error de css");
-		}
-	}
-
-
-
-
-	public function get_cantidad()
-	{
-		if (isset($_SESSION['carrito']['cantidad']))
-		{
-			return $_SESSION['carrito']['cantidad'];
-		}
-		else
-		{
-			return '0';
-		}
-	}
-
-	public function get_total()
-	{
-		if (isset($_SESSION['carrito']['total']))
-		{
-			return $_SESSION['carrito']['total'];
-		}
-		else
-		{
-			return '$0,00';
 		}
 	}
 	

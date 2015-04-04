@@ -65,4 +65,28 @@ class Vista
 		$i++;
 		return $clase;
 	}
+
+	public static function get_cantidad()
+	{
+		if (isset($_SESSION['carrito']['cantidad']))
+		{
+			return $_SESSION['carrito']['cantidad'];
+		}
+		else
+		{
+			return '0';
+		}
+	}
+
+	public static function get_total()
+	{
+		if (isset($_SESSION['carrito']['total']))
+		{
+			return $_SESSION['carrito']['total'];
+		}
+		else
+		{
+			return '$ 0,00';
+		}
+	}
 }

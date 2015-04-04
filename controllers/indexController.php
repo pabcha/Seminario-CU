@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Database\Capsule\Manager as Capsule;
+use App\Classes\Carrito;
+use Underscore\Types\Arrays;
 
 class indexController extends Controller
 {
@@ -76,7 +78,8 @@ class indexController extends Controller
 	public function producto($producto_id)
 	{
 		try {
-
+			/*unset($_SESSION['carrito']);
+			die();*/
 			$producto = App\Models\Product::where("producto_id", $producto_id)
 				->where("producto_estado", 'A')
 				->firstOrFail();
@@ -89,11 +92,12 @@ class indexController extends Controller
 
 			$this->_view->titulo = $producto->producto_nombre.' - Salta Shop';
 			$this->_view->setJs(array('vendor/jquery.flexslider-min',
+				'common/helpers',
 				'front/fn_producto',
-				'vendor/jquery.amaran.min'));
+				'vendor/notifit'));
 			$this->_view->setCss(array('vendor/flexslider',
 				'front/estilos_categorias',
-				'vendor/amaran/amaran.min'));
+				'vendor/notifit'));
 
 			$datos['p'] = $producto;
 			$datos['imagenes'] = $imagenes;
@@ -103,6 +107,43 @@ class indexController extends Controller
 			$this->redireccionar('error');
 		}
 		
+	}
+
+	public function add_producto($producto_id)
+	{
+		if ( $_SERVER['REQUEST_METHOD'] === 'POST' )
+		{
+			$producto = App\Models\Product::where("producto_id", $producto_id)
+					->select('producto_id', 
+						'producto_nombre', 
+						'producto_cantidad as stock', 
+						'producto_precio')
+					->where("producto_estado", 'A')
+					->first();
+
+			$result = array();
+			Carrito::init();
+
+			if ( $_POST['cantidad'] > $producto['stock'] || Carrito::is_less($producto_id, $_POST['cantidad'], $producto['stock']) )
+			{
+				$result['status'] = 'error';
+				echo json_encode($result);
+				exit;
+			}
+
+			$producto['cantidad'] = $_POST['cantidad'];
+			$producto['imagen'] = $producto->getDefaultImg()->producto_img_nombre;
+
+			Carrito::add_producto($producto->toArray());
+
+			$result = array(
+					'cantidad' => $_SESSION['carrito']['cantidad'],
+					'total' => $_SESSION['carrito']['total'],
+					'status' => 'success'
+				);
+
+			echo json_encode($result);
+		}
 	}
 }
 ?>

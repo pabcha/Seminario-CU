@@ -18,9 +18,6 @@
 					</div>
 				</div>
 				<div class="span3">
-					<div class="tweets">
-						<h4>Ultimos Tweets</h4>
-					</div>
 				</div>
 				<div class="span3">
 					<div class="ultimos-post">
