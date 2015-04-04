@@ -103,4 +103,33 @@ class Carrito
 	{
 		return $_SESSION['carrito']['total'];
 	}
+
+	//
+
+	public static function set_quantity($id, $value)
+	{
+		$index = static::get_index($id);
+		
+		if ( $value > 0 ) 
+		{
+			$_SESSION['carrito']['productos'][$index]['cantidad'] = intval($value);	
+		} 
+
+		static::recalcular();
+	}
+
+	public static function recalcular()
+	{
+		$cantidad = 0;
+		$total = 0;
+
+		foreach ($_SESSION['carrito']['productos'] as $producto) 
+		{
+			$cantidad += $producto['cantidad'];
+			$total += ($producto['cantidad'] * $producto['producto_precio']);
+		}
+
+		$_SESSION['carrito']['cantidad'] = $cantidad;
+		$_SESSION['carrito']['total'] = $total;
+	}
 }

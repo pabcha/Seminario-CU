@@ -28,86 +28,75 @@
 					<?php endif ?>
 					
 					<div class="row-fluid">
-						<form action="<?php echo BASE_URL.'carrito/update'; ?>" name="update_carrito" method="post">
-							<table class="tab-det-carro">
-								<thead>
-									<tr>
-										<th class="prod-quitar"></th>
-										<th class="prod-thumb hidden-phone"></th>
-										<th class="prod-nombre">Producto</th>
-										<th class="prod-precio">Precio unitario</th>
-										<th class="prod-cantidad">Cantidad</th>
-										<th class="prod-subtotal">Total</th>
-									</tr>
-								</thead>
-								<tbody>
-									<?php foreach ($productos as $producto): ?>
-									<tr>
-										<td class="prod-quitar"><i class="icon-trash" id="<?php echo $producto['id']; ?>"></i></td>
-										<td class="prod-thumb hidden-phone">
-											<a href="<?php echo BASE_URL.'productos/producto/'.$producto['id']; ?>">
-												<?php if (! empty($producto['imagen'])): ?>
-													<img src="<?php echo BASE_URL; ?>public/img/thumb_tiny/<?php echo $producto['imagen']; ?>" alt="<?php echo $producto['nombre']; ?>">		
-												<?php else: ?>
-													<img src="<?php echo BASE_URL; ?>public/img/no-image.jpg" alt="no-image">
-												<?php endif ?>
-											</a>
-										</td>
-										<td class="prod-nombre">
-											<a href="<?php echo BASE_URL.'productos/producto/'.$producto['id'] ?>"><?php echo $producto['nombre']; ?></a>	
-										</td>
-										<td class="prod-precio">
-											<?php echo $this->to_pesos($producto['precio']); ?>
-										</td>
-										<td class="prod-cantidad">
-											<div class="btn-cant">
-												<input type="button" class="restar" value="-">
-												<input type="text" class="inputCantidad" id="prod_<?php echo $producto['id']; ?>" name="<?php echo $producto['id']; ?>" maxlength="2" value="<?php echo $producto['cantidad']; ?>">
-												<input type="button" class="sumar" value="+">
-											</div>
-										</td>
-										<td class="prod-subtotal">
-											<?php echo $this->to_pesos($producto['precio'] * $producto['cantidad']); ?>
-										</td>
-									</tr>
-									<?php endforeach ?>
+						<!-- BASE_URL.'carrito/update' -->
+						<table class="tab-det-carro">
+							<thead>
+								<tr>
+									<th class="prod-quitar"></th>
+									<th class="prod-thumb hidden-phone"></th>
+									<th class="prod-nombre">Producto</th>
+									<th class="prod-precio">Precio unitario</th>
+									<th class="prod-cantidad">Cantidad</th>
+									<th class="prod-subtotal">Subtotal</th>
+								</tr>
+							</thead>
+							<tbody>
+								<?php foreach ($productos as $producto): ?>
+								<tr>
+									<td class="prod-quitar"><i class="icon-trash" id="<?= $producto['producto_id']; ?>"></i></td>
 
-									<tr>
-										<td class="acciones" colspan="6">
-											<div class="pull-right">
-												<input type="submit" class="boton" value="Actualizar carrito">											
-											</div>
-										</td>								
-									</tr>				
-								</tbody>
-							</table>
-						</form>
+									<td class="prod-thumb hidden-phone">
+										<a href="<?= BASE_URL.'productos/producto/'.$producto['producto_id']; ?>">
+											<?php if (! empty($producto['imagen'])): ?>
+												<img src="<?= BASE_URL; ?>storage/uploads/thumb_tiny/<?= $producto['imagen']; ?>" alt="<?= $producto['producto_nombre']; ?>">		
+											<?php else: ?>
+												<img src="<?= BASE_URL; ?>storage/uploads/no-image.jpg" alt="no-image">
+											<?php endif ?>
+										</a>
+									</td>
+
+									<td class="prod-nombre">
+										<a href="<?= BASE_URL.'productos/producto/'.$producto['producto_id'] ?>"><?= $producto['producto_nombre']; ?></a>	
+									</td>
+
+									<td class="prod-precio">
+										<?= App\Helpers\Utils::to_pesos($producto['producto_precio']); ?>
+									</td>
+
+									<td class="prod-cantidad">
+										<div class="btn-cant">
+											<input type="button" class="restar" value="-">
+											<input type="text" class="inputCant" id="<?= $producto['producto_id'] ?>" maxlength="2" value="<?= $producto['cantidad'] ?>">
+											<input type="button" class="sumar" value="+">
+										</div>
+									</td>
+
+									<td class="prod-subtotal" id="<?= 'total-'.$producto['producto_id'] ?>">
+										<?= App\Helpers\Utils::to_pesos($producto['producto_precio'] * $producto['cantidad']); ?>
+									</td>
+								</tr>
+								<?php endforeach ?>				
+							</tbody>
+						</table>
 					</div>
 	
-					<div class="row-fluid">
-						<div class="resumen-carro span4 pull-right">
-							<div class="titulo-header-2">
-								<h3>Total en Carro</h3>
-								<table class="tab-det-carro">
-									<tr>
-										<td>Subtotal</td>
-										<td class="prod-precio"><?php echo $this->to_pesos($Carrito->get_total()); ?></td>
-									</tr>
-									<tr>
-										<td>Costo de envio</td>
-										<td>Acordar con el vendedor</td>
-									</tr>
-									<tr>
-										<td style="font-size:16px;">Total</td>
-										<td class="prod-precio" style="font-weight:bold;font-size:16px;"><?php echo $this->to_pesos($Carrito->get_total()); ?></td>
-									</tr>
-									<tr>
-										<td colspan="2">
-											<a href="#" class="boton boton-acept large" style="display:block;color:white;padding:8px;font-size:16px;">Comprar</a>										
-										</td>
-									</tr>					
-								</table>								
-							</div>
+					<div class="row-fluid resumen-carro">
+						<div class="span4 pull-right">
+							<table class="tab-det-carro">
+								<tr>
+									<td>Coste de envio</td>
+									<td>Acordar con el vendedor</td>
+								</tr>
+								<tr>
+									<td style="font-size:16px;">Total</td>
+									<td class="prod-precio big-precio" id="total"><?= App\Helpers\Utils::to_pesos(App\Classes\Carrito::get_total()) ?></td>
+								</tr>
+								<tr style="border-top: none;">
+									<td colspan="2" style="padding-top: 20px;">
+										<a href="#" class="boton boton-acept large" style="display:block;color:white;padding:8px;font-size:16px;">Comprar</a>										
+									</td>
+								</tr>					
+							</table>
 						</div>
 					</div>				
 				</div>				

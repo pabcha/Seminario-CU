@@ -95,7 +95,7 @@ $(document).ready(function() {
 			else if ( data.status == 'error' ) 
 			{
 				notiConf['bgcolor'] = '#b94a48';
-				notiConf['msg'] = 'La cantidad solicitada no está disponible!';
+				notiConf['msg'] = 'No hay suficiente producto en stock.';
 				notif( notiConf );
 			}
 		})
