@@ -1,35 +1,18 @@
 	<!-- Carrito -->
 	<div class="conten-prin">
 		<div class="container">
-			<div class="row-fluid">
+			<div class="row-fluid" >
 
 				<div class="titulo-post">
 					<h3 style="font-size:22px;">Carrito de compras</h3>
 				</div>
 
-				<div class="detalle_carro" style="margin-left:0;">
+				<div class="detalle_carro" id="detalle_carro" style="margin-left:0;">
+					<?php if ( count($productos) > 0) : ?>
 
-					<?php if ( Session::get('mensaje_exito') ): ?>
-						<div class="row-fluid">
-							<div class="alert alert-success">
-								<button type="button" class="close" data-dismiss="alert">&times;</button>
-								<?php echo Session::show('mensaje_exito'); ?>
-							</div>
-						</div>	
-					<?php endif ?>
-
-					<?php if ( Session::get('mensaje_err') ): ?>
-						<div class="row-fluid">
-							<div class="alert alert-error">
-								<button type="button" class="close" data-dismiss="alert">&times;</button>
-								<?php echo Session::show('mensaje_err'); ?>
-							</div>
-						</div>
-					<?php endif ?>
-					
 					<div class="row-fluid">
-						<!-- BASE_URL.'carrito/update' -->
-						<table class="tab-det-carro">
+
+						<table class="tab-det-carro" id="tab-det-carro">
 							<thead>
 								<tr>
 									<th class="prod-quitar"></th>
@@ -98,7 +81,12 @@
 								</tr>					
 							</table>
 						</div>
-					</div>				
+					</div>	
+
+					<?php else: ?>	
+						<p>Su carrito esta vacío.</p>
+					<?php endif ?>
+								
 				</div>				
 			</div>
 		</div>

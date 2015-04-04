@@ -75,6 +75,32 @@ class carritoController extends Controller
 		}
 	}
 
+	public function deleteC($producto_id)
+	{
+		Carrito::init();
+		$index = Carrito::get_index($producto_id);
+
+		if ( $index > -1)
+		{
+			Carrito::remove_producto($index);
+			Carrito::recalcular();
+
+			$result = array(
+				'cantidad' => $_SESSION['carrito']['cantidad'],
+				'total' => $_SESSION['carrito']['total'],
+				'status' => 'success'
+			);
+
+			echo json_encode($result);			
+		}
+		else
+		{
+			header('HTTP/1.1 404 Not Found');
+		    header('Content-Type: application/json; charset=UTF-8');
+		    die(json_encode(array('message' => 'ERROR')));
+		}
+	}
+
 	public function update()
 	{
 		$pass = true; //bandera para stock

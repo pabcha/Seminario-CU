@@ -65,7 +65,6 @@ $(document).ready(function() {
 		}).fail(function () {
 			console.log("error");
 		});
-		//send(url, data, id_total);
 	});
 
 	$('.sumar').click(function (e) 
@@ -136,7 +135,34 @@ $(document).ready(function() {
 	$(".icon-trash").click(function(){
 		if ( confirm('¿Esta seguro de que desea quitar este producto?') ) 
 		{
-			window.location.replace( options.urlRemove + $(this).attr('id') );
+			var url = options.urlRemove + $(this).attr('id');
+			var that = $(this);
+
+			$.ajax({
+				url: url,
+				type: 'POST',
+				dataType: 'json'
+			})
+			.done(function(data) {
+				if (data.status == 'success')
+				{					
+					that.closest('tr').fadeOut(400, function(){ 
+						$(this).remove();
+
+						$("#menu-cantidad").text(data.cantidad);
+						$("#menu-total").text('$ ' + data.total.format(2, 3, '.', ','));
+						$('#total').text('$ ' + data.total.format(2, 3, '.', ','));
+
+						if ( $('#tab-det-carro > tbody tr').length == 0 )
+						{
+							$('#detalle_carro').html('<p>Su carrito esta vacío.</p>');
+						}
+					});
+				}
+			})
+			.fail(function() {
+				console.log("error");
+			});	
 		}
 	});
 });

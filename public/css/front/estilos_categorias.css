@@ -155,6 +155,7 @@ ul.children > li > a{
 */
 .conten-prin {
 	margin-top: 30px;
+	min-height: 500px;
 }
 .bar-busqueda {
 	border-top: 1px solid #E6E6E6;

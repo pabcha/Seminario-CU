@@ -118,6 +118,11 @@ class Carrito
 		static::recalcular();
 	}
 
+	public function remove_producto($index)
+	{		
+		array_splice($_SESSION['carrito']['productos'], $index, 1);
+	}
+
 	public static function recalcular()
 	{
 		$cantidad = 0;
