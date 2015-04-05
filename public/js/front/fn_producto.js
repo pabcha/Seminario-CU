@@ -89,7 +89,11 @@ $(document).ready(function() {
 				notiConf['msg'] = 'El producto ha sido agregado al carrito!';
 				notif( notiConf );
 
-				$("#menu-cantidad").text(data.cantidad);
+				var msg = (data.cantidad > 1 || data.cantidad == 0) ? 
+					data.cantidad + ' productos' :
+					data.cantidad + ' producto';
+
+				$("#menu-cantidad").text( msg );
 				$("#menu-total").text('$ ' + data.total.format(2, 3, '.', ','));
 			} 
 			else if ( data.status == 'error' ) 
