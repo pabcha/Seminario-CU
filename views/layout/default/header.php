@@ -46,10 +46,7 @@
 							<li><a href="<?= BASE_URL.'entrar'; ?>">Entrar</a></li>	
 						<?php endif ?>					
 				
-						<li><a href="<?= BASE_URL.'micuenta'; ?>">Mi cuenta</a></li>
 						<li><a href="<?= BASE_URL.'registro'; ?>">Registrate</a></li>
-				
-						<li><a href="<?= BASE_URL.'carrito'; ?>">Carrito</a></li>	
 					</ul> 
 					<!-- /menu-top -->
 				
@@ -91,7 +88,7 @@
 					<div class="carrito-env pull-left">
 						<ul class="carrito-boton ">
 							<li class="dropdown">
-								<a href="#">
+								<a href="<?= BASE_URL.'carrito'; ?>">
 									<i class="icon-shopping-cart"></i>
 									<span id="menu-cantidad">
 										<?= App\Helpers\Vista::get_cantidad() ?>
@@ -107,8 +104,8 @@
 
 					<ul class="menu nav-collapse collapse">
 						<li><a href="<?= BASE_URL; ?>">Inicio</a></li>
-						<li><a href="<?= BASE_URL.'tienda'; ?>">Mi carrito</a></li>
-						<li><a href="<?= BASE_URL.'blog'; ?>">Mi cuenta</a></li>
+						<li><a href="<?= BASE_URL.'carrito'; ?>">Mi carrito</a></li>
+						<li><a href="<?= BASE_URL.'micuenta'; ?>">Mi cuenta</a></li>
 						<li><a href="<?= BASE_URL.'contacto'; ?>">Informacion</a></li>
 						<li><a href="<?= BASE_URL.'contacto'; ?>">Contactanos</a></li>
 					</ul>					
