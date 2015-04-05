@@ -1,0 +1,63 @@
+body
+{
+	font: normal 62.5% "Helvetica Neue", helvetica, sans-serif;
+	background: #333;
+	padding: 0;
+	margin: 0;
+}
+
+p
+{
+	font-size: 14px;
+}
+
+.container
+{
+	margin-top: 60px;
+}
+
+.header
+{
+	color: #fff;
+	background-color: #FF694F;
+	margin: 5px auto 0 auto;
+	padding: 2px 0 5px 0;
+	text-align: center;
+	max-width: 720px;
+	-webkit-border-top-left-radius: 8px;
+	-webkit-border-top-right-radius: 8px;
+	-moz-border-radius-topleft: 8px;
+	-moz-border-radius-topright: 8px;
+	border-top-left-radius: 8px;
+	border-top-right-radius: 8px;
+}
+	.header h1,
+	.header h2,
+	.header h3,
+	.header h4,
+	.header h5
+	{
+		font-family: 'Roboto', sans-serif;
+		font-size: 24px;
+		font-weight: 400;
+		margin: 0;
+	}
+
+.congratulation-container
+{
+	background-color: #FFF;
+	margin: 0 auto 60px auto;
+	padding: 5px 0 40px 0;
+	max-width: 720px;
+	-webkit-border-bottom-right-radius: 8px;
+	-webkit-border-bottom-left-radius: 8px;
+	-moz-border-radius-bottomright: 8px;
+	-moz-border-radius-bottomleft: 8px;
+	border-bottom-right-radius: 8px;
+	border-bottom-left-radius: 8px;
+}
+
+.congratulation-message
+{
+	padding: 10px;
+}

@@ -1,0 +1,195 @@
+body
+{
+	font: normal 62.5% "Helvetica Neue", helvetica, sans-serif;
+	/* background: #333; */
+	background: #fff;
+	padding: 0;
+	margin: 0;
+}
+
+label
+{
+	color: #7f8c8d;
+}
+
+a, a:hover
+{
+	text-decoration: none;
+}
+
+.logo
+{
+	font-family: 'Lobster', cursive;
+	color: #FF694F;
+	font-size: 7em;
+	font-weight: 400;
+	margin-top: 20px;
+	padding: 15px 0;
+
+	margin: 25px auto 0 auto;
+	max-width: 580px;
+}
+
+.header
+{
+	color: #3d3d3d;
+	margin: 25px auto 0 auto;	
+	padding: 0 0 0 0;
+	max-width: 580px;
+}
+	.header h1,
+	.header h2,
+	.header h3,
+	.header h4,
+	.header h5
+	{
+		font-family: 'Roboto', sans-serif;
+		font-size: 24px;
+		font-weight: 400;
+		margin: 0;
+	}
+
+.page-subheader
+{
+	padding-bottom: 9px;
+	margin: 20px 0 30px;
+	border-bottom: 1px solid #eeeeee;	
+}
+	.medium
+	{
+		color: #727272;
+		font-weight: 400;
+		font-size: 18px;	
+		margin: 0;
+	}
+
+	.page-subheader p
+	{
+		font-size: 12px;
+		font-weight: normal;
+		line-height: 1;
+		color: #777;
+	}
+
+.newuser-container
+{
+	background-color: #FFF;
+	margin: 0 auto 60px auto;
+	padding: 0 0 40px 0;
+	max-width: 720px;
+	-webkit-border-bottom-right-radius: 8px;
+	-webkit-border-bottom-left-radius: 8px;
+	-moz-border-radius-bottomright: 8px;
+	-moz-border-radius-bottomleft: 8px;
+	border-bottom-right-radius: 8px;
+	border-bottom-left-radius: 8px;
+}
+
+.newuser-form
+{
+	max-width: 580px;
+	margin: 0 auto;
+}
+
+.error-messages
+{
+	margin: 10px 20px;
+	font-size: 12px;
+}
+	.error-messages ul
+	{
+		margin: 10px 20px;		
+	}
+
+/* Personalizar bootstrap */
+
+.form-horizontal .control-label 
+{
+	padding-top: 8px;
+}
+
+/* boton */
+
+.boton{
+	display: inline-block;
+	display: inline;
+	/* IE7 inline-block hack */
+	padding: 4px 12px;
+	margin-bottom: 0;
+	font-size: 14px;
+	line-height: 20px;
+	text-align: center;
+	vertical-align: middle;
+	cursor: pointer;
+	color: #FFFFFF;
+	background-color: #16A6B6;
+
+	border: 1px solid rgba(0, 0, 0, 0.1);
+	border: 0;
+	border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 1px 1px 1px 1px;
+    -webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,0.2);
+    -moz-box-shadow: inset 0 1px 0 rgba(255,255,255,0.2);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset;	
+    text-decoration: none;
+}
+
+.boton:active {
+	background-color:#11818D;
+	color: #FFFFFF;
+}
+
+.boton-acept,
+.boton-acept:hover {
+	background-color: #2FB58E;
+}
+.boton-acept:active {
+	background-color: #318D6E;
+}
+
+.boton-cancel,
+.boton-cancel:hover {
+	background-color: #EE6557;
+}
+.boton-cancel:active {
+	background-color: #BD5045;
+}
+	.boton-large {
+		display: block;
+		width: 100%;
+		padding: 11px 19px;
+		font-size: 17.5px;
+	}
+
+@media(max-width: 767px) {
+	.header
+	{
+		margin-top: 20px;
+		margin-left: 8px;
+		margin-right: 8px;
+	}
+
+	.newuser-container
+	{
+		margin: 0 8px 20px 8px;		
+	}
+
+	.newuser-form
+	{
+		padding: 0 8px 0 8px;
+	}
+
+	.page-subheader h1,
+	.page-subheader h2,
+	.page-subheader h3,
+	.page-subheader h4,
+	.page-subheader h5,
+	{
+		margin-bottom: 0; 
+	}
+
+	.page-subheader p
+	{
+		font-size: 1.2em;
+	}
+}

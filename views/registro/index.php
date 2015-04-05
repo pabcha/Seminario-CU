@@ -5,29 +5,28 @@
 	<title>Registrar - Salta Shop</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<link href="<?php echo $_layoutParams['ruta_css']; ?>bootstrap.min.css" rel="stylesheet" type="text/css">
-	<link href="<?php echo $_layoutParams['ruta_css']; ?>bootstrap-responsive.min.css" rel="stylesheet" type="text/css">
-	<link href="<?php echo $_layoutParams['ruta_css']; ?>font-awesome.css" rel="stylesheet" type="text/css">
-	<link href="<?php echo BASE_URL.'views/registro/css/'; ?>registro_style.css" rel="stylesheet" type="text/css">
+	<link href="<?= $roots['css'] ?>vendor/bootstrap.min.css" rel="stylesheet">
+	<link href="<?= $roots['css'] ?>vendor/bootstrap-responsive.min.css" rel="stylesheet">
+	<link href="<?= $roots['css'] ?>vendor/font-awesome/font-awesome.css" rel="stylesheet">
+	<link href="<?= $roots['css'] ?>front/registro_style.css" rel="stylesheet">
         
+    <link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>	
 	<link href='http://fonts.googleapis.com/css?family=Roboto:400,100' rel='stylesheet' type='text/css'>
 
-	<script type="text/javascript" src="<?php echo BASE_URL; ?>public/js/jquery-1.8.2.min.js"></script>
-	<script type="text/javascript" src="<?php echo BASE_URL; ?>public/js/bootstrap.min.js"></script>
-	<script>
-		var sConfig = { url: "http://localhost/saltaShop/" };
-	</script>	
+	<script src="<?= $roots['js'] ?>vendor/jquery-1.8.2.min.js"></script>
+	<script src="<?= $roots['js'] ?>vendor/bootstrap.min.js"></script>	
 </head>
 <body>
-	<div class="newuser-options">
-		<a href="<?php echo BASE_URL; ?>">Volver a inicio</a> <span style="color:white;">-</span>
-		<a href="<?php echo BASE_URL.'entrar'; ?>">¿Ya tiene una cuenta?</a>
-	</div>
-
+	
 	<div class="container">
 		<div class="row-fluid">
+			
+			<a href="<?php echo BASE_URL; ?>">
+				<h1 class="logo">SaltaShop</h1>
+			</a>
+
 			<div class="header">
-				<h1>Registrate en SaltaShop</h1>
+				<h1>Registrate!</h1>
 			</div>
 			<div class="newuser-container">
 
@@ -121,26 +120,22 @@
 						</div>
 					</div>
 
-					<div class="control-group">
+					<div class="control-group" style="margin-bottom: 40px;">
 						<label class="control-label" for="inputCelular">Celular</label>
 						<div class="controls">
 							<input type="text" class="input-block-level" name="inputCelular" value="<?php echo $validador->set_valor('inputCelular'); ?>">
 						</div>
 					</div>					
 
-					<div class="control-group hidden-phone">
+					<div class="control-group">
 						<div class="controls">
-							<button type="submit" class="btn btn-info">Crear cuenta</button>
+							<button type="submit" class="boton boton-acept">Crear cuenta</button>
 						</div>
 					</div>
-
-					<button type="submit" class="btn btn-info btn-block btn-large visible-phone">Crear cuenta</button>
 				</form>		
 			</div>
 		</div>
 	</div>
-
-
 
 </body>
 </html>

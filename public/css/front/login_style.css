@@ -1,0 +1,147 @@
+body {
+	font: normal 62.5% "Helvetica Neue", helvetica, sans-serif;
+	color: #999;
+	background: #fff;
+	padding: 0;
+	margin: 0;
+}
+
+a,a:hover {
+	text-decoration: none;
+	color: #FF694F;
+}
+
+h1 
+{
+	font-family: 'Lobster', cursive;
+	color: #FF694F;
+	font-size: 7em;
+	font-weight: 400;
+	margin-top: 20px;
+	padding: 15px 0;
+	text-align: center;
+}
+
+h2 
+{
+	font: normal 2.8em "Helvetica Neue", helvetica, sans-serif;
+	text-align: center;
+}
+
+label
+{
+	color: #7f8c8d;
+}
+
+.help-block
+{
+	font-size: 1.2em;
+	color: #999;
+}
+
+.form-container
+{
+	max-width: 640px;
+	margin: 0 auto;	
+	padding: 60px 0;
+}
+	.form-container h3
+	{
+		color: #fff;
+	}
+
+.form-signin 
+{
+	max-width: 400px;
+	margin: 40px auto 20px;
+}
+
+.signin-notamember
+{
+	clear: both;
+	padding: 20px 0 0 0;
+	font-size: 1.5em;
+	text-align: center;
+}
+
+.error
+{
+	background-color: #da4f49;
+}
+	.error h3
+	{
+		color: #fff;
+		text-align: center;
+		font-weight: 400;
+	}
+
+/* boton */
+
+.boton{
+	display: inline-block;
+	display: inline;
+	/* IE7 inline-block hack */
+	padding: 4px 12px;
+	margin-bottom: 0;
+	font-size: 14px;
+	line-height: 20px;
+	text-align: center;
+	vertical-align: middle;
+	cursor: pointer;
+	color: #FFFFFF;
+	background-color: #16A6B6;
+
+	letter-spacing: 1px;
+
+	border: 1px solid rgba(0, 0, 0, 0.1);
+	border: 0;
+	border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 1px 1px 1px 1px;
+    -webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,0.2);
+    -moz-box-shadow: inset 0 1px 0 rgba(255,255,255,0.2);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset;	
+    text-decoration: none;
+}
+
+.boton:active {
+	background-color:#11818D;
+	color: #FFFFFF;
+}
+
+.boton-acept,
+.boton-acept:hover {
+	background-color: #2FB58E;
+}
+.boton-acept:active {
+	background-color: #318D6E;
+}
+
+.boton-cancel,
+.boton-cancel:hover {
+	background-color: #EE6557;
+}
+.boton-cancel:active {
+	background-color: #BD5045;
+}
+	.boton-large {
+		display: block;
+		width: 100%;
+		padding: 11px 19px;
+		font-size: 17.5px;
+	}
+
+
+@media(max-width: 767px) {
+	.form-container 
+	{
+		padding: 20px 0;
+	}
+	.form-signin
+	{
+		padding: 0 10px 0 10px;
+	}
+	.error h3
+	{
+		font-size: 19px;
+	}
+}
