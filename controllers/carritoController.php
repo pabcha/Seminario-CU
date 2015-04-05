@@ -6,16 +6,13 @@ class carritoController extends Controller
 {
 	public function __construct()
 	{
-		parent::__construct();		
+		parent::__construct();
+		Carrito::init();		
 	}
 
 	public function index()
 	{
-		/*$Carrito = $this->loadModel('carrito');
-		$datos['productos'] = $Carrito->get_productos();*/
-		Carrito::init();
 		$datos['productos'] = Carrito::get_productos();
-		//$datos['Carrito'] = $Carrito;
 
 		$this->_view->titulo = 'Mi carrito - Salta Shop';
 		$this->_view->setCss(array('front/estilos_categorias',
@@ -29,14 +26,13 @@ class carritoController extends Controller
 		$this->_view->renderizar('layout/default/footer');
 	}
 
-	public function updateC($producto_id)
+	public function update($producto_id)
 	{
 		if ( $_SERVER['REQUEST_METHOD'] === 'POST' )
 		{
 			try 
 			{
 				$cantidad = $_POST['cantidad'];
-				Carrito::init();
 
 				$producto = App\Models\Product::where("producto_id", $producto_id)
 							->select('producto_id', 
@@ -75,84 +71,31 @@ class carritoController extends Controller
 		}
 	}
 
-	public function deleteC($producto_id)
+	public function delete($producto_id)
 	{
-		Carrito::init();
-		$index = Carrito::get_index($producto_id);
-
-		if ( $index > -1)
+		if ( $_SERVER['REQUEST_METHOD'] === 'POST' )
 		{
-			Carrito::remove_producto($index);
-			Carrito::recalcular();
+			$index = Carrito::get_index($producto_id);
 
-			$result = array(
-				'cantidad' => $_SESSION['carrito']['cantidad'],
-				'total' => $_SESSION['carrito']['total'],
-				'status' => 'success'
-			);
-
-			echo json_encode($result);			
-		}
-		else
-		{
-			header('HTTP/1.1 404 Not Found');
-		    header('Content-Type: application/json; charset=UTF-8');
-		    die(json_encode(array('message' => 'ERROR')));
-		}
-	}
-
-	public function update()
-	{
-		$pass = true; //bandera para stock
-		$Carrito = $this->loadModel('carrito');
-		$Producto = $this->loadModel('producto');
-
-		foreach ($_POST as $producto_id => $cantidad) 
-		{
-			$producto = $Producto->getProductoById($producto_id);//$producto['cantidad'] => disponible
-			
-			if ($cantidad > $producto['cantidad'])
+			if ( $index > -1)
 			{
-				$mensaje = "La cantidad solicitada no está disponible. Solo quedan <b>"
-					. $producto['cantidad'] 
-					." productos</b> disponibles en <b>"
-					. $producto['nombre']
-					."</b>";
+				Carrito::remove_producto($index);
+				Carrito::recalcular();
 
-				Session::set("mensaje_err", $mensaje);
-				$pass = false;
-				break;			
-			}	
-		}
+				$result = array(
+					'cantidad' => $_SESSION['carrito']['cantidad'],
+					'total' => $_SESSION['carrito']['total'],
+					'status' => 'success'
+				);
 
-		if ( $pass )
-		{
-			foreach ($_POST as $producto_id => $cantidad) 
-			{
-				$producto = $Producto->getProductoById($producto_id);
-				
-				if ($cantidad <= $producto['cantidad'])
-				{					
-					$Carrito->update_quantity($producto_id, $cantidad);
-				} 				
+				echo json_encode($result);			
 			}
-
-			Session::set("mensaje_exito", "El producto ha sido agregado al carrito!");
+			else
+			{
+				header('HTTP/1.1 404 Not Found');
+			    header('Content-Type: application/json; charset=UTF-8');
+			    die(json_encode(array('message' => 'ERROR')));
+			}
 		}
-		
-		$this->redireccionar('carrito');
-	}
-
-	public function delete($categoria_id)
-	{
-		//Validar que existe, sino ignorar
-		//borrar del array session
-		//modificar cantidad de session
-		//recalcular total
-		$categoria_id = intval($categoria_id);
-		$Carrito = $this->loadModel('carrito');
-		$Carrito->remove_producto($categoria_id);
-		
-		$this->redireccionar('carrito');
 	}
 }

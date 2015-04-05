@@ -70,7 +70,15 @@ class Vista
 	{
 		if (isset($_SESSION['carrito']['cantidad']))
 		{
-			return $_SESSION['carrito']['cantidad'];
+			if ( $_SESSION['carrito']['cantidad'] > 1 OR $_SESSION['carrito']['cantidad'] == 0)
+			{
+				return $_SESSION['carrito']['cantidad'] . ' productos';
+			}
+			else
+			{
+				return $_SESSION['carrito']['cantidad'] . ' producto';
+			}
+			
 		}
 		else
 		{

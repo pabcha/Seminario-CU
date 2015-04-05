@@ -1,6 +1,6 @@
 var options = {
-	url: help.baseUrl + '/carrito/updateC/',
-	urlRemove: help.baseUrl + '/carrito/deleteC/',
+	url: help.baseUrl + '/carrito/update/',
+	urlRemove: help.baseUrl + '/carrito/delete/',
 	notiConf: {
 		msg: "No hay suficiente producto en stock.",
 		position: "center",
@@ -26,7 +26,11 @@ $(document).ready(function() {
 
 	var render = function (data, id_total)
 	{
-		$("#menu-cantidad").text(data.cantidad);
+		var msg = (data.cantidad > 1 || data.cantidad == 0) ? 
+			data.cantidad + ' productos' :
+			data.cantidad + ' producto';
+
+		$("#menu-cantidad").text( msg );
 		$("#menu-total").text('$ ' + data.total.format(2, 3, '.', ','));
 
 		$(id_total).text('$ ' + data.subtotal.format(2, 3, '.', ','));
@@ -149,7 +153,11 @@ $(document).ready(function() {
 					that.closest('tr').fadeOut(400, function(){ 
 						$(this).remove();
 
-						$("#menu-cantidad").text(data.cantidad);
+						var msg = (data.cantidad > 1 || data.cantidad == 0) ? 
+							data.cantidad + ' productos' :
+							data.cantidad + ' producto';
+
+						$("#menu-cantidad").text( msg );
 						$("#menu-total").text('$ ' + data.total.format(2, 3, '.', ','));
 						$('#total').text('$ ' + data.total.format(2, 3, '.', ','));
 

@@ -95,7 +95,7 @@
 									<i class="icon-shopping-cart"></i>
 									<span id="menu-cantidad">
 										<?= App\Helpers\Vista::get_cantidad() ?>
-									</span> productos - 
+									</span> - 
 									<span id="menu-total">
 										<?= App\Helpers\Utils::to_pesos( App\Helpers\Vista::get_total() ) ?>
 									</span>

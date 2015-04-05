@@ -8,7 +8,8 @@ class indexController extends Controller
 {
 	public function __construct()
 	{
-		parent::__construct();		
+		parent::__construct();
+		Carrito::init();	
 	}
 
 	private function viewMake($str, $data = array())
@@ -77,9 +78,8 @@ class indexController extends Controller
 
 	public function producto($producto_id)
 	{
-		try {
-			/*unset($_SESSION['carrito']);
-			die();*/
+		try 
+		{
 			$producto = App\Models\Product::where("producto_id", $producto_id)
 				->where("producto_estado", 'A')
 				->firstOrFail();
@@ -103,7 +103,9 @@ class indexController extends Controller
 			$datos['imagenes'] = $imagenes;
 
 			$this->viewMake('index/producto', $datos);
-		} catch (Exception $e) {
+		} 
+		catch (Exception $e) 
+		{
 			$this->redireccionar('error');
 		}
 		
@@ -122,7 +124,6 @@ class indexController extends Controller
 					->first();
 
 			$result = array();
-			Carrito::init();
 
 			if ( $_POST['cantidad'] > $producto['stock'] || Carrito::is_less($producto_id, $_POST['cantidad'], $producto['stock']) )
 			{
