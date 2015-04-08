@@ -28,10 +28,26 @@
 						<div class="widget-product-header">
 							<h3>
 								<?= $categoria_nombre ?>
-								<small>Hay <?= count($ps) ?> productos</small>
 							</h3>
 						</div>
 						<!-- /titulo categoria -->
+						
+						<?php if ( ! $ps->isEmpty() ): ?>
+							<div style="text-align:right;">
+								<form action="<?= BASE_URL.'index/categoria/'.$categoria_id ?>" method="GET" id="formOrderBy">
+									<div style="font-size: 16px;margin-right: 10px;display:inline-block;">
+										<p style="margin:0;display:inline-block;overflow:hidden">Ordenar por</p>
+									</div> 
+									<select name="orderby" id="orderBy">
+										<option value="0">--</option>
+										<option value="menorPrecio">Menor precio</option>
+										<option value="mayorPrecio">Mayor precio</option>
+										<option value="azNombre">Nombre de A a Z</option>
+										<option value="zaNombre">Nombre de Z a A</option>
+									</select>
+								</form>
+							</div>
+						<?php endif ?>
 
 						<div class="widget-product-content">
 						<?php if ( ! $ps->isEmpty() ): ?>
@@ -56,6 +72,31 @@
 							<?php echo "No se encontraron productos." ?>
 						<?php endif ?>				
 						</div>
+
+						<?php if ($pag->total_pages() > 1): ?>
+							<div class="pagination pagination-right" style="clear:both">
+								<ul>
+									<?php if ($pag->has_previous_page()): ?>
+										<li>
+											<a href="<?= App\Helpers\Vista::hrefPaginator($categoria_id, $pag->previous_page(), $orderby) ?>">Anterior</a>
+										</li>
+									<?php endif ?>
+
+									<?php for ($i=1; $i <= $pag->total_pages(); $i++) : ?>
+										<li>
+											<a href="<?= App\Helpers\Vista::hrefPaginator($categoria_id, $i, $orderby) ?>"><?= $i ?></a>
+										</li>
+									<?php endfor ?>
+
+									<?php if ($pag->has_next_page()): ?>
+										<li>
+											<a href="<?= App\Helpers\Vista::hrefPaginator($categoria_id, $pag->next_page(), $orderby) ?>">Siguiente</a>
+										</li>
+									<?php endif ?>									
+								</ul>
+							</div>
+							<!-- /paginador -->
+						<?php endif ?>
 						
 					</div>
 				</div>

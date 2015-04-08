@@ -97,4 +97,9 @@ class Vista
 			return '$ 0,00';
 		}
 	}
+
+	public static function hrefPaginator($id, $pag, $orderby='')
+	{
+		return BASE_URL.'index/categoria/'.$id.'?page='.$pag.$orderby;
+	}
 }

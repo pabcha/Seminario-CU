@@ -2,6 +2,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Capsule\Manager as Capsule;
 
 class Product extends Model {
 
@@ -19,6 +20,21 @@ class Product extends Model {
 		return $this->images()
 			->where('producto_img_predeterminado','S')
 			->first();
+	}
+
+	public static function active_paginate($per_page, $offset)
+	{
+		return Product::where('producto_estado', '!=', 'B')
+				->limit( $per_page )
+				->offset( $offset );
+	}
+
+	public static function count_all()
+	{
+		return Product::where('producto_estado', '!=', 'B')
+				->select(Capsule::raw('count(*) as count'))
+				->first()
+				->count;
 	}
 
 	public static function validate($Validator)

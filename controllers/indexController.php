@@ -49,31 +49,52 @@ class indexController extends Controller
 
 	public function categoria($id_categoria)
 	{
-		try {
+		//try {
+			$datos['orderby'] = '';
+
+			if ( $_SERVER['REQUEST_METHOD'] === 'GET' )
+			{
+				if ( !empty($_GET['orderby']) ) 
+				{
+					$datos['orderby'] = '&orderby='.$_GET['orderby'];
+				}
+			}
 
 			$categoria = App\Models\Category::where('producto_categoria_estado', 'A')
 				->where('producto_categoria_id', $id_categoria)
 				->firstOrFail();
 
-			$datos['ps'] = $categoria->productos()->get();
-			$datos['subcategorias'] = $categoria->get_subcategories();
+			//$datos['ps'] = $categoria->productos()->get();
+					
+			//pagination stuffs
+			$page = !empty($_GET['page']) ? (int)$_GET['page'] : 1;
+			$per_page = 10;
+			$count = App\Models\Product::count_all();
+
+			$datos['pag'] = new App\Helpers\Pagination($page, $per_page, $count);
+			$datos['ps'] = App\Models\Product::active_paginate($per_page, $datos['pag']->offset())
+				->get();
+			$datos['subcategorias'] = $categoria->get_subcategories();	
+
 
 			$datos['categorias'] = App\Models\Category::where('producto_categoria_padre_id', 0)
 				->where('producto_categoria_estado', 'A')
 				->get();
-
 			$datos['categoria_nombre'] =$categoria->producto_categoria_nombre;
+			$datos['categoria_id'] =$categoria->producto_categoria_id;
 
 			$datos['i'] = 1; // for App\Helpers\Vista::is_first($i)
 
 			$this->_view->titulo = $datos['categoria_nombre'].' - Salta Shop';
+			$this->_view->setJs(array('common/helpers',
+				'front/fn_categoria'));
 			$this->_view->setCss(array('front/estilos_categorias'));
 
 			$this->viewMake('index/categoria', $datos);
 
-		} catch (Exception $e) {
+		/*} catch (Exception $e) {
 			$this->redireccionar('error');
-		}
+		}*/
 	}
 
 	public function producto($producto_id)
