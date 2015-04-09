@@ -14,13 +14,6 @@ $(document).ready(function() {
 		} else {
 			return true;
 		}
-	});
-
-	$('span.precio-dropdown > i').click(function(){
-		// alert( $(this).attr('id') );
-		if ( confirm('¿Esta seguro de que desea quitar este producto?') ) {
-			location.href="http://localhost/saltaShop/index/"+$(this).attr('id');
-		}
-	});
+	});	
 
 });
