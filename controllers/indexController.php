@@ -51,14 +51,9 @@ class indexController extends Controller
 	{
 		//try {
 			$datos['orderby'] = '';
+			$datos['getOrderBy'] = '';
 
-			if ( $_SERVER['REQUEST_METHOD'] === 'GET' )
-			{
-				if ( !empty($_GET['orderby']) ) 
-				{
-					$datos['orderby'] = '&orderby='.$_GET['orderby'];
-				}
-			}
+			
 
 			$categoria = App\Models\Category::where('producto_categoria_estado', 'A')
 				->where('producto_categoria_id', $id_categoria)
@@ -72,8 +67,35 @@ class indexController extends Controller
 			$count = App\Models\Product::count_all();
 
 			$datos['pag'] = new App\Helpers\Pagination($page, $per_page, $count);
-			$datos['ps'] = App\Models\Product::active_paginate($per_page, $datos['pag']->offset())
-				->get();
+			// /pagination
+
+			$builder = App\Models\Product::active_paginate($per_page, $datos['pag']->offset());
+		
+			if ( !empty($_GET['orderby']) ) 
+			{
+				$datos['getOrderBy'] = $_GET['orderby'];
+				$datos['orderby'] = '&orderby='.$_GET['orderby'];
+
+				switch ($_GET['orderby']) {
+					case 'menorPrecio':
+						$builder->orderBy('producto_precio', 'asc');
+						break;
+					case 'mayorPrecio':
+						$builder->orderBy('producto_precio', 'desc');
+						break;
+					case 'azNombre':
+						$builder->orderBy('producto_nombre', 'asc');
+						break;
+					case 'zaNombre':
+						$builder->orderBy('producto_nombre', 'desc');
+						break;
+					default:
+						# code...
+						break;
+				}
+			}
+
+			$datos['ps'] = $builder->get();
 			$datos['subcategorias'] = $categoria->get_subcategories();	
 
 

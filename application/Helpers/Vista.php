@@ -102,4 +102,9 @@ class Vista
 	{
 		return BASE_URL.'index/categoria/'.$id.'?page='.$pag.$orderby;
 	}
+
+	public static function is_selected($value, $get)
+	{
+		return ($value == $get) ? 'selected="selected"' : '';
+	}
 }
