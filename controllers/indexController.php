@@ -42,10 +42,8 @@ class indexController extends Controller
 
 		$datos['i'] = 1; // for App\Helpers\Vista::is_first($i)
 		$datos['j'] = 1; // for App\Helpers\Vista::is_first($j)
-
-		$this->_view->renderizar('layout/default/header');
-		$this->_view->renderizar('index/index', $datos);
-		$this->_view->renderizar('layout/default/footer');
+		
+		$this->viewMake('index/index', $datos);
 	}
 
 	public function categoria($id_categoria)
