@@ -3,6 +3,7 @@
 use Illuminate\Database\Capsule\Manager as Capsule;
 use App\Classes\Carrito;
 use Underscore\Types\Arrays;
+use App\Classes\CategoryService;
 
 class indexController extends Controller
 {
@@ -49,62 +50,24 @@ class indexController extends Controller
 
 	public function categoria($id_categoria)
 	{
-		//try {
-			$datos['orderby'] = '';
-			$datos['getOrderBy'] = '';
+		try {
+			$categoria = App\Models\Category::active()->byId($id_categoria)->firstOrFail();
 
-			
-
-			$categoria = App\Models\Category::where('producto_categoria_estado', 'A')
-				->where('producto_categoria_id', $id_categoria)
-				->firstOrFail();
-
-			//$datos['ps'] = $categoria->productos()->get();
+			$builder = $categoria->productos()->active();
 					
 			//pagination stuffs
 			$page = !empty($_GET['page']) ? (int)$_GET['page'] : 1;
-			$per_page = 10;
-			$count = App\Models\Product::count_all();
-
+			$per_page = 12;
+			$count = $builder->count();
 			$datos['pag'] = new App\Helpers\Pagination($page, $per_page, $count);
-			// /pagination
 
-			$builder = App\Models\Product::active_paginate($per_page, $datos['pag']->offset());
-		
-			if ( !empty($_GET['orderby']) ) 
-			{
-				$datos['getOrderBy'] = $_GET['orderby'];
-				$datos['orderby'] = '&orderby='.$_GET['orderby'];
-
-				switch ($_GET['orderby']) {
-					case 'menorPrecio':
-						$builder->orderBy('producto_precio', 'asc');
-						break;
-					case 'mayorPrecio':
-						$builder->orderBy('producto_precio', 'desc');
-						break;
-					case 'azNombre':
-						$builder->orderBy('producto_nombre', 'asc');
-						break;
-					case 'zaNombre':
-						$builder->orderBy('producto_nombre', 'desc');
-						break;
-					default:
-						# code...
-						break;
-				}
-			}
+			CategoryService::getFilterProducts($builder, $per_page, $datos['pag']->offset());
 
 			$datos['ps'] = $builder->get();
-			$datos['subcategorias'] = $categoria->get_subcategories();	
-
-
-			$datos['categorias'] = App\Models\Category::where('producto_categoria_padre_id', 0)
-				->where('producto_categoria_estado', 'A')
-				->get();
+			$datos['subcategorias'] = $categoria->get_subcategories();
+			$datos['categorias'] = App\Models\Category::padre(0)->active()->get();
 			$datos['categoria_nombre'] =$categoria->producto_categoria_nombre;
 			$datos['categoria_id'] =$categoria->producto_categoria_id;
-
 			$datos['i'] = 1; // for App\Helpers\Vista::is_first($i)
 
 			$this->_view->titulo = $datos['categoria_nombre'].' - Salta Shop';
@@ -114,9 +77,9 @@ class indexController extends Controller
 
 			$this->viewMake('index/categoria', $datos);
 
-		/*} catch (Exception $e) {
+		} catch (Exception $e) {
 			$this->redireccionar('error');
-		}*/
+		}
 	}
 
 	public function producto($producto_id)

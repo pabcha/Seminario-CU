@@ -14,6 +14,21 @@ class Category extends Model {
 		return $this->hasMany('App\Models\Product', 'producto_categoria_id', 'producto_categoria_id');
 	}
 
+	public function scopePadre($query, $id)
+	{
+		return $query->where('producto_categoria_padre_id', $id);
+	}
+
+	public function scopeActive($query)
+	{
+		return $query->where('producto_categoria_estado', 'A');
+	}
+
+	public function scopebyId($query, $id)
+	{
+		return $query->where('producto_categoria_id', $id);
+	}
+
 	public function get_subcategories()
 	{
 		return $this->where('producto_categoria_padre_id', $this->producto_categoria_id)

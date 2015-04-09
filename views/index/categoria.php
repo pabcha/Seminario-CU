@@ -40,10 +40,10 @@
 									</div> 
 									<select name="orderby" id="orderBy">
 										<option value="0">--</option>
-										<option value="menorPrecio" <?= App\Helpers\Vista::is_selected('menorPrecio', $getOrderBy) ?>>Menor precio</option>
-										<option value="mayorPrecio" <?= App\Helpers\Vista::is_selected('mayorPrecio', $getOrderBy) ?>>Mayor precio</option>
-										<option value="azNombre" <?= App\Helpers\Vista::is_selected('azNombre', $getOrderBy) ?>>Nombre de A a Z</option>
-										<option value="zaNombre" <?= App\Helpers\Vista::is_selected('zaNombre', $getOrderBy) ?>>Nombre de Z a A</option>
+										<option value="menorPrecio" <?= App\Helpers\Vista::is_selectedGet('menorPrecio') ?>>Menor precio</option>
+										<option value="mayorPrecio" <?= App\Helpers\Vista::is_selectedGet('mayorPrecio') ?>>Mayor precio</option>
+										<option value="azNombre" <?= App\Helpers\Vista::is_selectedGet('azNombre') ?>>Nombre de A a Z</option>
+										<option value="zaNombre" <?= App\Helpers\Vista::is_selectedGet('zaNombre') ?>>Nombre de Z a A</option>
 									</select>
 								</form>
 							</div>
@@ -78,19 +78,19 @@
 								<ul>
 									<?php if ($pag->has_previous_page()): ?>
 										<li>
-											<a href="<?= App\Helpers\Vista::hrefPaginator($categoria_id, $pag->previous_page(), $orderby) ?>">Anterior</a>
+											<a href="<?= App\Helpers\Vista::hrefPaginator($categoria_id, $pag->previous_page()) ?>">Anterior</a>
 										</li>
 									<?php endif ?>
 
 									<?php for ($i=1; $i <= $pag->total_pages(); $i++) : ?>
 										<li>
-											<a href="<?= App\Helpers\Vista::hrefPaginator($categoria_id, $i, $orderby) ?>"><?= $i ?></a>
+											<a href="<?= App\Helpers\Vista::hrefPaginator($categoria_id, $i) ?>"><?= $i ?></a>
 										</li>
 									<?php endfor ?>
 
 									<?php if ($pag->has_next_page()): ?>
 										<li>
-											<a href="<?= App\Helpers\Vista::hrefPaginator($categoria_id, $pag->next_page(), $orderby) ?>">Siguiente</a>
+											<a href="<?= App\Helpers\Vista::hrefPaginator($categoria_id, $pag->next_page()) ?>">Siguiente</a>
 										</li>
 									<?php endif ?>									
 								</ul>

@@ -98,13 +98,32 @@ class Vista
 		}
 	}
 
-	public static function hrefPaginator($id, $pag, $orderby='')
+	public static function hrefPaginator($id, $pag)
 	{
+		$orderby = '';
+
+		if ( !empty($_GET['orderby']) )
+		{
+			$orderby = '&orderby='.$_GET['orderby'];
+		}
+
 		return BASE_URL.'index/categoria/'.$id.'?page='.$pag.$orderby;
 	}
 
 	public static function is_selected($value, $get)
 	{
+		return ($value == $get) ? 'selected="selected"' : '';
+	}
+
+	public static function is_selectedGet($value)
+	{
+		$get = '';
+
+		if ( !empty($_GET['orderby']) )
+		{
+			$get = $_GET['orderby'];
+		}
+
 		return ($value == $get) ? 'selected="selected"' : '';
 	}
 }

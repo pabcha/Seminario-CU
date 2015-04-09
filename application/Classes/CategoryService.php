@@ -53,4 +53,30 @@ class CategoryService
 			echo "</ul>";
 		}
 	}
+
+	public static function getFilterProducts($builder, $limit, $offset)
+	{
+		$builder->limit( $limit )->offset( $offset );
+
+		if ( !empty($_GET['orderby']) ) 
+		{
+			switch ($_GET['orderby']) {
+				case 'menorPrecio':
+					$builder->orderBy('producto_precio', 'asc');
+					break;
+				case 'mayorPrecio':
+					$builder->orderBy('producto_precio', 'desc');
+					break;
+				case 'azNombre':
+					$builder->orderBy('producto_nombre', 'asc');
+					break;
+				case 'zaNombre':
+					$builder->orderBy('producto_nombre', 'desc');
+					break;
+				default:
+					# code...
+					break;
+			}
+		}
+	}
 }

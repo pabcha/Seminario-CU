@@ -15,6 +15,11 @@ class Product extends Model {
 		return $this->hasMany('App\Models\ProductImage', 'producto_id', 'producto_id');
 	}
 
+	public function scopeActive($query)
+	{
+		return $query->where('producto_estado', 'A');
+	}
+
 	public function getDefaultImg()
 	{
 		return $this->images()
@@ -24,17 +29,9 @@ class Product extends Model {
 
 	public static function active_paginate($per_page, $offset)
 	{
-		return Product::where('producto_estado', '!=', 'B')
+		return Product::where('producto_estado', 'A')
 				->limit( $per_page )
 				->offset( $offset );
-	}
-
-	public static function count_all()
-	{
-		return Product::where('producto_estado', '!=', 'B')
-				->select(Capsule::raw('count(*) as count'))
-				->first()
-				->count;
 	}
 
 	public static function validate($Validator)
