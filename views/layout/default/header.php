@@ -51,10 +51,10 @@
 					<!-- /menu-top -->
 				
 					<div class="searchbar">
-						<form action="<?= BASE_URL; ?>" name="formBuscar" class="formBuscar">
+						<form action="<?= BASE_URL.'search'; ?>" class="formBuscar" method="get">
 							<div class="bus">
-								<input type="text" name="inputSearch" id="inputSearch">
-								<button value="">
+								<input type="text" name="q" id="q">
+								<button value="" id="searchSubmit">
 									<i class="icon-search"></i>	
 								</button>								
 							</div>

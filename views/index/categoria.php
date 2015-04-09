@@ -40,10 +40,10 @@
 									</div> 
 									<select name="orderby" id="orderBy">
 										<option value="0">--</option>
-										<option value="menorPrecio" <?= App\Helpers\Vista::is_selectedGet('menorPrecio') ?>>Menor precio</option>
-										<option value="mayorPrecio" <?= App\Helpers\Vista::is_selectedGet('mayorPrecio') ?>>Mayor precio</option>
-										<option value="azNombre" <?= App\Helpers\Vista::is_selectedGet('azNombre') ?>>Nombre de A a Z</option>
-										<option value="zaNombre" <?= App\Helpers\Vista::is_selectedGet('zaNombre') ?>>Nombre de Z a A</option>
+										<option value="menorPrecio" <?= App\Helpers\Vista::is_selectedGet('menorPrecio', 'orderby') ?>>Menor precio</option>
+										<option value="mayorPrecio" <?= App\Helpers\Vista::is_selectedGet('mayorPrecio', 'orderby') ?>>Mayor precio</option>
+										<option value="azNombre" <?= App\Helpers\Vista::is_selectedGet('azNombre', 'orderby') ?>>Nombre de A a Z</option>
+										<option value="zaNombre" <?= App\Helpers\Vista::is_selectedGet('zaNombre', 'orderby') ?>>Nombre de Z a A</option>
 									</select>
 								</form>
 							</div>
