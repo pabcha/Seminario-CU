@@ -18,9 +18,11 @@
 							<?php foreach ($ps as $p): ?>
 								<div class="span3 centerText <?= App\Helpers\Vista::is_first($i) ?>">
 									
-									<img <?= App\Helpers\Vista::buildDefaultImg($p, 'thumb_medium') ?>>
+									<a href="<?= BASE_URL.'index/producto/'.$p['producto_id'] ?>" class="title">
+										<img <?= App\Helpers\Vista::buildDefaultImg($p, 'thumb_medium') ?>>
+									</a>
 									
-									<a href="<?= BASE_URL.'productos/producto/'.$p['producto_id'] ?>" class="title">
+									<a href="<?= BASE_URL.'index/producto/'.$p['producto_id'] ?>" class="title">
 										<?= $p['producto_nombre'] ?>
 									</a>
 

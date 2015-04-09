@@ -16,7 +16,7 @@ class TiendaService
 			echo '<ul class="children">';
 			foreach ($subcategorias as $s) 
 			{
-				echo "<li><a href='".BASE_URL."productos/categoria/".$s['producto_categoria_id']."/1'>".$s['producto_categoria_nombre']."</a>";
+				echo "<li><a href='".BASE_URL."index/categoria/".$s['producto_categoria_id']."/1'>".$s['producto_categoria_nombre']."</a>";
 				static::createTree( $s['producto_categoria_id'] );
 				echo "</li>";
 			}

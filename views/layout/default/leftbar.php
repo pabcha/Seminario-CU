@@ -9,7 +9,7 @@
 
 							<?php foreach ($categorias as $c): ?>
 								<li>
-									<a href="<?= BASE_URL.'productos/categoria/'.$c['producto_categoria_id'].'/1'; ?>" class="nav-header">
+									<a href="<?= BASE_URL.'index/categoria/'.$c['producto_categoria_id'].'/1'; ?>" class="nav-header">
 										<?= $c['producto_categoria_nombre'] ?>
 									</a>
 									<?php App\Classes\TiendaService::createTree( $c['producto_categoria_id']); ?>
