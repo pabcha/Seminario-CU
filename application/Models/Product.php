@@ -15,6 +15,11 @@ class Product extends Model {
 		return $this->hasMany('App\Models\ProductImage', 'producto_id', 'producto_id');
 	}
 
+	public function marca()
+	{
+		return $this->belongsTo('App\Models\Marca', 'marca_id', 'marca_id');
+	}
+
 	public function scopeActive($query)
 	{
 		return $query->where('producto_estado', 'A');
@@ -25,13 +30,6 @@ class Product extends Model {
 		return $this->images()
 			->where('producto_img_predeterminado','S')
 			->first();
-	}
-
-	public static function active_paginate($per_page, $offset)
-	{
-		return Product::where('producto_estado', 'A')
-				->limit( $per_page )
-				->offset( $offset );
 	}
 
 	public static function validate($Validator)
