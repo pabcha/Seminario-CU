@@ -115,15 +115,29 @@ class Vista
 		return ($value == $get) ? 'selected="selected"' : '';
 	}
 
-	public static function is_selectedGet($value)
+	public static function is_selectedGet($value, $key)
 	{
 		$get = '';
 
-		if ( !empty($_GET['orderby']) )
+		if ( !empty($_GET[$key]) )
 		{
-			$get = $_GET['orderby'];
+			$get = $_GET[$key];
 		}
 
 		return ($value == $get) ? 'selected="selected"' : '';
+	}
+
+	public static function set_value($key)
+	{
+		$get = '';
+
+		if ( isset($_GET[$key]) )
+		{
+			/*if()
+			d('h');*/
+			$get = $_GET[$key];
+		}
+
+		return $get;
 	}
 }
