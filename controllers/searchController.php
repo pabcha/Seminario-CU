@@ -21,6 +21,7 @@ class searchController extends Controller
 	public function index()
 	{
 		$this->_view->titulo = 'Buscar - Salta Shop';
+		$this->_view->setJs(array('front/fn_search'));
 		$this->_view->setCss(array('front/estilos_categorias'));
 		
 		$datos['categorias'] = App\Models\Category::padre(0)->active()->get();
@@ -29,21 +30,41 @@ class searchController extends Controller
 		$marcas = App\Models\Marca::all();
 		$builder = App\Models\Product::where('producto_nombre', 'LIKE', '%'.$q.'%');
 
+
+		/*if (isset($_GET['min']) AND isset($_GET['max']))
+		{
+			if (is_numeric($_GET['min']) AND is_numeric($_GET['max']) )
+			{
+				if ($_GET['min'] >= $_GET['max'])
+				{
+					echo "El minimo debe ser menor que el maximo.";
+				}
+			}
+		}*/
+
 		if (isset($_GET['min'])) 
 		{
-			$builder->where('producto_precio', '>=', $_GET['min']);
+			if (is_numeric($_GET['min']))
+			{
+				$builder->where('producto_precio', '>=', $_GET['min']);
+			}
 		}
 
 		if (isset($_GET['max'])) 
 		{
-			$builder->where('producto_precio', '<=', $_GET['max']);
+			if (is_numeric($_GET['max']))
+			{
+				$builder->where('producto_precio', '<=', $_GET['max']);
+			}
 		}
 
 		if (isset($_GET['marca']) and $_GET['marca'] != 0) 
 		{
 			$builder->where('producto_marca_id', $_GET['marca']);
 		}
-		
+
+		//die();
+
 		//pagination stuffs
 		$page = !empty($_GET['page']) ? (int)$_GET['page'] : 1;
 		$per_page = 12;
@@ -57,14 +78,12 @@ class searchController extends Controller
 		$datos['marcas'] = $marcas;
 		$datos['q'] = $q; //ver si dejar
 		$datos['i'] = 1; // for App\Helpers\Vista::is_first($i)
-		$datos['j'] = 1; // for App\Helpers\Vista::is_first($j)
 
 		//d($count);
 		//die();
 
 		//validar datos
 		//remover de GET las variables q no se usan
-		//indicar automaticamente la marca
 		//q hacer con la interface busqueda
 
 		$this->viewMake('search/index', $datos);
