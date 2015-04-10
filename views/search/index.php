@@ -57,6 +57,31 @@
 								<?php endforeach ?>
 							<?php endif ?>		
 						</div>
+
+						<?php if ($pag->total_pages() > 1): ?>
+							<div class="pagination pagination-right" style="clear:both">
+								<ul>
+									<?php if ($pag->has_previous_page()): ?>
+										<li>
+											<a href="<?= App\Helpers\Vista::hrefPagSearch($pag->previous_page()) ?>">Anterior</a>
+										</li>
+									<?php endif ?>
+
+									<?php for ($i=1; $i <= $pag->total_pages(); $i++) : ?>
+										<li>
+											<a href="<?= App\Helpers\Vista::hrefPagSearch($i) ?>"><?= $i ?></a>
+										</li>
+									<?php endfor ?>
+
+									<?php if ($pag->has_next_page()): ?>
+										<li>
+											<a href="<?= App\Helpers\Vista::hrefPagSearch($pag->next_page()) ?>">Siguiente</a>
+										</li>
+									<?php endif ?>									
+								</ul>
+							</div>
+							<!-- /paginador -->
+						<?php endif ?>
 					</div>
 				</div>
 			</div>	
