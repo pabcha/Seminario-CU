@@ -17,5 +17,10 @@ $(document).ready(function() {
 		};
 
 		$(this).closest('form').submit();
-	});	
+	});
+
+	$('#search_showmore').click(function (e) {
+		$('#moresearch_criteria').toggle('slow');
+		$('#search_showmore > p').toggle();
+	});
 });

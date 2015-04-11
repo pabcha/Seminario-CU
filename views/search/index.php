@@ -8,33 +8,57 @@
 				<div class="row-fluid">
 					<div class="widget-product">
 
-						<div class="widget-product-header">
+						<!-- <div class="widget-product-header">
 							<h3>
 								Buscar <?= $q ?>
 							</h3>
+						</div> -->
+						<div class="row-fluid" style="margin-bottom:20px;">
+							Buscar
+							<div class="some row-fluid">
+								<input class="input-mini" type="text" name="q" id="qu" value="<?= App\Helpers\Vista::set_value('q') ?>">
+								<button type="submit"><i class="icon-search"></i></button>
+							</div>
+
+							<div class="row-fluid" id="moresearch_criteria" style="display:none">
+								<div class="span3">
+									Precio Min
+									<div class="input-prepend">
+										<span class="add-on">$</span>
+										<input class="input-mini" type="text" name="min" id="min" value="<?= App\Helpers\Vista::set_value('min') ?>">
+									</div>
+								</div>
+									
+								<div class="span3">
+									Precio Max
+									<div class="input-prepend">
+										<span class="add-on">$</span>
+										<input class="input-mini" type="text" name="max" id="max" value="<?= App\Helpers\Vista::set_value('max') ?>">
+									</div>
+								</div>
+								
+								<div class="span6">
+									Marca 
+									<div>
+										<select name="marca" id="marca" class="input-medium">
+											<option value="0">--</option>
+											<?php foreach ($marcas as $m): ?>
+												<option value="<?= $m['producto_marca_id'] ?>" <?= App\Helpers\Vista::is_selectedGet($m['producto_marca_id'], 'marca') ?>>
+													<?= $m['producto_marca_nombre'] ?>
+												</option>
+											<?php endforeach ?>
+										</select>
+									</div>
+								</div>
+							</div>
+
+							<div class="row-fluid" id="search_showmore">
+								<p>busqueda avanzada</p>
+								<p style="display:none">busqueda normal</p>
+							</div>
 						</div>
 						<!-- /titulo categoria -->
 
-						<div>
-							<form action="<?= BASE_URL.'search' ?>" method="get">
-								<input type="hidden" name="q" value="<?= $q ?>">
-								<p>
-									Precio Min <input type="text" name="min" id="min" value="<?= App\Helpers\Vista::set_value('min') ?>">
-									Precio Max <input type="text" name="max" id="max" value="<?= App\Helpers\Vista::set_value('max') ?>">
-								</p>
-								<p>Marca 
-									<select name="marca" id="marca">
-										<option value="0">--</option>
-										<?php foreach ($marcas as $m): ?>
-											<option value="<?= $m['producto_marca_id'] ?>" <?= App\Helpers\Vista::is_selectedGet($m['producto_marca_id'], 'marca') ?>>
-												<?= $m['producto_marca_nombre'] ?>
-											</option>
-										<?php endforeach ?>
-									</select>
-								</p>
-								<input type="submit" id="sSubmit">
-							</form>
-						</div>
 
 						<div class="widget-product-content">
 							<?php if ( ! $ps->isEmpty() ): ?>

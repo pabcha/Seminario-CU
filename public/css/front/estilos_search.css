@@ -1,0 +1,41 @@
+#qu {
+	color: black;
+	box-shadow: none !important;
+	font-size: 36px;
+	padding: 0;
+	margin: 0;
+	border: 0;
+	border-radius: 0;
+	border-bottom: 1px solid #e7e7e7;
+	margin-bottom: 9px;
+	height: auto;
+	width: 300px;
+}
+
+.some button[type=submit]
+{	
+	background-color: #FFF;
+	border: 0;
+	color: #95a5a6;
+
+	border-radius: 16px;
+	margin-bottom: 9px;
+	margin-left: -38px;
+	font-size: 20px;
+	height: 35px;
+	width: 35px;
+}
+	.some button[type=submit]:hover
+	{	
+		background-color: #ecf0f1;
+	}
+
+#search_showmore p
+{
+	cursor: pointer;
+}
+	#search_showmore p:hover
+	{
+		color: #FF694F;
+		text-decoration: underline;		
+	}

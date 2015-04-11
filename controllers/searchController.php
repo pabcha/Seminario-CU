@@ -22,25 +22,14 @@ class searchController extends Controller
 	{
 		$this->_view->titulo = 'Buscar - Salta Shop';
 		$this->_view->setJs(array('front/fn_search'));
-		$this->_view->setCss(array('front/estilos_categorias'));
+		$this->_view->setCss(array('front/estilos_categorias',
+			'front/estilos_search'));
 		
 		$datos['categorias'] = App\Models\Category::padre(0)->active()->get();
 
 		$q = ( !empty($_GET['q']) ? $_GET['q'] : '');
 		$marcas = App\Models\Marca::all();
 		$builder = App\Models\Product::where('producto_nombre', 'LIKE', '%'.$q.'%');
-
-
-		/*if (isset($_GET['min']) AND isset($_GET['max']))
-		{
-			if (is_numeric($_GET['min']) AND is_numeric($_GET['max']) )
-			{
-				if ($_GET['min'] >= $_GET['max'])
-				{
-					echo "El minimo debe ser menor que el maximo.";
-				}
-			}
-		}*/
 
 		if (isset($_GET['min'])) 
 		{
@@ -71,7 +60,7 @@ class searchController extends Controller
 		$count = $builder->count();
 		$paginator = new App\Helpers\Pagination($page, $per_page, $count);
 
-		CategoryService::getFilterProducts($builder, $per_page, $paginator->offset());
+		$builder->limit( $per_page )->offset( $paginator->offset() );
 
 		$datos['pag'] = $paginator;
 		$datos['ps'] = $builder->get();
@@ -79,10 +68,6 @@ class searchController extends Controller
 		$datos['q'] = $q; //ver si dejar
 		$datos['i'] = 1; // for App\Helpers\Vista::is_first($i)
 
-		//d($count);
-		//die();
-
-		//validar datos
 		//remover de GET las variables q no se usan
 		//q hacer con la interface busqueda
 

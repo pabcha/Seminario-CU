@@ -123,6 +123,18 @@ class Vista
 		return BASE_URL.'search?'.implode('&', $a);;
 	}
 
+	public static function actionSearch()
+	{
+		$a = array();
+
+		if (!empty($_GET['q'])) array_push($a, 'q='.$_GET['q']);
+		if (isset($_GET['min'])) array_push($a, 'min='.$_GET['min']);
+		if (isset($_GET['max'])) array_push($a, 'max='.$_GET['max']);
+		if (isset($_GET['marca']) and $_GET['marca'] != 0) array_push($a, 'marca='.$_GET['marca']);
+
+		return BASE_URL.'search?'.implode('&', $a);;
+	}
+
 	public static function is_selected($value, $get)
 	{
 		return ($value == $get) ? 'selected="selected"' : '';
