@@ -29,7 +29,7 @@
 									<td class="prod-quitar"><i class="icon-trash" id="<?= $producto['producto_id']; ?>"></i></td>
 
 									<td class="prod-thumb hidden-phone">
-										<a href="<?= BASE_URL.'productos/producto/'.$producto['producto_id']; ?>">
+										<a href="<?= BASE_URL.'index/producto/'.$producto['producto_id']; ?>">
 											<?php if (! empty($producto['imagen'])): ?>
 												<img src="<?= BASE_URL; ?>storage/uploads/thumb_tiny/<?= $producto['imagen']; ?>" alt="<?= $producto['producto_nombre']; ?>">		
 											<?php else: ?>
@@ -39,7 +39,7 @@
 									</td>
 
 									<td class="prod-nombre">
-										<a href="<?= BASE_URL.'productos/producto/'.$producto['producto_id'] ?>"><?= $producto['producto_nombre']; ?></a>	
+										<a href="<?= BASE_URL.'index/producto/'.$producto['producto_id'] ?>"><?= $producto['producto_nombre']; ?></a>	
 									</td>
 
 									<td class="prod-precio">
@@ -76,7 +76,7 @@
 								</tr>
 								<tr style="border-top: none;">
 									<td colspan="2" style="padding-top: 20px;">
-										<a href="#" class="boton boton-acept large" style="display:block;color:white;padding:8px;font-size:16px;">Comprar</a>										
+										<a href="<?= BASE_URL.'caja'; ?>" class="boton boton-acept large" style="display:block;color:white;padding:8px;font-size:16px;">Comprar</a>										
 									</td>
 								</tr>					
 							</table>
