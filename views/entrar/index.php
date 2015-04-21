@@ -31,7 +31,7 @@
 				<label for="inputCorreo">Contraseña</label>
 				<input class="input-block-level" type="password" name="inputPassword">
 
-				<a href="<?php echo BASE_URL.'recuperar' ?>" class="help-block pull-right">¿Olvido su constraseña?</a>
+				<a href="<?php echo BASE_URL.'recuperar' ?>" class="help-block pull-right">¿Olvido su contraseña?</a>
 				
 				<div style="clear: both;">
 					<button type="submit" class="boton boton-acept boton-large">Entrar</button>
