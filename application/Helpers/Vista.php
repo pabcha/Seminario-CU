@@ -163,4 +163,16 @@ class Vista
 
 		return $get;
 	}
+
+	public static function get_query($query)
+	{
+		$q = '';
+
+		if ( isset($_GET[$query])) 
+		{
+			$q = $query.'='.$_GET[$query];
+		}
+
+		return $q;
+	}
 }

@@ -30,12 +30,18 @@
 		background-color: #ecf0f1;
 	}
 
-#search_showmore p
+#search_showmore a
 {
+	color: #777777;
 	cursor: pointer;
 }
-	#search_showmore p:hover
+	#search_showmore a:hover
 	{
 		color: #FF694F;
 		text-decoration: underline;		
 	}
+.not-found
+{
+	padding: 10px;
+	border: 1px solid #bdc3c7; 
+}

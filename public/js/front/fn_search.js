@@ -2,10 +2,10 @@ $(document).ready(function() {
 	$('#sSubmit').click(function (e) {
 		e.preventDefault();
 
-		var min = $('#min').val(),
-			max = $('#max').val();
+		var min = parseFloat($('#min').val()),
+			max = parseFloat($('#max').val());
 
-		if (min == '' || max == '')
+		if ($('#min').val() == '' || $('#max').val() == '')
 		{
 			alert('Complete los campos minimo/maximo.');
 			return;
@@ -17,10 +17,5 @@ $(document).ready(function() {
 		};
 
 		$(this).closest('form').submit();
-	});
-
-	$('#search_showmore').click(function (e) {
-		$('#moresearch_criteria').toggle('slow');
-		$('#search_showmore > p').toggle();
 	});
 });

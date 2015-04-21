@@ -52,7 +52,9 @@
 							<?php foreach ($top as $p): ?>
 							<div class="span3 centerText <?= App\Helpers\Vista::is_first($j) ?>">
 								
-								<img <?= App\Helpers\Vista::buildDefaultImg($p, 'thumb_medium') ?>>
+								<a href="<?= BASE_URL.'index/producto/'.$p['producto_id'] ?>" class="title">	
+									<img <?= App\Helpers\Vista::buildDefaultImg($p, 'thumb_medium') ?>>
+								</a>
 								
 								<a href="<?= BASE_URL.'productos/producto/'.$p['producto_id'] ?>" class="title">
 									<?= $p['producto_nombre'] ?>

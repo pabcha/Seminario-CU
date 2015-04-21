@@ -9,15 +9,43 @@
 					<div class="widget-product">
 
 						<div class="row-fluid" style="margin-bottom:20px;">
-							<form action="<?= BASE_URL.'search' ?>" method="get">
+							<form action="<?= BASE_URL.'search/advanced' ?>" method="get">
 								Buscar
 								<div class="some row-fluid">
 									<input class="input-mini" type="text" name="q" id="qu" value="<?= App\Helpers\Vista::set_value('q') ?>">
-									<button type="submit" id=""><i class="icon-search"></i></button>
+									<button type="submit" id="sSubmit"><i class="icon-search"></i></button>
 								</div>
 
-								<div class="row-fluid" id="search_showmore">
-									<a href="<?= BASE_URL.'search/advanced?'.App\Helpers\Vista::get_query('q') ?>">busqueda avanzada</a>
+								<div class="row-fluid" id="moresearch_criteria">
+									<div class="span3">
+										Precio Min
+										<div class="input-prepend">
+											<span class="add-on">$</span>
+											<input class="input-mini" type="text" name="min" id="min" value="<?= App\Helpers\Vista::set_value('min') ?>">
+										</div>
+									</div>
+										
+									<div class="span3">
+										Precio Max
+										<div class="input-prepend">
+											<span class="add-on">$</span>
+											<input class="input-mini" type="text" name="max" id="max" value="<?= App\Helpers\Vista::set_value('max') ?>">
+										</div>
+									</div>
+									
+									<div class="span6">
+										Marca 
+										<div>
+											<select name="marca" id="marca" class="input-medium">
+												<option value="0">--</option>
+												<?php foreach ($marcas as $m): ?>
+													<option value="<?= $m['producto_marca_id'] ?>" <?= App\Helpers\Vista::is_selectedGet($m['producto_marca_id'], 'marca') ?>>
+														<?= $m['producto_marca_nombre'] ?>
+													</option>
+												<?php endforeach ?>
+											</select>
+										</div>
+									</div>
 								</div>
 							</form>
 						</div>
@@ -42,10 +70,10 @@
 										</span>
 
 									</div>
-								<?php endforeach ?>								
+								<?php endforeach ?>
 							<?php else: ?>
 								<p class="not-found">No se encontraron resultados.</p>
-							<?php endif ?>
+							<?php endif ?>		
 						</div>
 
 						<?php if ( isset($pag) and $pag->total_pages() > 1): ?>
@@ -72,6 +100,7 @@
 							</div>
 							<!-- /paginador -->
 						<?php endif ?>
+
 					</div>
 				</div>
 			</div>	
