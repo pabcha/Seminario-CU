@@ -9,6 +9,11 @@ a,a:hover {
 	color: white;
 	text-decoration: none;
 }
+
+.s960 {
+	max-width: 960px;
+	margin: 0 auto;
+}
 /*
 fonts
 */
@@ -554,6 +559,17 @@ ul.dropdown-menu i:hover {
 .panel-admin-login .boton {
 	width: 100%;
 }
+
+.btn-pay {
+	width: 25% !important;
+	padding: 8px;
+	font-size: 18px;
+}
+	.btn-pay:hover {
+		padding: 8px;
+		font-size: 18px;
+	}
+
 /*
 *
 *Botones mini personalizados
@@ -638,7 +654,7 @@ ul.dropdown-menu i:hover {
 		border: 1px solid #e6e6e6;
 		box-shadow: 0 0 1px #FFFFFF inset;
 		color: #373E46;
-		font-size: 13px;
+		font-size: 14px;
 		font-weight: bold;
 		padding: 10px 0 10px 15px;
 		text-align: left;
@@ -681,7 +697,7 @@ ul.dropdown-menu i:hover {
 	}
 	.tab-det-carro td,
 	.tab-det-carro td a {		
-		font-size: 13px;
+		font-size: 14px;
 	}
 	.tab-det-carro td i {
 		font-size: 21px;
@@ -820,68 +836,27 @@ ul.dropdown-menu i:hover {
 	.twtr-doc {
 		width: 90% !important;
 	}
-}
 
-/* iPads (vertical y horizontal) ----------- */  
-@media only screen and (min-width : 768px) and (max-width : 1024px) {
-	/*footer*/  
-	.inputNewsletter {
-		width: 88%;
-	}
-	.ultimos-post .post-footer span {
-		line-height: 1.2em;
-	}
-	/*footer*/
-	/*.twtr-timeline {
-		height: auto;
-	}*/
-}
-
-@media (max-width: 1023px) {
-/*Menu Header*/
-	ul.menu li {
-		cursor: pointer;
-		display: block;
-		padding: 7px 0 7px 0;
-		width: 100%;
-	}
-	ul.menu li a{
-		color: #FFFFFF;
-		border: 0px;			
-	}
-	ul.menu li a:hover{
-		color:#FFB677;	
-	}
-	ul.menu li:hover {
-		color:#FFB677;
-		background-color: #DB533B;
-		margin: 4px;
-		border-radius: 4px;
-	}
-	ul.menu li:hover a {
-		color:#FFB677;			
+	.formas-pago {
+		margin-left: 0;
+		margin-bottom: 40px;
 	}
 
-	.navbar .btn-navbar {
-		background-color: #FF694F;
-		background-image: none;		
-		border-style: solid; 
+	.btn-pay {
+		width: 98% !important;
+		padding: 8px;
+		font-size: 18px;
 	}
-	.navbar .btn-navbar:hover,
-	.navbar .btn-navbar:active {
-		background-color: #FF614F;
+
+	.s960 {
+		margin-bottom: 60px;
 	}
-	.carrito-env {
-		margin-top: 10px;
-	}
-		.carrito-boton {
-			margin-bottom: 6px;
-		}	
 }
+
 /*
 	smart phone horizontal
 */
-@media only screen and (min-width: 480px) and (max-width: 767px) {
+@media only screen and (min-width: 481px) and (max-width: 767px) {
 	/*
 	header
 	*/
@@ -953,4 +928,94 @@ ul.dropdown-menu i:hover {
 	.twtr-doc {
 		width: 65% !important;
 	}
+
+
+	.formas-pago {
+		margin-left: 0;
+		margin-bottom: 40px;
+	}
+
+	.btn-pay {
+		width: 98% !important;
+		padding: 10px;
+		font-size: 18px;
+	}
+
+	.s960 {
+		margin-bottom: 60px;
+	}
+}
+
+/* iPads (vertical y horizontal) ----------- */  
+@media only screen and (min-width : 768px) and (max-width : 1024px) {
+	.s960 {
+		max-width: 75%;
+		margin: 0 auto;
+	}
+	/*footer*/  
+	.inputNewsletter {
+		width: 88%;
+	}
+	.ultimos-post .post-footer span {
+		line-height: 1.2em;
+	}
+
+	.formas-pago {
+		margin-left: 0;
+		margin-bottom: 40px;
+	}
+
+	.btn-pay {
+		width: 40% !important;
+		padding: 8px;
+		font-size: 18px;
+	}
+
+	.s960 {
+		margin-bottom: 60px;
+	}
+}
+
+/*estilos para nav collpase*/
+
+@media (max-width: 1023px) {
+	/*Menu Header*/
+	ul.menu li {
+		cursor: pointer;
+		display: block;
+		padding: 7px 0 7px 0;
+		width: 100%;
+	}
+	ul.menu li a{
+		color: #FFFFFF;
+		border: 0px;			
+	}
+	ul.menu li a:hover{
+		color:#FFB677;	
+	}
+	ul.menu li:hover {
+		color:#FFB677;
+		background-color: #DB533B;
+		margin: 4px;
+		border-radius: 4px;
+	}
+	ul.menu li:hover a {
+		color:#FFB677;			
+	}
+
+	.navbar .btn-navbar {
+		background-color: #FF694F;
+		background-image: none;		
+		border-style: solid; 
+	}
+	.navbar .btn-navbar:hover,
+	.navbar .btn-navbar:active {
+		background-color: #FF614F;
+	}
+	.carrito-env {
+		margin-top: 10px;
+	}
+		.carrito-boton {
+			margin-bottom: 6px;
+		}	
 }

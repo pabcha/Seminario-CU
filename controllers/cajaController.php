@@ -20,4 +20,12 @@ class cajaController extends Controller
 		
 		$this->viewMake('caja/index');
 	}
+
+	public function pago_y_envio()
+	{
+		$this->_view->titulo = 'Checkout - Salta Shop';
+		$this->_view->setCss(array('front/estilos_categorias'));
+		
+		$this->viewMake('caja/pago_y_envio');
+	}
 }
