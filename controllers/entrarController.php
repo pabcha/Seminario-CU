@@ -12,17 +12,12 @@ class entrarController extends Controller
 	{
 		//$Usuario = $this->loadModel('usuario');
 
-		/*if (Session::get('usuario')['autenticado'] && Session::get('usuario')['rol'] == 'usuario') 
+		if (Session::get('usuario')['autenticado'] && Session::get('usuario')['rol'] == 'usuario') 
 		{
 			$this->redireccionar('index');
-		}*/
+		}
 
 		$Val = new App\Helpers\Validator();
-
-		/*$a = User::isUser('pablochavez15@hotmail.com', '1234567')->active()->first();
-
-		d($a);
-		exit;*/
 
 		if ( User::validate($Val) )
 		{
