@@ -661,92 +661,97 @@ class adminController extends Controller
 
 	public function ordenes()
 	{
-		$Orden = $this->loadModel('ordenes');
-
-		$datos['ordenes'] = $Orden->get_ordenes();
+		$datos['ordenes'] = App\Models\Order::orderBy('ord_fecha', 'desc')->get();
 		$this->_view->titulo = "Ordenes";
 
-		$this->_view->setJs(array('jquery.dataTables.min','dataTables.scrollingPagination'));
-		$this->viewMake('admin/ordenes', $datos);
+		$this->_view->setJs(array('vendor/datatable/jquery.dataTables.min',
+			'vendor/datatable/dataTables.scrollingPagination'));
+
+		$this->viewMake('admin/ordenes/ordenes', $datos);
 	}
 
 	public function orden($orden_id)
 	{
-		$Orden = $this->loadModel('ordenes');
-		$datos['orden_id'] = $orden_id;
-		$datos['orden'] = $Orden->get_orden( $orden_id );
+		//$Orden = $this->loadModel('ordenes');
+		//$datos['orden'] = $Orden->get_orden( $orden_id );
+		try {
+			$o = App\Models\Order::findOrFail($orden_id);
 
-		if ( ! $datos['orden'] ) 
+			$datos['o'] = $o;
+			
+			/*if ( isset($_POST['orden_estado']) )
+			{
+				$estado = $_POST['orden_estado'];
+				
+				switch ($estado) 
+				{
+					case '1':
+						$estado = 'Pedido';
+						break;
+					case '2':
+						$estado = 'Esperando pago';
+						break;
+					case '3':
+						$estado = 'Pago aceptado';
+						break;
+					case '4':
+						$estado = 'Enviado';
+						break;
+					case '5':
+						$estado = 'Recibido';
+						break;
+					case '6':
+						$estado = 'Cancelado';
+						break;				
+					default:
+						//codigo no valido
+						$this->redireccionar('error');
+						break;
+				}
+				//actualizo estado en tabla ordenes
+				$Orden->update_estado_orden($estado, $orden_id);
+				//agrego nueva historia a tabla historial
+				$Orden->insert_historia($estado, $orden_id);
+				
+				$this->redireccionar('admin/ordenes/');			
+			}*/
+
+			//datos del cliente en cuestion
+			$datos['u'] = $o->usuario()->first();
+			//datos detalle de orden
+			$datos['detalles'] = App\Models\OrderDetail::where('ord_id', $orden_id)->get();
+
+			$datos['estados'] = array(
+					array('id' => '1',
+						'nombre' => 'Pedido'
+						),
+					array('id' => '2',
+						'nombre' => 'Esperando pago'
+						),
+					array('id' => '3',
+						'nombre' => 'Pago aceptado'
+						),
+					array('id' => '4',
+						'nombre' => 'Enviado'
+						),
+					array('id' => '5',
+						'nombre' => 'Recibido'
+						),
+					array('id' => '6',
+						'nombre' => 'Cancelado'
+						),
+				);
+
+			$this->_view->titulo = "Orden ".Underscore\Types\Number::paddingLeft($o->ord_id, 5);
+			$this->_view->setCss(array('admin/orden_style'));
+
+			$this->viewMake('admin/ordenes/orden', $datos);	
+
+		} 
+		catch (Exception $e) 
 		{
 			$this->redireccionar('error');
-		}
-
-		if ( isset($_POST['orden_estado']) )
-		{
-			$estado = $_POST['orden_estado'];
-			
-			switch ($estado) 
-			{
-				case '1':
-					$estado = 'Pedido';
-					break;
-				case '2':
-					$estado = 'Esperando pago';
-					break;
-				case '3':
-					$estado = 'Pago aceptado';
-					break;
-				case '4':
-					$estado = 'Enviado';
-					break;
-				case '5':
-					$estado = 'Recibido';
-					break;
-				case '6':
-					$estado = 'Cancelado';
-					break;				
-				default:
-					//codigo no valido
-					$this->redireccionar('error');
-					break;
-			}
-			//actualizo estado en tabla ordenes
-			$Orden->update_estado_orden($estado, $orden_id);
-			//agrego nueva historia a tabla historial
-			$Orden->insert_historia($estado, $orden_id);
-			
-			$this->redireccionar('admin/ordenes/');			
-		}
-
-		//datos del cliente en cuestion
-		$datos['usuario'] = $Orden->get_cliente_from_orden( $datos['orden']['us_id'] );
-		//datos detalle de orden
-		$datos['detalles'] = $Orden->get_detalle_from_orden( $orden_id );
-
-		$datos['estados'] = array(
-				array('id' => '1',
-					'nombre' => 'Pedido'
-					),
-				array('id' => '2',
-					'nombre' => 'Esperando pago'
-					),
-				array('id' => '3',
-					'nombre' => 'Pago aceptado'
-					),
-				array('id' => '4',
-					'nombre' => 'Enviado'
-					),
-				array('id' => '5',
-					'nombre' => 'Recibido'
-					),
-				array('id' => '6',
-					'nombre' => 'Cancelado'
-					),
-			);
-
-		$this->_view->setCss(array('orden_style'));
-
-		$this->viewMake('admin/orden', $datos);
+		};		
 	}
 
 	public function orden_historia($orden_id)

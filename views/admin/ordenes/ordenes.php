@@ -24,10 +24,10 @@
 								</tr>
 							</thead>
 							<tbody>
-								<?php foreach ($ordenes as $orden): ?>
+								<?php foreach ($ordenes as $o): ?>
 									<?php 
 										$clase = '';
-										switch ($orden['estado']) {
+										switch ($o['estado']) {
 											case 'Pedido':
 												$clase = '';
 												break;
@@ -52,18 +52,18 @@
 										}
 									?>							
 									<tr>
-										<td style="text-align:center;"><?php echo $orden['id']; ?></td>
-										<td><?php echo $orden['nombre_us']; ?></td>
-										<td><?php echo $this->to_pesos($orden['total']); ?></td>
+										<td style="text-align:center;"><?php echo $o->ord_id; ?></td>
+										<td><?php echo $o->ord_nombre_us; ?></td>
+										<td><?php echo $o->ord_total; ?></td>
 										<td>
 											<span class="label <?php echo $clase; ?>">
-												<?php echo $orden['estado']; ?>
+												<?php echo $o->ord_estado; ?>
 											</span>
 										</td>
-										<td><?php echo $this->get_fecha( $orden['estado_fecha'] ); ?></td>
+										<td><?php echo $o->ord_fecha; ?></td>
 										<td style="text-align:center;">
 											<div class="btn-group">
-												<a href="<?php echo BASE_URL.'admin/orden/'.$orden['id']; ?>" class="btn" title="Ver"><i class="icon-zoom-in"></i></a>	
+												<a href="<?php echo BASE_URL.'admin/orden/'.$o->ord_id ?>" class="btn" title="Ver"><i class="icon-zoom-in"></i></a>	
 											</div>
 										</td>
 									</tr>
