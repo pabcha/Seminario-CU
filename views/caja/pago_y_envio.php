@@ -13,7 +13,7 @@
 								Nombre
 							</td>
 							<td class="resaltar">
-								Juan Perez
+								<?= $u->us_nombre.' '.$u->us_apellido ?>
 							</td>									
 						</tr>
 						<tr>
@@ -21,7 +21,7 @@
 								Domicilio
 							</td>
 							<td class="resaltar">
-								Lamadrid 979
+								<?= $u->us_domicilio ?>
 							</td>									
 						</tr>
 						<tr>
@@ -29,7 +29,7 @@
 								Provincia
 							</td>
 							<td class="resaltar">
-								Salta
+								<?= $u->us_provincia ?>
 							</td>									
 						</tr>
 						<tr>
@@ -37,7 +37,7 @@
 								Ciudad
 							</td>
 							<td class="resaltar">
-								Salta
+								<?= $u->us_ciudad ?>
 							</td>									
 						</tr>
 						<tr>
@@ -45,7 +45,7 @@
 								Codigo Postal
 							</td>
 							<td class="resaltar">
-								4400
+								<?= $u->us_cpostal ?>
 							</td>									
 						</tr>
 						<tr>
@@ -53,7 +53,7 @@
 								Telefono
 							</td>
 							<td class="resaltar">
-								4236875
+								<?= $u->us_telefono ?>
 							</td>									
 						</tr>								
 					</tbody>
@@ -62,7 +62,7 @@
 		</div>
 		<!-- /info envio -->
 
-		<form action="caja.html">
+		<form action="<?= BASE_URL.'caja/confirmacion'  ?>" method="get">
 			<div class="row-fluid">
 				<div class="titulo-post">
 					<h3 style="font-size:22px;">Forma de pago</h3>
@@ -70,7 +70,7 @@
 
 				<ul class="formas-pago">
 					<li>
-						<input type="radio" name="inputFPago" id="inputTB" checked="checked">
+						<input type="radio" name="forma_pago" checked="checked" value="transferencia">
 						<label for="inputTB">Transferencia Bancaria</label>
 						<div class="detalle_pago_tb alerta">
 							<p>El cliente debera realizar una transferencia bancaria, la cual sera acordada con el vendedor luego de realizar la orden. Su orden no se enviara hasta que se halla verificado el pago.
@@ -78,7 +78,7 @@
 						</div>
 					</li>
 					<li>
-						<input type="radio" name="inputFPago" id="inputPP">
+						<input type="radio" name="forma_pago" value="paypal">
 						<label for="inputPP">PayPal <img src="img/paypal.png" alt=""></label>
 						<div class="detalle_pago_pp alerta">
 							<p>El cliente sera redireccionado a PayPal para efectuar el pago utilizando su tarjeta de credito.</p>
