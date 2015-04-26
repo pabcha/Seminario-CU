@@ -206,4 +206,24 @@ class Vista
 
 		return $clase;
 	}
+
+	public static function set_label_historia($accion)
+	{
+		$clase = '';
+
+		if ( strtolower($accion) == 'nota' ) 
+		{
+			$clase = 'label-blue';
+		} 
+		else if ( strtolower($accion) == 'nuevo estado' ) 
+		{
+			$clase = 'label-green';
+		} 
+		else 
+		{
+			$clase = 'label-darkblue';
+		}
+
+		return $clase;
+	}
 }

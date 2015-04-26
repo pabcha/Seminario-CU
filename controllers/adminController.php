@@ -662,8 +662,9 @@ class adminController extends Controller
 	public function ordenes()
 	{
 		$datos['ordenes'] = App\Models\Order::orderBy('ord_fecha', 'desc')->get();
+		
 		$this->_view->titulo = "Ordenes";
-
+		$this->_view->setCss(array('admin/orden_style'));
 		$this->_view->setJs(array('vendor/datatable/jquery.dataTables.min',
 			'vendor/datatable/dataTables.scrollingPagination'));
 
@@ -672,24 +673,20 @@ class adminController extends Controller
 
 	public function orden($orden_id)
 	{
-		//try {
-			$o = App\Models\Order::findOrFail($orden_id);
-
-			$datos['o'] = $o;
+		try {
+			$o = App\Models\Order::findOrFail($orden_id);			
 			
 			if ( isset($_POST['orden_estado']) )
 			{			
 				$estado = App\Classes\OrdenService::get_estado($_POST['orden_estado']);
 
 				//actualizo estado en tabla ordenes
-				//$Orden->update_estado_orden($estado, $orden_id);
 				$fecha = Capsule::raw('now()');
 				$o->ord_estado_fecha = $fecha;
 				$o->ord_estado = $estado;
 
 				$o->save();
 				//agrego nueva historia a tabla historial
-				//$Orden->insert_historia($estado, $orden_id);
 				$oh = new App\Models\OrderHistory();
 				$oh->ord_id = $orden_id;
 				$oh->historia_fecha = $fecha;
@@ -727,34 +724,42 @@ class adminController extends Controller
 						),
 				);
 
+			$datos['o'] = $o;
+
 			$this->_view->titulo = "Orden ".Underscore\Types\Number::paddingLeft($o->ord_id, 5);
 			$this->_view->setCss(array('admin/orden_style'));
 
 			$this->viewMake('admin/ordenes/orden', $datos);	
 
-		/*} 
+		} 
 		catch (Exception $e) 
 		{
 			$this->redireccionar('error');
-		};		*/
+		};		
 	}
 
 	public function orden_historia($orden_id)
 	{
-		$Orden = $this->loadModel('ordenes');
+		/*$Orden = $this->loadModel('ordenes');
 		$datos['orden_id'] = $orden_id;
-		$datos['orden'] = $Orden->get_orden( $orden_id );
+		$datos['orden'] = $Orden->get_orden( $orden_id );*/
 
-		if ( ! $datos['orden'] ) 
-		{
-			$this->redireccionar('error');
-		}
+		$o = App\Models\Order::findOrFail($orden_id);
+		$oh = $o->historias()->orderBy('historia_fecha', 'desc')->get();
 
-		$datos['historias'] = $Orden->get_historias($orden_id);
+		$datos['o'] = $o;
+		$datos['oh'] = $oh;
 
-		$this->_view->setCss(array('orden_style'));
+		/*d($o);
+		d($oh);
+		die();*/
 
-		$this->viewMake('admin/orden_historia', $datos);
+		//$datos['historias'] = $Orden->get_historias($orden_id);
+
+		$this->_view->titulo = "Orden";
+		$this->_view->setCss(array('admin/orden_style'));
+
+		$this->viewMake('admin/ordenes/orden_historia', $datos);
 	}
 
 	public function orden_correo($orden_id)

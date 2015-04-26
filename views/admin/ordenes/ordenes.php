@@ -24,39 +24,13 @@
 								</tr>
 							</thead>
 							<tbody>
-								<?php foreach ($ordenes as $o): ?>
-									<?php 
-										$clase = '';
-										switch ($o['estado']) {
-											case 'Pedido':
-												$clase = '';
-												break;
-											case 'Esperando pago':
-												$clase = 'label-warning';
-												break;
-											case 'Pago aceptado':
-												$clase = 'label-info';
-												break;
-											case 'Enviado':
-												$clase = 'label-inverse';
-												break;
-											case 'Recibido':
-												$clase = 'label-success';
-												break;
-											case 'Cancelado':
-												$clase = 'label-important';
-												break;											
-											default:
-												# code...
-												break;
-										}
-									?>							
+								<?php foreach ($ordenes as $o): ?>						
 									<tr>
 										<td style="text-align:center;"><?php echo $o->ord_id; ?></td>
 										<td><?php echo $o->ord_nombre_us; ?></td>
 										<td><?php echo $o->ord_total; ?></td>
 										<td>
-											<span class="label <?php echo $clase; ?>">
+											<span class="label <?= App\Helpers\Vista::set_label($o->ord_estado) ?>">
 												<?php echo $o->ord_estado; ?>
 											</span>
 										</td>

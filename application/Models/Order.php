@@ -19,7 +19,7 @@ class Order extends Model {
 		return $this->belongsTo('App\Models\User', 'us_id', 'us_id');
 	}
 
-	public function historia()
+	public function historias()
 	{
 		return $this->hasMany('App\Models\OrderHistory', 'ord_id', 'ord_id');
 	}
