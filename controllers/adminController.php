@@ -740,26 +740,23 @@ class adminController extends Controller
 
 	public function orden_historia($orden_id)
 	{
-		/*$Orden = $this->loadModel('ordenes');
-		$datos['orden_id'] = $orden_id;
-		$datos['orden'] = $Orden->get_orden( $orden_id );*/
+		try 
+		{
+			$o = App\Models\Order::findOrFail($orden_id);
+			$oh = $o->historias()->orderBy('historia_fecha', 'desc')->get();
 
-		$o = App\Models\Order::findOrFail($orden_id);
-		$oh = $o->historias()->orderBy('historia_fecha', 'desc')->get();
+			$datos['o'] = $o;
+			$datos['oh'] = $oh;
 
-		$datos['o'] = $o;
-		$datos['oh'] = $oh;
+			$this->_view->titulo = "Orden";
+			$this->_view->setCss(array('admin/orden_style'));
 
-		/*d($o);
-		d($oh);
-		die();*/
-
-		//$datos['historias'] = $Orden->get_historias($orden_id);
-
-		$this->_view->titulo = "Orden";
-		$this->_view->setCss(array('admin/orden_style'));
-
-		$this->viewMake('admin/ordenes/orden_historia', $datos);
+			$this->viewMake('admin/ordenes/orden_historia', $datos);	
+		} 
+		catch (Exception $e) 
+		{
+			$this->redireccionar('error');
+		};		
 	}
 
 	public function orden_correo($orden_id)
