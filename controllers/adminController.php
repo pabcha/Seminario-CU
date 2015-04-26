@@ -672,49 +672,34 @@ class adminController extends Controller
 
 	public function orden($orden_id)
 	{
-		//$Orden = $this->loadModel('ordenes');
-		//$datos['orden'] = $Orden->get_orden( $orden_id );
-		try {
+		//try {
 			$o = App\Models\Order::findOrFail($orden_id);
 
 			$datos['o'] = $o;
 			
-			/*if ( isset($_POST['orden_estado']) )
-			{
-				$estado = $_POST['orden_estado'];
-				
-				switch ($estado) 
-				{
-					case '1':
-						$estado = 'Pedido';
-						break;
-					case '2':
-						$estado = 'Esperando pago';
-						break;
-					case '3':
-						$estado = 'Pago aceptado';
-						break;
-					case '4':
-						$estado = 'Enviado';
-						break;
-					case '5':
-						$estado = 'Recibido';
-						break;
-					case '6':
-						$estado = 'Cancelado';
-						break;				
-					default:
-						//codigo no valido
-						$this->redireccionar('error');
-						break;
-				}
+			if ( isset($_POST['orden_estado']) )
+			{			
+				$estado = App\Classes\OrdenService::get_estado($_POST['orden_estado']);
+
 				//actualizo estado en tabla ordenes
-				$Orden->update_estado_orden($estado, $orden_id);
+				//$Orden->update_estado_orden($estado, $orden_id);
+				$fecha = Capsule::raw('now()');
+				$o->ord_estado_fecha = $fecha;
+				$o->ord_estado = $estado;
+
+				$o->save();
 				//agrego nueva historia a tabla historial
-				$Orden->insert_historia($estado, $orden_id);
+				//$Orden->insert_historia($estado, $orden_id);
+				$oh = new App\Models\OrderHistory();
+				$oh->ord_id = $orden_id;
+				$oh->historia_fecha = $fecha;
+				$oh->historia_accion = 'Nuevo estado';
+				$oh->historia_descripcion = $estado;
+
+				$oh->save();
 				
-				$this->redireccionar('admin/ordenes/');			
-			}*/
+				$this->redireccionar('admin/ordenes');
+			}
 
 			//datos del cliente en cuestion
 			$datos['u'] = $o->usuario()->first();
@@ -747,11 +732,11 @@ class adminController extends Controller
 
 			$this->viewMake('admin/ordenes/orden', $datos);	
 
-		} 
+		/*} 
 		catch (Exception $e) 
 		{
 			$this->redireccionar('error');
-		};		
+		};		*/
 	}
 
 	public function orden_historia($orden_id)
