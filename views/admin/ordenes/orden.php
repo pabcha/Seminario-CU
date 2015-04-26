@@ -117,17 +117,12 @@
 										<small>cambiar estado de orden</small>
 
 										<select name="orden_estado" class="input-block-level">										
-										<?php foreach ($estados as $estado): ?>
-											<?php 
-												$selected = '';
-												if ($estado['nombre'] == $o->ord_estado) { $selected = "selected = 'selected'"; }
-											 ?>
-											
-											<option value="<?php echo $estado['id']; ?>" <?php echo $selected; ?>>
+										<?php foreach ($estados as $estado): ?>											
+											<option value="<?php echo $estado['id']; ?>" <?= App\Helpers\Vista::is_selected($estado['nombre'], $o->ord_estado) ?>>
 												<?php echo $estado['nombre']; ?>
 											</option>
 										<?php endforeach ?>
-										</select>
+										</select>										
 
 										<div class="menu-form">
 											<a href="<?php echo BASE_URL.'admin/ordenes'; ?>" class="boton boton-cancel">Salir</a>		
