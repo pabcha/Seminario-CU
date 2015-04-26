@@ -31,7 +31,7 @@
 					<h3 style="font-size:22px;">Gracias por tu orden!</h3>
 				</div>
 				<p style="font-size: 15px;">
-					Tu pedido ha sido recibido y ahora esta sieno procesado. En breve nos comunicaremos con usted.
+					Tu pedido ha sido recibido y ahora esta siendo procesado. En breve nos comunicaremos con usted.
 				</p>
 				<p style="font-size: 15px;">
 					La siguiente siguiente información le sera enviada a su correo. 
@@ -41,7 +41,7 @@
 
 			<div class="row-fluid order-header">
 				<h2>N° <?= Underscore\Types\Number::paddingLeft($id, 5) ?></h2>
-				<p><span>Fecha:</span> 25-05-2015 21:15:16</p>
+				<p><span>Fecha:</span> <?= date('d-m-Y') ?></p>
 			</div>
 
 			<div class="row-fluid client-info">
