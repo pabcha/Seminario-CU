@@ -17,6 +17,16 @@ class Carrito
 		}
 	}
 
+	public static function isEmpty()
+	{
+		if ( isset($_SESSION['carrito']) )
+		{
+			return count($_SESSION['carrito']['productos']) === 0;	
+		}
+
+		return true;		
+	}
+
 	public static function get_productos()
 	{
 		return $_SESSION['carrito']['productos'];
