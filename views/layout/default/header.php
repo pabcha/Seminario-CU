@@ -9,11 +9,11 @@
 	<link href="<?= $roots['css'] ?>vendor/bootstrap-responsive.min.css" rel="stylesheet">
 	<link href="<?= $roots['css'] ?>vendor/font-awesome/font-awesome.css" rel="stylesheet">
 	<link href="<?= $roots['css'] ?>front/estilos_comercio.css" rel="stylesheet">
-	<!-- <link href='http://fonts.googleapis.com/css?family=Lora' rel='stylesheet'>
+	<link href='http://fonts.googleapis.com/css?family=Lora' rel='stylesheet'>
 	<link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet'>
 	<link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet'>
 	<link href='http://fonts.googleapis.com/css?family=Acme' rel='stylesheet'>
-	<link href='http://fonts.googleapis.com/css?family=Chau+Philomene+One' rel='stylesheet'> -->
+	<link href='http://fonts.googleapis.com/css?family=Chau+Philomene+One' rel='stylesheet'>
 	<?= App\Helpers\Vista::loadCss( $styles ) ?>
 
 
