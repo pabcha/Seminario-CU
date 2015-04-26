@@ -110,36 +110,10 @@
 							<div class="widget widget-compact">
 								<div class="widget-header"><h3>Estado de la orden</h3></div>
 								<div class="widget-content">
-									<?php 
-										$clase = '';
+									
+									<p class="estado-orden <?= App\Helpers\Vista::set_label($o->ord_estado) ?>"><?php echo $o->ord_estado; ?></p>
 
-										switch ($o->ord_estado) {
-											case 'Pedido':
-												$clase = 'bg-light-gray';
-												break;
-											case 'Esperando pago':
-												$clase = 'bg-yellow';
-												break;
-											case 'Pago aceptado':
-												$clase = 'bg-light-blue';
-												break;
-											case 'Enviado':
-												$clase = 'bg-black';
-												break;
-											case 'Recibido':
-												$clase = 'bg-green';
-												break;
-											case 'Cancelado':
-												$clase = 'bg-red';
-												break;											
-											default:
-												# code...
-												break;
-										}
-									?>
-									<p class="estado-orden <?php echo $clase; ?>"><?php echo $o->ord_estado; ?></p>
-
-									<form class="form-inline status-order-form" action="<?php echo BASE_URL.'admin/orden/'.$orden_id; ?>" method="post">
+									<form class="form-inline status-order-form" action="<?php echo BASE_URL.'admin/orden/'.$o->ord_id; ?>" method="post">
 										<small>cambiar estado de orden</small>
 
 										<select name="orden_estado" class="input-block-level">										

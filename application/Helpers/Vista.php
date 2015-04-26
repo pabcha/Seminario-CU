@@ -175,4 +175,35 @@ class Vista
 
 		return $q;
 	}
+
+	public static function set_label($item)
+	{
+		$clase = '';
+
+		switch ($item) {
+			case 'Pedido':
+				$clase = 'bg-light-gray';
+				break;
+			case 'Esperando pago':
+				$clase = 'bg-yellow';
+				break;
+			case 'Pago aceptado':
+				$clase = 'bg-light-blue';
+				break;
+			case 'Enviado':
+				$clase = 'bg-black';
+				break;
+			case 'Recibido':
+				$clase = 'bg-green';
+				break;
+			case 'Cancelado':
+				$clase = 'bg-red';
+				break;											
+			default:
+				# code...
+				break;
+		}
+
+		return $clase;
+	}
 }
