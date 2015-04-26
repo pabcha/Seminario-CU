@@ -1,4 +1,6 @@
 <?php
+use App\Models\User;
+
 class entrarController extends Controller
 {
 	public function __construct()
@@ -8,12 +10,37 @@ class entrarController extends Controller
 
 	public function index()
 	{
-		$Usuario = $this->loadModel('usuario');
+		//$Usuario = $this->loadModel('usuario');
 
-		if (Session::get('usuario')['autenticado'] && Session::get('usuario')['rol'] == 'usuario') 
+		/*if (Session::get('usuario')['autenticado'] && Session::get('usuario')['rol'] == 'usuario') 
 		{
 			$this->redireccionar('index');
-		}
+		}*/
+
+		$Val = new App\Helpers\Validator();
+
+		/*$a = User::isUser('pablochavez15@hotmail.com', '1234567')->active()->first();
+
+		d($a);
+		exit;*/
+
+		if ( User::validate($Val) )
+		{
+			//redireccionar a otro metodo que haga el trabajo			
+			$u = User::isUser($_POST['inputCorreo'], $_POST['inputPassword'])->active()->first();
+
+			$_SESSION['usuario'] = array(
+					'autenticado' => true,
+					'rol' => 'usuario',
+					'nombre' => $u->us_nombre,
+					'apellido' => $u->us_apellido,
+					'correo' => $u->us_correo,
+					'id' => $u->us_id,
+					'tiempo' => time(),
+				);
+
+			$this->redireccionar('index');
+		}		
 
 		/*if( $this->getInt('enviar') == 1 ) {	
 			
@@ -37,7 +64,7 @@ class entrarController extends Controller
 		}*/
 
 		//Validacion y Actualizacion
-		if ( $Usuario->validar_user() )
+		/*if ( $Usuario->validar_user() )
 		{
 			$user = $Usuario->identify_user($_POST['inputCorreo'], $_POST['inputPassword']);
 
@@ -52,10 +79,10 @@ class entrarController extends Controller
 				);
 
 			$this->redireccionar('index');
-		}
+		}*/
 
-		$datos['validador'] = $Usuario->getValidadorInstance();
-		$datos['errors'] = $Usuario->getErrorsForm();
+		$datos['validador'] 	= $Val;
+		$datos['errors'] 		= $Val->show_errors();
 
 		$this->_view->titulo = 'Entrar - Salta Shop';
 
