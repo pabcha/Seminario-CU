@@ -748,7 +748,7 @@ class adminController extends Controller
 			$datos['o'] = $o;
 			$datos['oh'] = $oh;
 
-			$this->_view->titulo = "Orden";
+			$this->_view->titulo = "Historial de la orden";
 			$this->_view->setCss(array('admin/orden_style'));
 
 			$this->viewMake('admin/ordenes/orden_historia', $datos);	
@@ -761,106 +761,78 @@ class adminController extends Controller
 
 	public function orden_correo($orden_id)
 	{
-		$Orden = $this->loadModel('ordenes');
-		$datos['orden_id'] = $orden_id;
-		$datos['orden'] = $Orden->get_orden( $orden_id );
+		try 
+		{
+			$o = App\Models\Order::findOrFail($orden_id);
 
-		if ( ! $datos['orden'] ) 
+			if ( isset($_POST['inputMensaje']) )
+			{
+				if ( ! empty($_POST['inputMensaje']) )
+				{
+					$mensaje = $_POST['inputMensaje'];
+					$oh = new App\Models\OrderHistory();
+
+					$oh->ord_id = $o->ord_id;
+					$oh->historia_fecha = Capsule::raw('now()');
+					$oh->historia_accion = 'Notificación al cliente';
+					$oh->historia_descripcion = $mensaje;
+
+					$oh->save();
+
+					//Enviar el correo electronico.
+					$u = $o->usuario()->first();				
+					// App\Classes\OrdenService::enviar_correo($u->us_correo, $mensaje);
+
+					Session::set("mensajeExito", "El mensaje se ha enviado al correo electrónico del cliente.");
+					$this->redireccionar('admin/orden_historia/'.$o->ord_id);
+				}			
+			}
+
+			$datos['o'] = $o;
+
+			$this->_view->titulo = "Hablar con el cliente";
+			$this->viewMake('admin/ordenes/orden_correo', $datos);
+		} 
+		catch (Exception $e) 
 		{
 			$this->redireccionar('error');
-		}
-
-		if ( isset($_POST['inputMensaje']) )
-		{
-			if ( ! empty($_POST['inputMensaje']) )
-			{
-				$mensaje = $_POST['inputMensaje'];
-				$Orden->insert_mensaje($orden_id, $mensaje);
-
-				//Enviar el correo electronico.
-				$usuario = $Orden->get_cliente_from_orden( $datos['orden']['us_id'] );
-				$this->enviar_correo($usuario['correo'], $mensaje);
-
-				Session::set("mensajeExito", "El mensaje se ha enviado al correo electrónico del cliente.");
-				$this->redireccionar('admin/orden_historia/'.$orden_id);
-			}			
-		}
-
-		$this->_view->setCss(array('orden_style'));
-
-		$this->viewMake('admin/orden_correo', $datos);
-	}
-
-	private function enviar_correo($destino, $mensaje)
-	{
-		$this->getLibrary('PHPMailer-master/PHPMailerAutoload');
-
-		$mail = new PHPMailer;
-
-		$mail->isSMTP();
-		$mail->Host = 'smtp.gmail.com';
-		$mail->Port = 587; 
-		$mail->SMTPAuth = true;
-		$mail->Username = EMAIL_USERNAME;
-		$mail->Password = EMAIL_PASSWORD;
-		$mail->SMTPSecure = 'tls';
-		$mail->CharSet = 'UTF-8';
-
-		$mail->From = EMAIL_USERNAME;
-		$mail->FromName = EMAIL_EMISOR;
-
-		$mail->addAddress( $destino );
-		$mail->isHTML(true);
-		$mail->Subject = 'Comunicado '.EMAIL_EMISOR;
-
-		$mail->Body    = '<table style="font-family:Verdana,sans-serif;font-size:11px;color:#374953;width:550px;">
-		<tbody>	
-			<tr>
-				<td align="left">
-					'.nl2br($mensaje).'
-				</td>
-			</tr>
-			<tr>
-				<td>&nbsp;</td>
-			</tr>
-			<tr>
-				<td style="font-size:10px;border-top:1px solid #D9DADE;" align="center">
-					<a style="color:#ff5e00;font-weight:bold;text-decoration:none;" href="'.BASE_URL.'" target="_blank">SaltaShop.com</a></a>
-				</td>
-			</tr>
-		</tbody>
-		</table>';
-		//Si no soporta HTML
-		$mail->AltBody = $mensaje;
-
-		return $mail->send();
+		};
 	}
 
 	public function orden_nota($orden_id)
 	{
-		$Orden = $this->loadModel('ordenes');
-		$datos['orden_id'] = $orden_id;
-		$datos['orden'] = $Orden->get_orden( $orden_id );
+		try 
+		{
+			$o = App\Models\Order::findOrFail($orden_id);
 
-		if ( ! $datos['orden'] ) 
+			if ( isset($_POST['inputNota']) )
+			{
+				if ( ! empty($_POST['inputNota']) )
+				{
+					//$Orden->insert_nota($orden_id, $_POST['inputNota']);
+					$oh = new App\Models\OrderHistory();
+
+					$oh->ord_id = $o->ord_id;
+					$oh->historia_fecha = Capsule::raw('now()');
+					$oh->historia_accion = 'Nota';
+					$oh->historia_descripcion = $_POST['inputNota'];
+
+					$oh->save();
+
+					Session::set("mensajeExito", "Se ha añadido una nueva nota.");
+					$this->redireccionar('admin/orden_historia/'.$o->ord_id);
+				}			
+			}
+
+			$datos['o'] = $o;
+
+			$this->_view->titulo = "Agregar una nota";
+			$this->viewMake('admin/ordenes/orden_nota', $datos);
+		} 
+		catch (Exception $e) 
 		{
 			$this->redireccionar('error');
-		}
-
-		if ( isset($_POST['inputNota']) )
-		{
-			if ( ! empty($_POST['inputNota']) )
-			{
-				$Orden->insert_nota($orden_id, $_POST['inputNota']);
-
-				Session::set("mensajeExito", "Se ha añadido una nueva nota.");
-				$this->redireccionar('admin/orden_historia/'.$orden_id);
-			}			
-		}
-
-		$this->_view->setCss(array('orden_style'));
-
-		$this->viewMake('admin/orden_nota', $datos);
+		};
 	}
 // ---------------- Clientes --------------------- //
 

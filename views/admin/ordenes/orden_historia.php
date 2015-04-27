@@ -11,7 +11,7 @@
 				<!-- fin navegacion -->
 				<div class="span9">					
 
-					<h1 class="pag-titulo">Orden de compra - <?php echo $o->ord_id; ?></h1>
+					<h1 class="pag-titulo">Orden de compra - <?= Underscore\Types\Number::paddingLeft($o->ord_id, 5) ?></h1>
 
 					<ul class="nav nav-tabs">
 						<li>
