@@ -12,7 +12,8 @@ class Carrito
 			$_SESSION['carrito'] = array(
 					'productos' => array(),	
 					'cantidad' => 0,
-					'total' => 0.00, 			
+					'total' => 0.00,
+					'cobrado' => false		
 				);
 		}
 	}
