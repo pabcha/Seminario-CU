@@ -58,5 +58,15 @@ class errorController extends Controller
 			return $error['default'];
 		}
 	}
+
+	public function bad()
+	{
+		$this->_view->titulo = 'SaltaShop / Error desconocido';
+		$datos['mensaje'] = 'Error desconocido. Por favor intente nuevamente.';
+		$this->_view->setCss(array('front/estilos_error'));
+
+
+		$this->toError('error/index', $datos);
+	}
 }
 ?>
