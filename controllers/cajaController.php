@@ -8,6 +8,8 @@ use App\Models\Product;
 use Illuminate\Database\Capsule\Manager as DB;
 use App\Classes\Carrito;
 
+use App\Classes\CajaService;
+
 class cajaController extends Controller
 {
 	public function __construct()
@@ -49,9 +51,18 @@ class cajaController extends Controller
 
 		$this->_view->titulo = 'Pago y Envio - Salta Shop';
 		$this->_view->setCss(array('front/estilos_categorias'));
+		$this->_view->setJs(array('front/fn_caja'));
 
 		$datos['u'] = User::find( Session::get('usuario')['id'] );
-		
+		$datos['correo'] = Session::get('usuario')['correo'];
+		$datos['total'] = Session::get('carrito')['total']*100;//centavos
+		$datos['descripcion'] = '';
+
+		foreach (Session::get('carrito')['productos'] as $p) 
+		{
+			$datos['descripcion'] .= $p['producto_nombre'].' x '.$p['cantidad'].";";
+		}
+
 		$this->viewMake('caja/pago_y_envio', $datos);
 	}
 
@@ -63,81 +74,19 @@ class cajaController extends Controller
 			exit;
 		}
 
-		if ( Carrito::isEmpty() )
+		if ( !isset($_SESSION['temp']) OR !isset($_SESSION['carrito']) )
 		{
 			$this->redireccionar('index');
 			exit;
 		}
 
-		if ( empty($_GET['forma_pago']) )
-		{
-			$this->redireccionar('error');
-			exit;
-		}
-		else
-		{
-			$values = ['transferencia', 'paypal'];
-			if ( !in_array($_GET['forma_pago'], $values) ) 
-			{
-				$this->redireccionar('error');
-				exit;
-			}
-		}
-
 		$this->_view->titulo = 'Felicidades - Salta Shop';
 		$this->_view->setCss(array('front/estilos_categorias',
 			'front/estilos_congrats'));
+		date_default_timezone_set('America/Argentina/Buenos_Aires');
 
-		$fecha = DB::raw('now()');
-
-		$o = new Order();
-		$o->us_id = Session::get('usuario')['id'];
-		$o->ord_nombre_us = Session::get('usuario')['nombre'].' '.Session::get('usuario')['apellido'];
-		$o->ord_forma_pago = 'Transferencia bancaria';
-		$o->ord_estado = 'Pedido';
-		$o->ord_estado_fecha = $fecha;
-		$o->ord_total = $_SESSION['carrito']['total'];
-		$o->ord_fecha = $fecha;
-		$o->ord_cantidad_vendida = $_SESSION['carrito']['cantidad'];
-
-		if ( $o->save() )
-		{
-			//detalle de orden
-			$ps = Carrito::get_productos();
-
-			foreach ($ps as $p) 
-			{
-				$od = new OrderDetail();
-				$od->ord_id = $o->ord_id;
-				$od->producto_id = $p['producto_id'];
-				$od->producto_cantidad = $p['cantidad'];
-				$od->producto_precio = $p['producto_precio'];
-				$od->producto_subtotal = $p['producto_precio'] * $p['cantidad'];
-				$od->producto_nombre = $p['producto_nombre'];
-
-				$od->save();
-
-				//reducir stock
-				$producto = Product::find($p['producto_id']);
-				$producto->producto_cantidad = $producto->producto_cantidad - $p['cantidad'];
-				$producto->producto_cantidad_comprada = $producto->producto_cantidad_comprada + $p['cantidad'];
-				$producto->save();
-			}
-
-			//historia	
-			$oh = new OrderHistory();
-			$oh->ord_id = $o->ord_id;
-			$oh->historia_fecha = $fecha;
-			$oh->historia_accion = 'Nuevo estado';
-			$oh->historia_descripcion = 'Pedido';
-
-			$oh->save();
-		}
-
-		$datos['id'] = $o->ord_id;
-		//$datos['id'] = 18;
-		$datos['ps'] = $ps;
-		// $datos['ps'] = Carrito::get_productos();
+		$datos['id'] = Session::get('temp')['orden_id'];
+		$datos['ps'] = Carrito::get_productos();
 		$datos['carrito_total'] = App\Classes\Carrito::get_total();
 
 		//personal info
@@ -146,14 +95,98 @@ class cajaController extends Controller
 		$datos['telefono'] = $u->us_telefono;
 		$datos['correo'] = $u->us_correo;
 		$datos['domicilio'] = $u->us_domicilio;
-		$datos['pago'] = 'Transferencia bancaria';
-
+		$datos['pago'] = Session::get('temp')['forma_pago'];
 
 		//finalizado la insercion el carrito se tiene que vaciar
 		Session::destroy('carrito');
-
-		//aumentar cantidad comprada
-
+		Session::destroy('temp');		
+		
 		$this->_view->renderizar('caja/confirmacion', $datos);
+	}
+
+	public function cobrar_transferencia()
+	{
+		if ( !Session::get('usuario')['autenticado'] ) 
+		{
+			$this->redireccionar('caja');
+			exit;
+		}
+
+		if ( Session::get('carrito')['cobrado'] )
+		{
+			$this->redireccionar('index');
+			exit;
+		}
+
+		$forma_pago = 'Transferencia bancaria';
+		$orden_id = CajaService::saveOrder($forma_pago);
+
+		Session::get('carrito')['cobrado'] = true;
+		Session::set('temp', array(
+			'orden_id' => $orden_id,
+			'forma_pago' => $forma_pago
+		));
+
+		$this->redireccionar('caja/confirmacion');
+	}
+
+	public function cobrar_stripe()
+	{
+		if ( !Session::get('usuario')['autenticado'] ) 
+		{
+			$this->redireccionar('caja');
+			exit;
+		}
+
+		if ( Session::get('carrito')['cobrado'] )
+		{
+			$this->redireccionar('index');
+			exit;
+		}
+
+		if ( isset($_POST['stripeToken']) )
+		{
+			$correo = Session::get('usuario')['correo'];
+			$total = Session::get('carrito')['total']*100;//centavos
+			$token = $_POST['stripeToken'];
+			
+			\Stripe\Stripe::setApiKey(stripe_secret);
+
+			try 
+			{
+				\Stripe\Charge::create(array(
+				  "amount" => $total,
+				  "currency" => "ARS",
+				  "source" => $token, // obtained with Stripe.js
+				  "description" => "Cobro para ".$correo
+				));
+
+				//cobrar en mi db
+				$forma_pago = 'Tarjeta de credito - Stripe';				
+				$orden_id = CajaService::saveOrder($forma_pago);
+
+				//ya esta cobrado
+				Session::get('carrito')['cobrado'] = true;
+				Session::set('temp', array(
+					'orden_id' => $orden_id,
+					'forma_pago' => $forma_pago
+				));
+
+				$this->redireccionar('caja/confirmacion');
+			} 
+			catch(\Stripe\Error\Card $e) {
+			  $this->redireccionar('error/bad');
+			} catch (\Stripe\Error\InvalidRequest $e) {
+			  $this->redireccionar('error/bad');
+			} catch (\Stripe\Error\Authentication $e) {
+			  $this->redireccionar('error/bad');
+			} catch (\Stripe\Error\ApiConnection $e) {
+			  $this->redireccionar('error/bad');
+			} catch (\Stripe\Error\Base $e) {
+			  $this->redireccionar('error/bad');
+			} catch (Exception $e) {
+			  $this->redireccionar('error/bad');
+			}
+		}		
 	}
 }

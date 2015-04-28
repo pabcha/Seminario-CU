@@ -62,36 +62,53 @@
 		</div>
 		<!-- /info envio -->
 
-		<form action="<?= BASE_URL.'caja/confirmacion'  ?>" method="get">
-			<div class="row-fluid">
-				<div class="titulo-post">
-					<h3 style="font-size:22px;">Forma de pago</h3>
-				</div>
+		<div class="row-fluid">
+			<div class="titulo-post">
+				<h3 style="font-size:22px;">Forma de pago</h3>
+			</div>
 
-				<ul class="formas-pago">
-					<li>
-						<input type="radio" name="forma_pago" checked="checked" value="transferencia">
-						<label for="inputTB">Transferencia Bancaria</label>
-						<div class="detalle_pago_tb alerta">
-							<p>El cliente debera realizar una transferencia bancaria, la cual sera acordada con el vendedor luego de realizar la orden. Su orden no se enviara hasta que se halla verificado el pago.
-							</p>
+			<ul class="formas-pago">
+				<li style="margin-bottom:20px;">
+					<input type="radio" name="forma_pago" id="radio-transfer">
+					<label for="inputTB">Transferencia Bancaria</label>
+					<div class="detalle_pago_tb alerta" style="padding-bottom:15px;display:none;" id="transfer">
+						<p>Debera realizar una transferencia bancaria, la cual sera acordada con el vendedor luego de realizar la orden.
+						</p>
+						<div class="row-fluid" style="text-align: right;">
+							<a href="<?= BASE_URL.'caja/cobrar_transferencia' ?>" class="boton boton-acept">Transferencia bancaria</a>
 						</div>
-					</li>
-					<li>
-						<input type="radio" name="forma_pago" value="paypal">
-						<label for="inputPP">PayPal <img src="img/paypal.png" alt=""></label>
-						<div class="detalle_pago_pp alerta">
-							<p>El cliente sera redireccionado a PayPal para efectuar el pago utilizando su tarjeta de credito.</p>
+						<div style="clear:both"></div>
+					</div>
+				</li>
+				<li>
+					<input type="radio" name="forma_pago" id="radio-credit-card">
+					<label for="inputPP">
+						<img src="<?= BASE_URL.'public/img/visa-curved-32px.png' ?>" alt="visa">
+						<img src="<?= BASE_URL.'public/img/mastercard-curved-32px.png' ?>" alt="mastercard">
+						<img src="<?= BASE_URL.'public/img/american-express-curved-32px.png' ?>" alt="american-express">
+						<img src="<?= BASE_URL.'public/img/discover-curved-32px.png' ?>" alt="discover">
+					</label>
+					<div class="detalle_pago_pp alerta" id="credit-card" style="display:none">
+						<p>Usamos Stripe un procesador de pagos online.</p>
+						<div class="row-fluid" style="text-align: right;">
+							<form action="<?= BASE_URL.'caja/cobrar_stripe' ?>" method="POST">
+							  <script
+							    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+							    data-key="<?= stripe_pub ?>"
+							    data-name="Saltashop"
+							    data-currency="ARS"
+							    data-panel-label="Pagar {{amount}}"
+							    data-label="Pagar con Stripe"
+							    data-email="<?= $correo ?>"
+							    data-allow-remember-me="false"
+							    data-description="<?= $descripcion ?>"
+							    data-amount="<?= $total ?>">
+							  </script>
+							</form>
 						</div>
-					</li>					
-				</ul>
-			</div>
-			<!-- /forma de pago -->
-				
-			<div class="row-fluid" style="text-align: right">
-				<input type="submit" class="boton boton-acept btn-pay" value="Listo">
-			</div>
-			<!-- /enviar orden -->
-		</form>
+					</div>
+				</li>					
+			</ul>
+		</div>		
 	</div>
 </div>
