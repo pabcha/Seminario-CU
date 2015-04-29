@@ -654,6 +654,14 @@ p.descripcion {
 	color:#ABABAB;
 }
 
+/* Styles for table*/
+
+a.paginate_button {
+	padding: 0 5px 0 5px;
+	cursor: pointer;
+	text-decoration: none;	
+}
+
 /*
 *
 *Media querys

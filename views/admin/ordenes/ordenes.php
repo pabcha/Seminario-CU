@@ -26,18 +26,22 @@
 							<tbody>
 								<?php foreach ($ordenes as $o): ?>						
 									<tr>
-										<td style="text-align:center;"><?php echo $o->ord_id; ?></td>
-										<td><?php echo $o->ord_nombre_us; ?></td>
-										<td><?php echo $o->ord_total; ?></td>
-										<td>
+										<td style="text-align:center;"><?= $o->ord_id ?></td>
+										<td style="text-align:right;"><?= $o->ord_nombre_us ?></td>
+										<td data-order="<?= $o->ord_total ?>" style="text-align:right;">
+											<?= App\Helpers\Utils::to_pesos($o->ord_total) ?>
+										</td>
+										<td style="text-align:center;">
 											<span class="label <?= App\Helpers\Vista::set_label($o->ord_estado) ?>">
-												<?php echo $o->ord_estado; ?>
+												<?= $o->ord_estado ?>
 											</span>
 										</td>
-										<td><?php echo $o->ord_fecha; ?></td>
+										<td data-order="<?= $o->ord_fecha ?>" style="text-align:right;">
+											<?= App\Helpers\Utils::dateHour2Locale($o->ord_fecha) ?>
+										</td>
 										<td style="text-align:center;">
 											<div class="btn-group">
-												<a href="<?php echo BASE_URL.'admin/orden/'.$o->ord_id ?>" class="btn" title="Ver"><i class="icon-zoom-in"></i></a>	
+												<a href="<?= BASE_URL.'admin/orden/'.$o->ord_id ?>" class="btn" title="Ver"><i class="icon-zoom-in"></i></a>	
 											</div>
 										</td>
 									</tr>
@@ -51,25 +55,33 @@
 		</div>
 	</div>
 
-	<!-- <script type="text/javascript" src="<?php echo BASE_URL; ?>views/admin/js/dataTables.scrollingPagination.js"></script>	 -->
 	<script type="text/javascript">
 		$(function() {
-			$('#tabla-result').dataTable({
-					"oLanguage" : {
-						"sLengthMenu" : "Mostrar _MENU_",
-						"sZeroRecords" : "No hubo coincidencias",
-						"sInfo" : "Mostrando _START_ - _END_ de _TOTAL_ registros",
-						"sInfoEmpty" : "Mostrando 0 - 0 de 0 registros",
-						"sInfoFiltered" : "(de _MAX_ registros)",
-						"sSearch": "Buscar:",
-						oPaginate : {
-							"sLast"		: 		"Ultimo",
-							"sFirst"	: 		"Primero",
-							"sPrevious"	: 		"Anterior",
-							"sNext"		: 		"Siguiente"
-						} 						
-					},
-					"sPaginationType": "bootstrap"
-				});
+			$('#tabla-result').DataTable({
+				"order": [[ 4, "desc" ]],
+				"language": {
+		            "lengthMenu": "Mostrar _MENU_",
+		            "zeroRecords": "No hubo coincidencias",
+		            "info": "Mostrando pagina _PAGE_ de _PAGES_",
+		            "infoEmpty": "",
+		            "infoFiltered": "",
+		            "search": "Buscar:",
+		            "paginate": {
+		            	last: "Ultimo",
+		            	previous: "Anterior",
+		            	next: "Siguiente",
+		            	first: "Primero"
+		            }
+		        },
+		        "fnDrawCallback": function() {
+					$('#tabla-result_length').hide();//entradas por tabla
+
+		            /*if ( $('.dataTables_paginate > ul > li').size() < 4) 
+		            {
+		            	$('.dataTables_paginate').hide();
+		            }*/
+		        },
+		        info: false
+			});
 		});
 	</script>

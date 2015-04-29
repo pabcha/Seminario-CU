@@ -665,8 +665,7 @@ class adminController extends Controller
 		
 		$this->_view->titulo = "Ordenes";
 		$this->_view->setCss(array('admin/orden_style'));
-		$this->_view->setJs(array('vendor/datatable/jquery.dataTables.min',
-			'vendor/datatable/dataTables.scrollingPagination'));
+		$this->_view->setJs(array('vendor/datatable1.10.6/jquery.dataTables.min'));
 
 		$this->viewMake('admin/ordenes/ordenes', $datos);
 	}
