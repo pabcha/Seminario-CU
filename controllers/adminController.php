@@ -661,11 +661,62 @@ class adminController extends Controller
 
 	public function ordenes()
 	{
-		$datos['ordenes'] = App\Models\Order::orderBy('ord_fecha', 'desc')->get();
+		$datos['ordenes'] = App\Models\Order::estado('Pedido')
+			->estado('Esperando pago')
+			->get();
 		
 		$this->_view->titulo = "Ordenes";
 		$this->_view->setCss(array('admin/orden_style'));
 		$this->_view->setJs(array('vendor/datatable1.10.6/jquery.dataTables.min'));
+		$datos['page'] = 1;
+
+		$this->viewMake('admin/ordenes/ordenes', $datos);
+	}
+
+	public function ordenes_pagadas()
+	{
+		$datos['ordenes'] = App\Models\Order::estado('Pago aceptado')->get();
+		
+		$this->_view->titulo = "Ordenes";
+		$this->_view->setCss(array('admin/orden_style'));
+		$this->_view->setJs(array('vendor/datatable1.10.6/jquery.dataTables.min'));
+		$datos['page'] = 2;
+
+		$this->viewMake('admin/ordenes/ordenes', $datos);
+	}
+
+	public function ordenes_enviadas()
+	{
+		$datos['ordenes'] = App\Models\Order::estado('Enviado')->get();
+		
+		$this->_view->titulo = "Ordenes";
+		$this->_view->setCss(array('admin/orden_style'));
+		$this->_view->setJs(array('vendor/datatable1.10.6/jquery.dataTables.min'));
+		$datos['page'] = 3;
+
+		$this->viewMake('admin/ordenes/ordenes', $datos);
+	}
+
+	public function ordenes_finalizadas()
+	{
+		$datos['ordenes'] = App\Models\Order::estado('Recibido')->get();
+		
+		$this->_view->titulo = "Ordenes";
+		$this->_view->setCss(array('admin/orden_style'));
+		$this->_view->setJs(array('vendor/datatable1.10.6/jquery.dataTables.min'));
+		$datos['page'] = 4;
+
+		$this->viewMake('admin/ordenes/ordenes', $datos);
+	}
+
+	public function ordenes_canceladas()
+	{
+		$datos['ordenes'] = App\Models\Order::estado('Cancelado')->get();
+		
+		$this->_view->titulo = "Ordenes";
+		$this->_view->setCss(array('admin/orden_style'));
+		$this->_view->setJs(array('vendor/datatable1.10.6/jquery.dataTables.min'));
+		$datos['page'] = 5;
 
 		$this->viewMake('admin/ordenes/ordenes', $datos);
 	}

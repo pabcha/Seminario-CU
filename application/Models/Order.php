@@ -24,4 +24,9 @@ class Order extends Model {
 		return $this->hasMany('App\Models\OrderHistory', 'ord_id', 'ord_id');
 	}
 
+	public function scopeEstado($query, $estado)
+	{
+		return $query->orWhere('ord_estado', $estado);
+	}
+
 }

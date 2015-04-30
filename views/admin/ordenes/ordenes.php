@@ -9,6 +9,26 @@
 
 				<div class="span9">
 					<h1 class="pag-titulo">Ordenes</h1>
+
+					<div style="margin-top:10px;">
+						<ul class="nav nav-tabs">
+							<li <?= App\Helpers\Vista::is_active($page, 1) ?>>
+								<a href="<?= BASE_URL.'admin/ordenes'; ?>">Recientes</a>
+							</li>
+							<li <?= App\Helpers\Vista::is_active($page, 2) ?>>
+								<a href="<?= BASE_URL.'admin/ordenes_pagadas'; ?>">Pagadas</a>
+							</li>
+							<li <?= App\Helpers\Vista::is_active($page, 3) ?>>
+								<a href="<?= BASE_URL.'admin/ordenes_enviadas'; ?>">Enviadas</a>
+							</li>
+							<li <?= App\Helpers\Vista::is_active($page, 4) ?>>
+								<a href="<?= BASE_URL.'admin/ordenes_finalizadas'; ?>">Finalizadas</a>
+							</li>
+							<li <?= App\Helpers\Vista::is_active($page, 5) ?>>
+								<a href="<?= BASE_URL.'admin/ordenes_canceladas'; ?>">Canceladas</a>
+							</li>
+						</ul>
+					</div>
 					
 					<div class="tabla-datos">
 
@@ -48,7 +68,6 @@
 								<?php endforeach ?>
 							</tbody>
 						</table>
-
 					</div>
 				</div>
 			</div>
@@ -56,32 +75,34 @@
 	</div>
 
 	<script type="text/javascript">
-		$(function() {
-			$('#tabla-result').DataTable({
-				"order": [[ 4, "desc" ]],
-				"language": {
-		            "lengthMenu": "Mostrar _MENU_",
-		            "zeroRecords": "No hubo coincidencias",
-		            "info": "Mostrando pagina _PAGE_ de _PAGES_",
-		            "infoEmpty": "",
-		            "infoFiltered": "",
-		            "search": "Buscar:",
-		            "paginate": {
-		            	last: "Ultimo",
-		            	previous: "Anterior",
-		            	next: "Siguiente",
-		            	first: "Primero"
-		            }
-		        },
-		        "fnDrawCallback": function() {
-					$('#tabla-result_length').hide();//entradas por tabla
+		var config = {
+			"order": [[ 4, "desc" ]],
+			"language": {
+	            "lengthMenu": "Mostrar _MENU_",
+	            "zeroRecords": "No hubo coincidencias",
+	            "info": "Mostrando pagina _PAGE_ de _PAGES_",
+	            "infoEmpty": "",
+	            "infoFiltered": "",
+	            "search": "Buscar:",
+	            "paginate": {
+	            	last: "Ultimo",
+	            	previous: "Anterior",
+	            	next: "Siguiente",
+	            	first: "Primero"
+	            }
+	        },
+	        "fnDrawCallback": function() {
+				$('#tabla-result_length').hide();//entradas por tabla
 
-		            /*if ( $('.dataTables_paginate > ul > li').size() < 4) 
-		            {
-		            	$('.dataTables_paginate').hide();
-		            }*/
-		        },
-		        info: false
-			});
+	            if ( $('.dataTables_paginate a').size() < 4) 
+	            {
+	            	$('.dataTables_paginate').hide();
+	            }
+	        },
+	        info: false
+		};
+
+		$(function() {
+			$('#tabla-result').DataTable(config);
 		});
 	</script>
