@@ -748,6 +748,34 @@ ul.dropdown-menu i:hover {
 	border-collapse: collapse;	
 }
 
+/* Styles for table*/
+
+a.paginate_button {
+	padding: 0 5px 0 5px;
+	cursor: pointer;
+	text-decoration: none;
+	color: #6AB7B6;
+}
+
+.tabla-datos td {
+	padding: 4px 4px 2px 4px;
+}
+
+div.dataTables_filter label {
+  float: right;
+}
+
+div.dataTables_length label {
+  float: left;
+  text-align: left;
+}
+
+div.dataTables_paginate {
+  float: right;
+  margin: 0;
+  font-size: 14px;
+}
+
 /*
 	Media Queries
 */

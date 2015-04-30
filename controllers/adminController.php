@@ -657,7 +657,7 @@ class adminController extends Controller
 			$this->redireccionar('admin/productos');
 		}
 	}
-// ---------------- Ordenes --------------------- //
+//---------------- Ordenes ---------------------//
 
 	public function ordenes()
 	{

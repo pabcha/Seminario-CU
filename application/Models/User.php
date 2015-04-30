@@ -9,7 +9,7 @@ class User extends Model {
 	public $table = "sp_usuarios";
 	public $primaryKey = "us_id";
 
-	public function orden()
+	public function ordenes()
 	{
 		return $this->hasMany('App\Models\Order', 'us_id', 'us_id');
 	}
