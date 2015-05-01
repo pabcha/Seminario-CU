@@ -16,7 +16,12 @@
 	<script src="<?= $roots['js'] ?>vendor/bootstrap.min.js"></script>
 </head>
 <body>
-	<?php echo $errors; ?>
+	<?php if ( Session::get("errors") ) : ?>
+		<div class="error row-fluid">
+			<h3><?= Session::show("errors"); ?></h3>
+		</div>
+	<?php endif; ?>
+
 	<div class="container">
 		<div class="row-fluid form-container">
 
@@ -24,9 +29,9 @@
 				<h1>SaltaShop</h1>
 			</a>
 
-			<form action="<?php echo BASE_URL.'entrar'; ?>" method="post" class="form-signin">				
+			<form action="<?php echo BASE_URL.'entrar/logear'; ?>" method="post" class="form-signin">				
 				<label for="inputCorreo">Correo</label>
-				<input class="input-block-level" type="text" name="inputCorreo" value="<?php echo $validador->set_valor('inputCorreo'); ?>">
+				<input class="input-block-level" type="text" name="inputCorreo" value="<?= Session::show('correo') ?>">
 
 				<label for="inputCorreo">Contraseña</label>
 				<input class="input-block-level" type="password" name="inputPassword">

@@ -24,32 +24,7 @@ class User extends Model {
 		return $query->where('us_correo', $correo)
 				->where('us_password', $pass);
 	}
-
-	public static function validate($Validator)
-	{
-		$Validator->set_content_delimiters('<div class="error row-fluid">','</div>');
-		$Validator->set_error_delimiters('<h3>','</h3>');
-
-		$Validator->set_reglas('inputCorreo', 'correo', 'max_length[250]');
-
-		if ( count($_POST) > 0 )
-		{
-			$temp = User::isUser($_POST['inputCorreo'], $_POST['inputPassword'])->active()->first();
-
-			if ( empty($temp) ) 
-			{
-				$Validator->additional_errors("Usuario/Contraseña incorrectos.");
-			}
-		}
-
-		if ( $Validator->validar() )
-		{
-			return true;
-		}
-		
-		return false;		
-	}
-
+	
 	public static function validateInfo($validator)
 	{
 		$validator->set_content_delimiters('<div class="alert alert-error error-messages">

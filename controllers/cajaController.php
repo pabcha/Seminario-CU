@@ -44,6 +44,11 @@ class cajaController extends Controller
 			$this->redireccionar('caja/pago_y_envio');
 		}
 
+		if ( $_SERVER['REQUEST_METHOD'] != 'POST' )
+		{
+			$this->redireccionar('caja/pago_y_envio');
+		}
+
 		$u = User::isUser($_POST['inputCorreo'], md5($_POST['inputPassword']))
 			->active()
 			->first();
