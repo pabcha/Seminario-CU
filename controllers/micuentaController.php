@@ -161,7 +161,8 @@ class micuentaController extends Controller
 		$datos['u']				= $u;
 
 		$this->_view->titulo = 'Cambiar password - Salta Shop';
-		$this->_view->setCss(array('front/estilos_categorias'));
+		$this->_view->setCss(array('front/estilos_categorias',
+			'front/estilos_micuenta'));
 
 		$this->viewMake('micuenta/cambiar_password', $datos);
 	}

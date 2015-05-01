@@ -1,0 +1,15 @@
+.form-contenedor {
+	width: 50%;
+}
+	.control-label {
+		width:160px !important;
+	}
+	.controls {
+		margin-left: 175px !important;
+	}
+
+@media (max-width: 480px) {
+	.controls {
+		margin-left: 0 !important;
+	}
+}
