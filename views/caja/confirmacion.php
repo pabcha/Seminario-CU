@@ -41,7 +41,7 @@
 
 			<div class="row-fluid order-header">
 				<h2>N° <?= Underscore\Types\Number::paddingLeft($id, 5) ?></h2>
-				<p><span>Fecha:</span> <?= date('d-m-Y') ?></p>
+				<p><span>Fecha:</span> <?= date('d/m/Y') ?></p>
 			</div>
 
 			<div class="row-fluid client-info">

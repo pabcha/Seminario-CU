@@ -24,7 +24,11 @@
 
 				<div class="hidden-phone">
 					<ul class="nav pull-right">
-						<li><a href="<?= BASE_URL; ?>"><i class="icon-briefcase"></i>Ir al negocio</a></li>
+						<li>
+							<a href="<?= BASE_URL; ?>" target="_blank">
+								<i class="icon-briefcase"></i>Ir al negocio
+							</a>
+						</li>
 						<li class="divider-vertical"></li>
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown">

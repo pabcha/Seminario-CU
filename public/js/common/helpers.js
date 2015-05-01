@@ -20,7 +20,7 @@ help = (function(window) {
 	 */
 	String.prototype.toDDMM = function () {
 		var ddmm = this.split('-');
-		return ddmm[2]+'-'+ddmm[1];
+		return ddmm[2]+'/'+ddmm[1];
 	};
 
 	Array.prototype.sum = function () {
