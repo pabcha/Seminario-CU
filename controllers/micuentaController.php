@@ -44,7 +44,7 @@ class micuentaController extends Controller
 		{
 			$this->redireccionar('entrar');
 		}
-		
+
 		try {
 			$o = App\Models\Order::findOrFail($id);
 		} catch (Exception $e) {
@@ -116,7 +116,6 @@ class micuentaController extends Controller
 
 		$this->_view->titulo = 'Editar informacion - Salta Shop';
 		$this->_view->setCss(array('front/estilos_categorias'));
-		$this->_view->setJs(array('front/fn_micuenta'));
 
 		$this->viewMake('micuenta/editar_informacion', $datos);		
 	}
@@ -163,7 +162,6 @@ class micuentaController extends Controller
 
 		$this->_view->titulo = 'Cambiar password - Salta Shop';
 		$this->_view->setCss(array('front/estilos_categorias'));
-		$this->_view->setJs(array('front/fn_micuenta'));
 
 		$this->viewMake('micuenta/cambiar_password', $datos);
 	}
@@ -203,7 +201,6 @@ class micuentaController extends Controller
 
 		$this->_view->titulo = 'Mi cuenta - Salta Shop';
 		$this->_view->setCss(array('front/estilos_categorias'));
-		$this->_view->setJs(array('front/fn_micuenta'));
 
 		$datos['u']	= $u;
 
