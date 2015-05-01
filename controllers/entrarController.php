@@ -26,7 +26,6 @@ class entrarController extends Controller
 
 			$_SESSION['usuario'] = array(
 					'autenticado' => true,
-					'rol' => 'usuario',
 					'nombre' => $u->us_nombre,
 					'apellido' => $u->us_apellido,
 					'correo' => $u->us_correo,

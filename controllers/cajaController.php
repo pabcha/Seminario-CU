@@ -26,19 +26,46 @@ class cajaController extends Controller
 
 	public function index()
 	{
-		$this->_view->titulo = 'Checkout - Salta Shop';
-		$this->_view->setCss(array('front/estilos_categorias'));
-
 		if (Session::get('usuario')['autenticado']) 
 		{
 			$this->redireccionar('caja/pago_y_envio');
 			exit;
-		}
-		else
+		}		
+
+		$this->_view->titulo = 'Checkout - Salta Shop';
+		$this->_view->setCss(array('front/estilos_categorias'));
+		$this->viewMake('caja/index');
+	}
+
+	public function logear()
+	{
+		if (Session::get('usuario')['autenticado']) 
 		{
-			$this->viewMake('caja/index');
-			exit;
+			$this->redireccionar('caja/pago_y_envio');
 		}
+
+		$u = User::isUser($_POST['inputCorreo'], md5($_POST['inputPassword']))
+			->active()
+			->first();
+
+		if ( !empty($u) ) 
+		{
+			$_SESSION['usuario'] = array(
+				'autenticado' => true,
+				'nombre' => $u->us_nombre,
+				'apellido' => $u->us_apellido,
+				'correo' => $u->us_correo,
+				'id' => $u->us_id,
+				'tiempo' => time(),
+			);
+
+			$this->redireccionar('caja/pago_y_envio');
+			exit;			
+		}
+
+		Session::set('correo', $_POST['inputCorreo']);
+		Session::set('errors', "Usuario/Contraseña incorrectos.");
+		$this->redireccionar('caja');
 	}
 
 	public function pago_y_envio()

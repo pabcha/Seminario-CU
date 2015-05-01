@@ -8,9 +8,16 @@
 					<h3>¿Ya tienes cuenta?</h3>					
 				</div>
 
-				<form action="<?php echo BASE_URL.'entrar'; ?>" method="post" class="form-signin">				
+				<?php if ( Session::get("errors") ) : ?>
+				    <div class="alert alert-error alert-dismissable">
+				    	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+				        <?php echo Session::show("errors"); ?>
+				    </div>   
+				<?php endif; ?>
+
+				<form action="<?php echo BASE_URL.'caja/logear'; ?>" method="post" class="form-signin">				
 					<label for="inputCorreo">Correo</label>
-					<input class="input-block-level" type="text" name="inputCorreo" value="">
+					<input class="input-block-level" type="text" name="inputCorreo" value="<?= Session::show('correo') ?>">
 
 					<label for="inputCorreo">Contraseña</label>
 					<input class="input-block-level" type="password" name="inputPassword">

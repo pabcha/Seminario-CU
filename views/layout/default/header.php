@@ -37,16 +37,11 @@
 				
 					<ul class="menu-top">
 						<?php if ( isset($_SESSION['usuario']) && $_SESSION['usuario']['autenticado'] ): ?>
-							<?php if ( $_SESSION['usuario']['rol'] === 'usuario'): ?>
-								<li><a href="<?= BASE_URL.'entrar/salir'; ?>">Salir</a></li>							
-							<?php else: ?>
-								<li><a href="<?= BASE_URL.'entrar'; ?>">Entrar</a></li>								
-							<?php endif ?>							
+							<li><a href="<?= BASE_URL.'entrar/salir'; ?>">Salir</a></li>							
 						<?php else: ?>
-							<li><a href="<?= BASE_URL.'entrar'; ?>">Entrar</a></li>	
-						<?php endif ?>					
-				
-						<li><a href="<?= BASE_URL.'registro'; ?>">Registrate</a></li>
+							<li><a href="<?= BASE_URL.'entrar'; ?>">Entrar</a></li>
+							<li><a href="<?= BASE_URL.'registro'; ?>">Registrate</a></li>
+						<?php endif ?>						
 					</ul> 
 					<!-- /menu-top -->
 				
