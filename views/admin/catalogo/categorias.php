@@ -11,13 +11,7 @@
 				<?php require_once ROOT.'views\admin\catalogo\catalogo_menu.php'; ?>
 				<!-- /nav catalogo -->
 
-				<?php if ( isset($this->_error) ) : ?>
-	            <div class="alert alert-error">
-	                <?= $this->_error ?>
-	            </div>   
-		        <?php endif; ?>
-
-		        <?php if ( Session::get("mensajeExito") ) : ?>
+				<?php if ( Session::get("mensajeExito") ) : ?>
 		            <div class="alert alert-success alert-dismissable">
 		            	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 		                <?= Session::show("mensajeExito") ?>
@@ -77,6 +71,6 @@
 <script>
 	$(document).ready(function() {
 		Catalogo.deleter("a[title='Borrar']", "/admin/categoria_delete/");
-		$('#tabla-result').dataTable( Catalogo.tableOpt );
+		$('#tabla-result').DataTable(Catalogo.tableOpt);
 	});
 </script>

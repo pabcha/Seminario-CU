@@ -68,6 +68,6 @@
 <script>
 	$(document).ready(function() {
 		Catalogo.deleter("a[title='Borrar']", "/admin/categoria_delete/");
-		$('#tabla-result').dataTable( Catalogo.tableOpt );
+		$('#tabla-result').DataTable(Catalogo.tableOpt);
 	});
 </script>

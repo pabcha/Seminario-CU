@@ -10,12 +10,6 @@
 			<div class="span9">
 				<?php require_once ROOT.'views\admin\catalogo\catalogo_menu.php'; ?>
 				<!--fin nav catalogo -->
-
-				<?php if ( isset($this->_error) ) : ?>
-		            <div class="alert alert-error">
-		                <?php echo $this->_error; ?>
-		            </div>   
-		        <?php endif; ?>
 		        
 		        <?php if ( Session::get("mensajeExito") ) : ?>
 		            <div class="alert alert-success alert-dismissable">
@@ -42,7 +36,9 @@
 
 								<td><?= $p['producto_nombre']; ?></td>
 
-								<td style="text-align:right"><?= App\Helpers\Utils::to_pesos($p['producto_precio']); ?></td>
+								<td data-order="<?= $p['producto_precio'] ?>" style="text-align:right">
+									<?= App\Helpers\Utils::to_pesos($p['producto_precio']); ?>
+								</td>
 
 								<td class="hidden-phone" style="text-align:center;">
 									<?php if ( $p['producto_estado'] == 'A' ): ?>
@@ -72,6 +68,6 @@
 <script>
 	$(document).ready(function() {		
 		Catalogo.deleter("a[title='Borrar']", "/admin/producto_delete/");
-		$('#tabla-result').dataTable( Catalogo.tableOpt );
+		$('#tabla-result').DataTable(Catalogo.tableOpt);
 	});
 </script>

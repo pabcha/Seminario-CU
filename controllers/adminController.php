@@ -97,8 +97,7 @@ class adminController extends Controller
 		
 		$this->_view->titulo = 'Categorias';
 		$this->_view->setJs(array(
-			'vendor/datatable/jquery.dataTables.min',
-			'vendor/datatable/dataTables.scrollingPagination',
+			'vendor/datatable1.10.6/jquery.dataTables.min',
 			'common/helpers',
 			'admin/catalogo'
 		));		
@@ -214,8 +213,7 @@ class adminController extends Controller
 
 			$this->_view->titulo = 'Categorias en '.$datos['c']->producto_categoria_nombre;
 			$this->_view->setJs(array(
-				'vendor/datatable/jquery.dataTables.min',
-				'vendor/datatable/dataTables.scrollingPagination',
+				'vendor/datatable1.10.6/jquery.dataTables.min',
 				'common/helpers',
 				'admin/catalogo'
 			));
@@ -262,8 +260,7 @@ class adminController extends Controller
 
 		$this->_view->titulo = 'Marcas de producto';
 		$this->_view->setJs(array(
-			'vendor/datatable/jquery.dataTables.min',
-			'vendor/datatable/dataTables.scrollingPagination',
+			'vendor/datatable1.10.6/jquery.dataTables.min',
 			'common/helpers',
 			'admin/catalogo'
 		));
@@ -374,8 +371,7 @@ class adminController extends Controller
 
 		$this->_view->titulo = 'Productos de catalogo';
 		$this->_view->setJs(array(
-			'vendor/datatable/jquery.dataTables.min',
-			'vendor/datatable/dataTables.scrollingPagination',
+			'vendor/datatable1.10.6/jquery.dataTables.min',
 			'common/helpers',
 			'admin/catalogo'
 		));

@@ -1,30 +1,29 @@
 var Catalogo = (function (w) {
 
 	var tableOpt = {
-		"oLanguage" : {
-			"sLengthMenu" : "Mostrar _MENU_ registros",
-			"sZeroRecords" : "No se ha encontrado registros.",
-			"sInfo" : "Mostrando _START_ - _END_ de _TOTAL_ registros",
-			"sInfoEmpty" : "Mostrando 0 - 0 de 0 registros",
-			"sInfoFiltered" : "(de _MAX_ registros)",
-			"sSearch": "Buscar:",
-			oPaginate : {
-				"sLast"		: 		"Ultimo",
-				"sFirst"	: 		"Primero",
-				"sPrevious"	: 		"Anterior",
-				"sNext"		: 		"Siguiente"
-			} 						
-		},
-		"fnDrawCallback": function() {
-			$('#tabla-result_length').hide();//entradas por tabla 10/25/50
-            $('#tabla-result_info').hide();//cantidad de registros
+		"language": {
+            "lengthMenu": "Mostrar _MENU_",
+            "zeroRecords": "No hubo coincidencias",
+            "info": "Mostrando pagina _PAGE_ de _PAGES_",
+            "infoEmpty": "",
+            "infoFiltered": "",
+            "search": "Buscar:",
+            "paginate": {
+            	last: "Ultimo",
+            	previous: "Anterior",
+            	next: "Siguiente",
+            	first: "Primero"
+            }
+        },       
+        "fnDrawCallback": function() {
+			$('#tabla-result_length').hide();//entradas por tabla
 
-            if ( $('.dataTables_paginate > ul > li').size() < 4) 
+            if ( $('.dataTables_paginate a').size() < 4) 
             {
             	$('.dataTables_paginate').hide();
             }
         },
-		"sPaginationType": "bootstrap"
+        info: false
 	};
 
 	var deleter = function (target, href) {
