@@ -12,59 +12,78 @@
 
 				<div class="row-fluid">
 
-					<div class="alerta" id="alerta" style="display:none;">
-						<ul class="alert_info">
-						</ul>
-					</div>
+					<?= $errors; ?>
 
-					<form action="<?= BASE_URL.'micuenta/editar_informacion' ?>" class="form-horizontal" >
+					<form action="<?= BASE_URL.'micuenta/editar_informacion' ?>" class="form-horizontal" method="POST">
+
 						<div class="control-group">
-							<label for="inputNombre" class="control-label">Nombre<span class="requerido">*</span></label>
+							<label for="inputNombre" class="control-label">Nombre</label>
 							<div class="controls">
-								<input type="text" id="inputNombre" class="span11" name="inputNombre">
+								<input type="text" name="inputNombre" value="<?= $validador->set_valor('inputNombre', $u['us_nombre']) ?>">
 							</div>
 						</div>
 
 						<div class="control-group">
-							<label for="inputApellido" class="control-label">Apellido<span class="requerido">*</span></label>
+							<label for="inputApellido" class="control-label">Apellido</label>
 							<div class="controls">
-								<input type="text" id="inputApellido" class="span11" name="inputApellido">
+								<input type="text" name="inputApellido" value="<?= $validador->set_valor('inputApellido', $u['us_apellido']) ?>">
 							</div>
 						</div>
 
 						<div class="control-group">
-							<label for="inputDNI" class="control-label">DNI<span class="requerido">*</span></label>
+							<label for="inputDNI" class="control-label">DNI</label>
 							<div class="controls">
-								<input type="text" id="inputDNI" class="span11" name="inputDNI">
+								<input type="text" name="inputDNI" value="<?= $validador->set_valor('inputDNI', $u['us_dni']) ?>">
+							</div>
+						</div>						
+
+						<div class="control-group">
+							<label for="inputProvincia" class="control-label">Provincia</label>
+							<div class="controls">
+								<input type="text" name="inputProvincia" value="<?= $validador->set_valor('inputProvincia', $u['us_provincia']) ?>">
 							</div>
 						</div>
 
 						<div class="control-group">
-							<label for="inputCorreo" class="control-label">Correo<span class="requerido">*</span></label>
+							<label for="inputCiudad" class="control-label">Ciudad</label>
 							<div class="controls">
-								<input type="text" id="inputCorreo" class="span11" name="inputCorreo">
+								<input type="text" name="inputCiudad" value="<?= $validador->set_valor('inputCiudad', $u['us_ciudad']) ?>">
 							</div>
 						</div>
 
 						<div class="control-group">
-							<label for="inputPassword" class="control-label">Password<span class="requerido">*</span></label>
+							<label for="inputCPostal" class="control-label">Codigo Postal:</label>
 							<div class="controls">
-								<input type="text" id="inputPassword" class="span11" name="inputPassword">
+								<input type="text" name="inputCPostal" value="<?= $validador->set_valor('inputCPostal', $u['us_cpostal']) ?>">
 							</div>
 						</div>
 
 						<div class="control-group">
-							<label for="inputPassword2" class="control-label">Repetir password<span class="requerido">*</span></label>
+							<label for="inputDireccion" class="control-label">Domicilio</label>
 							<div class="controls">
-								<input type="text" id="inputPassword2" class="span11" name="inputPassword2">
+								<input type="text" name="inputDireccion" value="<?= $validador->set_valor('inputDireccion', $u['us_domicilio']) ?>">
+							</div>
+						</div>
+
+						<div class="control-group">
+							<label for="inputTelefono" class="control-label">Telefono</label>
+							<div class="controls">
+								<input type="text" name="inputTelefono" value="<?= $validador->set_valor('inputTelefono', $u['us_telefono']) ?>">
+							</div>
+						</div>
+
+						<div class="control-group">
+							<label for="inputCelular" class="control-label">Celular</label>
+							<div class="controls">
+								<input type="text" name="inputCelular" value="<?= $validador->set_valor('inputCelular', $u['us_celular']) ?>">
 							</div>
 						</div>
 
 						<div class="control-group">
 							<div class="controls">
-								<button type="submit" class="boton boton-acept">Añadir</button>
+								<button type="submit" class="boton boton-acept">Editar</button>
 							</div>
-						</div>	
+						</div>
 					</form>
 				</div>				
 			</div>

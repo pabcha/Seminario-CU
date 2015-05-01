@@ -1,16 +1,13 @@
 <!-- Menu categorias -->
 <div class="span3">
 	<div class="header-menu">
-		<span>Mi Cuenta</span>
+		<span>Bienvenido, <?php echo Session::get('usuario')['nombre'].' '.Session::get('usuario')['apellido']; ?></span>
 	</div>
 	<ul class="menu-categorias">
 		<li>
-			<a href="<?= BASE_URL.'micuenta' ?>" class="nav-header">Mis ordenes</a>
-			<ul class="children">
-				<li><a href="#">Recientes</a></li>
-				<li><a href="#">Finalizadas</a></li>
-				<li><a href="#">Canceladas</a></li>
-			</ul>
+			<a href="<?= BASE_URL.'micuenta' ?>" class="nav-header">
+				Mis ordenes
+			</a>
 		</li>
 		<li>
 			<a href="<?= BASE_URL.'micuenta/editar_informacion' ?>" class="nav-header">
@@ -18,8 +15,8 @@
 			</a>
 		</li>
 		<li>
-			<a href="<?= BASE_URL.'micuenta/editar_domicilio' ?>" class="nav-header">
-				Editar domicilio
+			<a href="<?= BASE_URL.'micuenta/cambiar_password' ?>" class="nav-header">
+				Cambiar password
 			</a>
 		</li>
 	</ul>

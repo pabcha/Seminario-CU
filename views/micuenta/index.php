@@ -6,8 +6,8 @@
 			<?php require_once ROOT.'views/micuenta/common/menu.php'; ?>			
 
 			<div class="span9">
-				<div class="titulo-header-3">
-					<h3>Mis ordenes</h3>
+				<div class="titulo-post">
+					<h3 style="font-size:22px;">Mis ordenes</h3>
 				</div>
 
 				<div class="row-fluid">
@@ -41,7 +41,7 @@
 										</td>
 										<td style="text-align:center;">
 											<div class="btn-group">
-												<a href="<?= BASE_URL.'admin/orden/'.$o->ord_id ?>" class="btn" title="Ver"><i class="icon-zoom-in"></i></a>	
+												<a href="<?= BASE_URL.'micuenta/orden/'.$o->ord_id ?>" class="btn" title="Ver"><i class="icon-zoom-in"></i></a>	
 											</div>
 										</td>
 									</tr>
