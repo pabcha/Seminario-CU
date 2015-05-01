@@ -16,7 +16,6 @@
 							<thead>
 								<tr>
 									<th style="width:3%;">#</th>
-									<th>Cliente</th>
 									<th>Total</th>
 									<th>Estado</th>
 									<th>Fecha y hora</th>
@@ -27,11 +26,10 @@
 								<?php foreach ($ordenes as $o): ?>						
 									<tr>
 										<td style="text-align:center;"><?= $o->ord_id ?></td>
-										<td style="text-align:right;"><?= $o->ord_nombre_us ?></td>
 										<td data-order="<?= $o->ord_total ?>" style="text-align:right;">
 											<?= App\Helpers\Utils::to_pesos($o->ord_total) ?>
 										</td>
-										<td style="text-align:center;">
+										<td style="text-align:right;">
 											<span class="label <?= App\Helpers\Vista::set_label($o->ord_estado) ?>">
 												<?= $o->ord_estado ?>
 											</span>

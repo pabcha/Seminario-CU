@@ -17,24 +17,18 @@ class micuentaController extends Controller
 
 	public function index()
 	{
-		/*if( !Session::get('autenticado') ) {
+		if( !Session::get('usuario')['autenticado'] ) {
 			$this->redireccionar('entrar');
 		}
 
-		if (Session::get('level') == 'administrador') {
-			$this->redireccionar('entrar');
-			exit;
-		}*/
-
-		/*if ( Session::get('autenticado') && Session::get('level') != 'usuario'){
-			$this->redireccionar('entrar');
-		}*/
-
-		$ordenes = App\Models\User::findOrFail(Session::get('usuario')['id'])->ordenes()->get();
-
-		//armar pdf
+		try {
+			$ordenes = App\Models\User::findOrFail(Session::get('usuario')['id'])->ordenes()->get();
+		} catch (Exception $e) {
+			$this->redireccionar('error');
+		}
 		
 		$datos['ordenes'] = $ordenes;
+
 		$this->_view->titulo = 'Mi cuenta - Salta Shop';
 		$this->_view->setCss(array('front/estilos_categorias',
 			'admin/orden_style'));
@@ -46,6 +40,11 @@ class micuentaController extends Controller
 
 	public function orden($id)
 	{
+		if( !Session::get('usuario')['autenticado'] ) 
+		{
+			$this->redireccionar('entrar');
+		}
+		
 		try {
 			$o = App\Models\Order::findOrFail($id);
 		} catch (Exception $e) {
@@ -77,6 +76,11 @@ class micuentaController extends Controller
 
 	public function editar_informacion()
 	{
+		if( !Session::get('usuario')['autenticado'] ) 
+		{
+			$this->redireccionar('entrar');
+		}
+
 		try {
 			$u = App\Models\User::findOrFail( Session::get('usuario')['id'] );
 		} 
@@ -166,11 +170,6 @@ class micuentaController extends Controller
 
 	public function success_password()
 	{
-		if( !Session::get('usuario')['autenticado'] ) 
-		{
-			$this->redireccionar('entrar');
-		}
-
 		if ( Session::get('exito') !== 1)
 		{
 			$this->redireccionar('index');
