@@ -56,10 +56,10 @@ class registroController extends Controller
 
 	public function thanks()
 	{
-		if (Session::get('usuario')['autenticado']) 
+		/*if (Session::get('usuario')['autenticado']) 
 		{
 			$this->redireccionar('index');
-		}
+		}*/
 
 		$this->_view->renderizar('registro/thanks');
 	}

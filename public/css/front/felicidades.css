@@ -1,7 +1,6 @@
 body
 {
 	font: normal 62.5% "Helvetica Neue", helvetica, sans-serif;
-	background: #333;
 	padding: 0;
 	margin: 0;
 }
@@ -24,12 +23,6 @@ p
 	padding: 2px 0 5px 0;
 	text-align: center;
 	max-width: 720px;
-	-webkit-border-top-left-radius: 8px;
-	-webkit-border-top-right-radius: 8px;
-	-moz-border-radius-topleft: 8px;
-	-moz-border-radius-topright: 8px;
-	border-top-left-radius: 8px;
-	border-top-right-radius: 8px;
 }
 	.header h1,
 	.header h2,
