@@ -1,0 +1,79 @@
+body {
+	font: normal "Helvetica Neue", helvetica, sans-serif;
+	font-size: 14px;
+	color: #999;
+	padding: 0;
+	margin: 0;
+}
+
+ul
+{
+	margin: 0 0 0 25px;
+}
+
+a,a:hover {
+	text-decoration: none;
+	color: #fff;
+}
+
+h1,h2,h3,h4,h5
+{
+	color: #FF694F;
+}
+
+label
+{
+	color: #999;
+}
+
+.recovery-head
+{
+	max-width: 420px;
+	margin: 0 auto;
+	margin-bottom: 20px;
+}
+
+.form-container
+{
+	max-width: 640px;
+	margin: 0 auto;	
+	padding: 60px 0;
+}
+
+.form-recovery 
+{
+	max-width: 420px;
+	margin: 0 auto;
+}
+
+.error
+{
+	background-color: #da4f49;
+}
+	.error h3
+	{
+		color: #fff;
+		text-align: center;
+		font-weight: 400;
+	}
+
+
+@media(max-width: 767px) {
+	p {
+		font-size: 0.9em;
+	}
+	.form-container 
+	{
+		padding: 20px 0;
+	}
+	.recovery-head,
+	.form-recovery
+	{
+		padding: 0 10px 0 10px;
+	}
+
+	.recovery-head h3
+	{
+		font-size: 20px;
+	}	
+}

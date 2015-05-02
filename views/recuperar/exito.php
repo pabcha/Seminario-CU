@@ -4,17 +4,17 @@
 	<meta charset="utf-8" />
 	<title><?php echo $this->titulo; ?></title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-   
-	<link href="<?php echo $_layoutParams['ruta_css']; ?>bootstrap.min.css" rel="stylesheet" type="text/css">
-	<link href="<?php echo $_layoutParams['ruta_css']; ?>bootstrap-responsive.min.css" rel="stylesheet" type="text/css">
-	<link href="<?php echo $_layoutParams['ruta_css']; ?>font-awesome.css" rel="stylesheet" type="text/css">
-	<link href="<?php echo BASE_URL.'views/recuperar/css/'; ?>recuperar.css" rel="stylesheet" type="text/css">
-	<link href="<?php echo BASE_URL.'views/recuperar/css/'; ?>exito.css" rel="stylesheet" type="text/css">
+
+	<link href="<?= $roots['css'] ?>vendor/bootstrap.min.css" rel="stylesheet">
+	<link href="<?= $roots['css'] ?>vendor/bootstrap-responsive.min.css" rel="stylesheet">
+	<link href="<?= $roots['css'].'front/estilos_comercio.css'; ?>" rel="stylesheet" type="text/css">
+	<link href="<?= $roots['css'].'front/recuperar.css'; ?>" rel="stylesheet" type="text/css">
+	<link href="<?= $roots['css'].'front/exito.css'; ?>" rel="stylesheet" type="text/css">
 
 	<link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>	
 
-	<script type="text/javascript" src="<?php echo BASE_URL; ?>public/js/jquery-1.8.2.min.js"></script>
-	<script type="text/javascript" src="<?php echo BASE_URL; ?>public/js/bootstrap.min.js"></script>
+	<script src="<?= $roots['js'] ?>vendor/jquery-1.8.2.min.js"></script>
+	<script src="<?= $roots['js'] ?>vendor/bootstrap.min.js"></script>	
 </head>
 <body>	
 	<div class="container">
@@ -25,8 +25,7 @@
 				acceder nuevamente.</p>
 				<p>Si la contraseña es muy dificil de recordar cambiela desde las opciones de usuario una vez dentro del sistema.</p>
 				
-				<a href="<?php echo BASE_URL; ?>" class="btn" style="margin-top:10px;margin-right:5px;">Ir a inicio</a>
-				<a href="<?php echo BASE_URL.'entrar'; ?>" class="btn" style="margin-top:10px;">Entrar a SaltaShop</a>
+				<a href="<?php echo BASE_URL; ?>" class="btn" style="margin-top:10px;margin-right:5px;">Ir a inicio</a>				
 			</div>			
 		</div>
 	</div>
