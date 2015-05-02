@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8" />
-	<title><?php echo $this->titulo; ?></title>
+	<title>Recuperar Contraseña - Salta Shop</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
    
 	<link href="<?= $roots['css'] ?>vendor/bootstrap.min.css" rel="stylesheet">

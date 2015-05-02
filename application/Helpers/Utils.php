@@ -136,4 +136,17 @@ class Utils
 	    return $string;
 	    //http://stackoverflow.com/questions/5851189/naming-convention-uploaded-files
 	}
+
+	public function generate_password()
+	{
+		$str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
+		$cad = "";
+
+		for( $i=0; $i < 8; $i++ ) 
+		{
+			$cad .= substr($str, rand(0, 62), 1);
+		}
+
+		return $cad;
+	}
 }
