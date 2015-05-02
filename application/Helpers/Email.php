@@ -11,7 +11,7 @@ class Email
 		return ob_get_clean();
 	}
 
-	public static function send($destino, $mensaje, $mail)
+	public static function send($destino, $mensaje, $mail, $subject)
 	{
 		$mail->isSMTP();
 		$mail->Host = 'smtp.gmail.com';
@@ -27,7 +27,7 @@ class Email
 
 		$mail->addAddress( $destino );
 		$mail->isHTML(true);
-		$mail->Subject = 'Comunicado '.EMAIL_EMISOR;
+		$mail->Subject = $subject;
 
 		$mail->Body = $mensaje;
 		$mail->AltBody = $mensaje;
