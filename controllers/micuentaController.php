@@ -149,7 +149,8 @@ class micuentaController extends Controller
 
 		    $html = Email::get_template('template', $data);
 		    $Mailer = new PHPMailer();
-		    Email::send($u->us_correo, $html, $Mailer);
+		    $subject = 'Comunicado '.EMAIL_EMISOR;
+		    Email::send($u->us_correo, $html, $Mailer, $subeject);
 			
 			Session::set("exito", 1);
 			$this->redireccionar('micuenta/success_password');
