@@ -13,7 +13,7 @@ class entrarController extends Controller
 		if (Session::get('usuario')['autenticado']) 
 		{
 			$this->redireccionar('index');
-		}
+		}		
 
 		$this->_view->titulo = 'Entrar - Salta Shop';
 		$this->_view->renderizar('entrar/index');		

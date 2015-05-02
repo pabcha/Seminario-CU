@@ -14,7 +14,7 @@
 	<link href='http://fonts.googleapis.com/css?family=Roboto:400,100' rel='stylesheet' type='text/css'>
 
 	<script src="<?= $roots['js'] ?>vendor/jquery-1.8.2.min.js"></script>
-	<script src="<?= $roots['js'] ?>vendor/bootstrap.min.js"></script>	
+	<script src="<?= $roots['js'] ?>vendor/bootstrap.min.js"></script>
 </head>
 <body>
 	
@@ -30,32 +30,34 @@
 			</div>
 			<div class="newuser-container">
 
-				<?php echo $errors; ?>
+				<?php if ( Session::get("errors") ) : ?>
+				        <?= Session::show("errors"); ?> 
+				<?php endif; ?>
 				
-				<form class="form-horizontal newuser-form" action="<?php echo BASE_URL.'registro'; ?>" method="post">
+				<form class="form-horizontal newuser-form" action="<?php echo BASE_URL.'registro/store'; ?>" method="post">
 					<div class="page-subheader">
 						<h3 class="medium">Información de usuario</h3>
 						<p>Con esta información accederas al sitio.</p>				
 					</div>					
 
 					<div class="control-group">
-						<label class="control-label" for="inputCorreo">Correo</label>
+						<label class="control-label" for="correo">Correo*</label>
 						<div class="controls">
-							<input type="text" class="input-block-level" name="inputCorreo" value="<?php echo $validador->set_valor('inputCorreo'); ?>">
+							<input type="text" class="input-block-level" name="correo" value="<?= Session::show('correo') ?>">
 						</div>
 					</div>
 
 					<div class="control-group">
-						<label class="control-label" for="inputPassword">Contraseña</label>
+						<label class="control-label" for="password">Contraseña*</label>
 						<div class="controls">
-							<input type="password" class="input-block-level" name="inputPassword" value="<?php echo $validador->set_valor('inputPassword'); ?>">
+							<input type="password" class="input-block-level" name="password">
 						</div>
 					</div>
 
 					<div class="control-group">
-						<label class="control-label" for="inputPassword2">Repetir Contraseña</label>
+						<label class="control-label" for="password2">Repetir Contraseña*</label>
 						<div class="controls">
-							<input type="password" class="input-block-level" name="inputPassword2" value="<?php echo $validador->set_valor('inputPassword2'); ?>">
+							<input type="password" class="input-block-level" name="password2">
 						</div>
 					</div>
 
@@ -65,65 +67,65 @@
 					</div>
 
 					<div class="control-group">
-						<label class="control-label" for="inputNombre">Nombre</label>
+						<label class="control-label" for="nombre">Nombre*</label>
 						<div class="controls">
-							<input type="text" class="input-block-level" name="inputNombre" value="<?php echo $validador->set_valor('inputNombre'); ?>">
+							<input type="text" class="input-block-level" name="nombre" value="<?= Session::show('nombre') ?>">
 						</div>
 					</div>
 
 					<div class="control-group">
-						<label class="control-label" for="inputApellido">Apellido</label>
+						<label class="control-label" for="apellido">Apellido*</label>
 						<div class="controls">
-							<input type="text" class="input-block-level" name="inputApellido" value="<?php echo $validador->set_valor('inputApellido'); ?>">
+							<input type="text" class="input-block-level" name="apellido" value="<?= Session::show('apellido') ?>">
 						</div>
 					</div>
 
 					<div class="control-group">
-						<label class="control-label" for="inputDNI">DNI</label>
+						<label class="control-label" for="dni">DNI*</label>
 						<div class="controls">
-							<input type="text" class="input-block-level" name="inputDNI" value="<?php echo $validador->set_valor('inputDNI'); ?>">
+							<input type="text" class="input-block-level" name="dni" value="<?= Session::show('dni') ?>">
 						</div>
 					</div>
 
 					<div class="control-group">
-						<label class="control-label" for="inputProvincia">Provincia</label>
+						<label class="control-label" for="provincia">Provincia*</label>
 						<div class="controls">
-							<input type="text" class="input-block-level" name="inputProvincia" value="<?php echo $validador->set_valor('inputProvincia'); ?>">
+							<input type="text" class="input-block-level" name="provincia" value="<?= Session::show('provincia') ?>">
 						</div>
 					</div>
 
 					<div class="control-group">
-						<label class="control-label" for="inputCiudad">Ciudad</label>
+						<label class="control-label" for="ciudad">Ciudad*</label>
 						<div class="controls">
-							<input type="text" class="input-block-level" name="inputCiudad" value="<?php echo $validador->set_valor('inputCiudad'); ?>">
+							<input type="text" class="input-block-level" name="ciudad" value="<?= Session::show('ciudad') ?>">
 						</div>
 					</div>
 
 					<div class="control-group">
-						<label class="control-label" for="inputCPostal">Codigo postal</label>
+						<label class="control-label" for="cpostal">Codigo postal*</label>
 						<div class="controls">
-							<input type="text" class="input-block-level" name="inputCPostal" value="<?php echo $validador->set_valor('inputCPostal'); ?>">
+							<input type="text" class="input-block-level" name="cpostal" value="<?= Session::show('cpostal') ?>">
 						</div>
 					</div>
 
 					<div class="control-group">
-						<label class="control-label" for="inputDomicilio">Domicilio</label>
+						<label class="control-label" for="domicilio">Domicilio*</label>
 						<div class="controls">
-							<input type="text" class="input-block-level" name="inputDomicilio" value="<?php echo $validador->set_valor('inputDomicilio'); ?>">
+							<input type="text" class="input-block-level" name="domicilio" value="<?= Session::show('domicilio') ?>">
 						</div>
 					</div>
 
 					<div class="control-group">
-						<label class="control-label" for="inputTelefono">Telefono</label>
+						<label class="control-label" for="telefono">Telefono*</label>
 						<div class="controls">
-							<input type="text" class="input-block-level" name="inputTelefono" value="<?php echo $validador->set_valor('inputTelefono'); ?>">
+							<input type="text" class="input-block-level" name="telefono" value="<?= Session::show('telefono') ?>">
 						</div>
 					</div>
 
 					<div class="control-group" style="margin-bottom: 40px;">
-						<label class="control-label" for="inputCelular">Celular</label>
+						<label class="control-label" for="celular">Celular</label>
 						<div class="controls">
-							<input type="text" class="input-block-level" name="inputCelular" value="<?php echo $validador->set_valor('inputCelular'); ?>">
+							<input type="text" class="input-block-level" name="celular" value="<?= Session::show('celular') ?>">
 						</div>
 					</div>					
 

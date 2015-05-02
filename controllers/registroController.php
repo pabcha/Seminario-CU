@@ -8,54 +8,55 @@ class registroController extends Controller
 
 	public function index()
 	{
-		$Usuario = $this->loadModel('usuario');
-
-		if (Session::get('usuario')['autenticado'] && Session::get('usuario')['rol'] == 'usuario') 
+		if (Session::get('usuario')['autenticado']) 
 		{
 			$this->redireccionar('index');
 		}
 
+		$this->_view->renderizar('registro/index');		
+	}
 
-		//Validacion y Actualizacion
-		if ( $Usuario->validar_registro() )
+	public function store()
+	{
+		if (Session::get('usuario')['autenticado']) 
 		{
-			$celular = isset($_POST['inputCelular']) ? $_POST['inputCelular'] : '';
-
-			$is_insert = $Usuario->insert_user(
-					$_POST['inputCorreo'],
-					$_POST['inputPassword'],
-					$_POST['inputNombre'],
-					$_POST['inputApellido'],
-					$_POST['inputDNI'],
-					$_POST['inputProvincia'],
-					$_POST['inputCiudad'],
-					$_POST['inputCPostal'],
-					$_POST['inputDomicilio'],
-					$_POST['inputTelefono'],
-					$celular
-				);
-
-			if ( $is_insert == false )
-			{	
-				echo "Ha ocurrido un error, intente de nuevo.";
-				exit;
-			} 
-			else
-			{
-				$this->send_email($_POST['inputCorreo'], $_POST['inputPassword'], $_POST['inputNombre'], $_POST['inputApellido']);
-				$this->redireccionar('registro/thanks');
-			}			
+			$this->redireccionar('index');
 		}
 
-		$datos['validador'] = $Usuario->getValidadorInstance();
-		$datos['errors'] = $Usuario->getErrorsForm();
+		if ( $_SERVER['REQUEST_METHOD'] != 'POST' )
+		{
+			$this->redireccionar('index');
+		}
 
-		$this->_view->renderizar('registro/index', $datos);		
+		$val = new App\Helpers\Validator();
+
+		if ( App\Classes\RegistroService::validar($val) )
+		{
+			App\Classes\RegistroService::createUser();
+			//Mandar mail
+
+			$this->redireccionar('registro/thanks');
+		}
+
+		
+		Session::set('errors', $val->show_errors());
+		
+		Session::set('correo', $_POST['correo']);
+		Session::set('nombre', $_POST['nombre']);
+		Session::set('apellido', $_POST['apellido']);
+		Session::set('dni', $_POST['dni']);
+		Session::set('provincia', $_POST['provincia']);
+		Session::set('ciudad', $_POST['ciudad']);
+		Session::set('cpostal', $_POST['cpostal']);
+		Session::set('domicilio', $_POST['domicilio']);
+		Session::set('telefono', $_POST['telefono']);
+		Session::set('celular', $_POST['celular']);
+		$this->redireccionar('registro');
 	}
 
 	public function thanks()
 	{
-		if (Session::get('usuario')['autenticado'] && Session::get('usuario')['rol'] == 'usuario') 
+		if (Session::get('usuario')['autenticado']) 
 		{
 			$this->redireccionar('index');
 		}

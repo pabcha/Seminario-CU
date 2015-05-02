@@ -19,6 +19,11 @@ class User extends Model {
 		return $query->where('us_estado', 'A');
 	}
 
+	public function scopeExists($query, $correo)
+	{
+		return $query->where('us_correo', $correo);
+	}
+
 	public function scopeisUser($query, $correo, $pass)
 	{
 		return $query->where('us_correo', $correo)

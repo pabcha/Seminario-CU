@@ -5,15 +5,15 @@
 	<title>Gracias - Salta Shop</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<link href="<?php echo $_layoutParams['ruta_css']; ?>bootstrap.min.css" rel="stylesheet" type="text/css">
-	<link href="<?php echo $_layoutParams['ruta_css']; ?>bootstrap-responsive.min.css" rel="stylesheet" type="text/css">
-	<link href="<?php echo $_layoutParams['ruta_css']; ?>font-awesome.css" rel="stylesheet" type="text/css">
-	<link href="<?php echo BASE_URL.'views/registro/css/'; ?>felicidades.css" rel="stylesheet" type="text/css">
+	<link href="<?= $roots['css'] ?>vendor/bootstrap.min.css" rel="stylesheet">
+	<link href="<?= $roots['css'] ?>vendor/bootstrap-responsive.min.css" rel="stylesheet">
+	<link href="<?= $roots['css'] ?>vendor/font-awesome/font-awesome.css" rel="stylesheet">
+	<link href="<?= $roots['css'] ?>front/felicidades.css" rel="stylesheet">
         
-	<link href='http://fonts.googleapis.com/css?family=Roboto:400,100' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,100' rel='stylesheet' type='text/css'>
 
-	<script type="text/javascript" src="<?php echo BASE_URL; ?>public/js/jquery-1.8.2.min.js"></script>
-	<script type="text/javascript" src="<?php echo BASE_URL; ?>public/js/bootstrap.min.js"></script>		
+	<script src="<?= $roots['js'] ?>vendor/jquery-1.8.2.min.js"></script>
+	<script src="<?= $roots['js'] ?>vendor/bootstrap.min.js"></script>
 </head>
 <body>
 
