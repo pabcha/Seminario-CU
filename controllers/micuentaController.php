@@ -1,5 +1,6 @@
 <?php
 use App\Helpers\Email;
+use App\Classes\MiCuentaService;
 
 class micuentaController extends Controller
 {
@@ -136,7 +137,7 @@ class micuentaController extends Controller
 
 		$val = new App\Helpers\Validator();
 
-		if ( App\Models\User::validateEditPassword($val) )
+		if ( MiCuentaService::validar($val, $u->us_password) )
 		{
 			$u->us_password = md5($_POST['inputPassword']);
 			$u->save();
@@ -150,7 +151,7 @@ class micuentaController extends Controller
 		    $html = Email::get_template('template', $data);
 		    $Mailer = new PHPMailer();
 		    $subject = 'Comunicado '.EMAIL_EMISOR;
-		    Email::send($u->us_correo, $html, $Mailer, $subeject);
+		    Email::send($u->us_correo, $html, $Mailer, $subject);
 			
 			Session::set("exito", 1);
 			$this->redireccionar('micuenta/success_password');

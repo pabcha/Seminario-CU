@@ -14,10 +14,19 @@
 					<?= $errors ?>					
 					<div class="form-contenedor">
 						<form action="<?= BASE_URL.'micuenta/cambiar_password' ?>" class="form-horizontal" method="POST">
+
+							<div class="control-group">
+								<label for="old_password" class="control-label">
+									Password viejo
+								</label>
+								<div class="controls">
+									<input type="password" name="old_password">
+								</div>
+							</div>
 							
 							<div class="control-group">
 								<label for="inputPassword" class="control-label">
-									Password
+									Nuevo password
 								</label>
 								<div class="controls">
 									<input type="password" name="inputPassword">

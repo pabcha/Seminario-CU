@@ -56,27 +56,4 @@ class User extends Model {
 		
 		return false;
 	}
-
-	public static function validateEditPassword($validator)
-	{
-		$validator->set_content_delimiters('<div class="alert alert-error error-messages">
-					<button type="button" class="close" data-dismiss="alert">&times;</button>
-					<ul>','</ul></div>');
-		$validator->set_error_delimiters('<li>','</li>');
-
-		$validator->set_reglas('inputPassword','contraseña','requerido|min_length[6]|max_length[15]|matches[inputPassword2]');
-		$validator->set_reglas('inputPassword2','contraseña','max_length[15]');
-
-		$validator->set_message('matches', 'Las contraseñas deben coincidir.');
-
-		if ( $validator->validar() )
-		{
-			return true;
-		}
-		
-		return false;
-	}
-
-	
-
 }
