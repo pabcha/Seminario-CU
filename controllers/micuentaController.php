@@ -92,7 +92,7 @@ class micuentaController extends Controller
 
 		$val = new App\Helpers\Validator();
 
-		if ( App\Models\User::validateInfo($val) )
+		if ( MiCuentaService::validateInfo($val) )
 		{
 			$u->us_nombre = $_POST['inputNombre'];
 			$u->us_apellido = $_POST['inputApellido'];
@@ -102,9 +102,13 @@ class micuentaController extends Controller
 			$u->us_cpostal = $_POST['inputCPostal'];
 			$u->us_domicilio = $_POST['inputDireccion'];
 			$u->us_telefono = $_POST['inputTelefono'];
-			$u->us_celular = $_POST['inputCelular'];
+			$u->us_celular = $_POST['inputCelular'];		
 
 			$u->save();
+
+			//Change data session
+			$_SESSION['usuario']['nombre'] = $_POST['inputNombre'];
+			$_SESSION['usuario']['apellido'] = $_POST['inputApellido'];
 			
 			Session::set("exito", 1);
 			$this->redireccionar('micuenta/exito');
