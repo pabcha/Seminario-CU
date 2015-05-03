@@ -53,17 +53,7 @@
 										</tr>
 										<tr>
 											<td><b>Celular</b></td>
-											<td><?php echo $u->us_celular; ?></td>
-										</tr>
-										<tr>
-											<td><b>Estado</b></td>
-											<td>
-												<?php if ($u->us_estado == 'A'): ?>
-													<i class="icon-ok"></i>
-												<?php else: ?>
-													<i class="icon-remove"></i>
-												<?php endif ?>
-											</td>
+											<td><?php echo ($u->us_celular == '') ? '-' : $u->us_celular; ?></td>
 										</tr>
 									</tbody>
 								</table>
