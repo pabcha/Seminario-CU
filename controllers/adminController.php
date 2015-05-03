@@ -899,7 +899,9 @@ class adminController extends Controller
 		$datos['clientes'] = App\Models\User::all();
 		$this->_view->titulo = "Clientes en SaltaShop";
 
-		$this->_view->setJs(array('vendor/datatable1.10.6/jquery.dataTables.min'));
+		$this->_view->setJs(array(
+			'admin/fn_clientes',
+			'vendor/datatable1.10.6/jquery.dataTables.min'));
 		$this->viewMake('admin/clientes/clientes', $datos);
 	}
 
@@ -932,7 +934,9 @@ class adminController extends Controller
 		$datos['ordenes'] = $u->ordenes()->get();
 		
 		$this->_view->titulo = "Cliente en SaltaShop";
-		$this->_view->setJs(array('vendor/datatable1.10.6/jquery.dataTables.min'));
+		$this->_view->setJs(array(
+			'admin/fn_clientes',
+			'vendor/datatable1.10.6/jquery.dataTables.min'));
 		$this->_view->setCss(array('admin/orden_style'));
 		$this->viewMake('admin/clientes/cliente', $datos);
 	}
