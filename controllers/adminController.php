@@ -810,39 +810,51 @@ class adminController extends Controller
 		try 
 		{
 			$o = App\Models\Order::findOrFail($orden_id);
-
-			if ( isset($_POST['inputMensaje']) )
-			{
-				if ( ! empty($_POST['inputMensaje']) )
-				{
-					$mensaje = $_POST['inputMensaje'];
-					$oh = new App\Models\OrderHistory();
-
-					$oh->ord_id = $o->ord_id;
-					$oh->historia_fecha = Capsule::raw('now()');
-					$oh->historia_accion = 'Notificación al cliente';
-					$oh->historia_descripcion = $mensaje;
-
-					$oh->save();
-
-					//Enviar el correo electronico.
-					$u = $o->usuario()->first();				
-					// App\Classes\OrdenService::enviar_correo($u->us_correo, $mensaje);
-
-					Session::set("mensajeExito", "El mensaje se ha enviado al correo electrónico del cliente.");
-					$this->redireccionar('admin/orden_historia/'.$o->ord_id);
-				}			
-			}
-
-			$datos['o'] = $o;
-
-			$this->_view->titulo = "Hablar con el cliente";
-			$this->viewMake('admin/ordenes/orden_correo', $datos);
 		} 
 		catch (Exception $e) 
 		{
 			$this->redireccionar('error');
-		};
+		}
+
+		if ( isset($_POST['inputMensaje']) )
+		{
+			if ( ! empty($_POST['inputMensaje']) )
+			{
+				$mensaje = $_POST['inputMensaje'];
+				$oh = new App\Models\OrderHistory();
+
+				$oh->ord_id = $o->ord_id;
+				$oh->historia_fecha = Capsule::raw('now()');
+				$oh->historia_accion = 'Notificación al cliente';
+				$oh->historia_descripcion = $mensaje;
+
+				$oh->save();
+
+				//Enviar correo
+				$u = $o->usuario()->first();
+
+				$data = array(
+					'id' => $o->ord_id,
+			    	'name' => $u->us_nombre.' '.$u->us_apellido,	
+			    	'message' => $mensaje
+			    );
+
+			    $html = App\Helpers\Email::get_template('new_notification', $data);
+			    $Mailer = new PHPMailer();
+			    $subject = 'Notificación de estado de tu pedido';
+
+			    App\Helpers\Email::send($u->us_correo, $html, $Mailer, $subject);
+
+				Session::set("mensajeExito", "El mensaje se ha enviado al correo electrónico del cliente.");
+				$this->redireccionar('admin/orden_historia/'.$o->ord_id);
+			}			
+		}
+
+		$datos['o'] = $o;
+
+		$this->_view->titulo = "Hablar con el cliente";
+		$this->viewMake('admin/ordenes/orden_correo', $datos);
+		
 	}
 
 	public function orden_nota($orden_id)
