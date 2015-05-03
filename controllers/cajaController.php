@@ -7,6 +7,7 @@ use App\Models\OrderHistory;
 use App\Models\Product;
 use Illuminate\Database\Capsule\Manager as DB;
 use App\Classes\Carrito;
+use App\Helpers\Email;
 
 use App\Classes\CajaService;
 
@@ -110,12 +111,7 @@ class cajaController extends Controller
 		{
 			$this->redireccionar('index');
 			exit;
-		}
-
-		$this->_view->titulo = 'Felicidades - Salta Shop';
-		$this->_view->setCss(array('front/estilos_categorias',
-			'front/estilos_congrats'));
-		date_default_timezone_set('America/Argentina/Buenos_Aires');
+		}		
 
 		$datos['id'] = Session::get('temp')['orden_id'];
 		$datos['ps'] = Carrito::get_productos();
@@ -129,9 +125,22 @@ class cajaController extends Controller
 		$datos['domicilio'] = $u->us_domicilio;
 		$datos['pago'] = Session::get('temp')['forma_pago'];
 
+		//send an email
+	    $html = Email::get_template('new_order', $datos);
+	    $Mailer = new PHPMailer();
+	    $subject = 'Confirmacion de orden en saltashop';
+
+	    Email::send($u->us_correo, $html, $Mailer, $subject);
+
+
 		//finalizado la insercion el carrito se tiene que vaciar
 		Session::destroy('carrito');
-		Session::destroy('temp');		
+		Session::destroy('temp');
+
+		$this->_view->titulo = 'Felicidades - Salta Shop';
+		$this->_view->setCss(array('front/estilos_categorias',
+			'front/estilos_congrats'));
+		date_default_timezone_set('America/Argentina/Buenos_Aires');
 		
 		$this->_view->renderizar('caja/confirmacion', $datos);
 	}
