@@ -923,6 +923,57 @@ class adminController extends Controller
 		$this->_view->setCss(array('admin/orden_style'));
 		$this->viewMake('admin/clientes/cliente', $datos);
 	}
+
+//---------------- Empleados -----------------------//
+
+	public function empleados()
+	{
+		$datos['operadores'] = App\Models\Operador::all();
+		$this->_view->titulo = "Empleados en SaltaShop";
+		$this->_view->setJs(array(
+			'admin/fn_empleados',
+			'vendor/datatable1.10.6/jquery.dataTables.min'));
+
+		$this->viewMake('admin/empleados/index', $datos);
+	}
+
+	public function add_empleado()
+	{
+		$datos['genero'] = (Session::get('genero')) ? Session::show('genero') : '';
+		$datos['rol'] = (Session::get('rol')) ? Session::show('rol') : '';
+
+		$this->_view->titulo = "Añador empleado en SaltaShop";
+		$this->viewMake('admin/empleados/add', $datos);
+	}
+
+	public function store_empleado()
+	{
+		if ( $_SERVER['REQUEST_METHOD'] != 'POST' )
+		{
+			$this->redireccionar('admin/empleados');
+		}
+
+		$val = new App\Helpers\Validator();
+
+		if ( App\Classes\EmpleadoService::validar($val) )
+		{
+			App\Classes\EmpleadoService::store();
+
+			Session::set("mensajeExito", "Se ha añadido un nuevo empleado.");
+			$this->redireccionar('admin/empleados');
+		}
+		
+		Session::set('errors', $val->show_errors());
+
+		Session::set('nombre', $_POST['nombre']);
+		Session::set('apellido', $_POST['apellido']);
+		Session::set('dni', $_POST['dni']);
+		Session::set('genero', $_POST['genero']);
+		Session::set('correo', $_POST['correo']);
+		Session::set('rol', $_POST['rol']);
+
+		$this->redireccionar('admin/add_empleado');
+	}
 // ---------------- Reportes --------------------- //
 
 	public function reportes($filter = '')
