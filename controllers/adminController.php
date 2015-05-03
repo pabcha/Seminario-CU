@@ -64,11 +64,11 @@ class adminController extends Controller
 
 	public function panelcontrol()
 	{
-		if( !Session::get('op_autenticado') )
+		/*if( !Session::get('op_autenticado') )
 		{
 			$this->redireccionar('admin');
 		}
-		Session::acceso('vendedor');
+		Session::acceso('vendedor');*/
 
 		$this->_view->titulo = 'Panel de Control';
 		$this->_view->setCss(array('jquery.jqplot'));
@@ -896,13 +896,11 @@ class adminController extends Controller
 
 	public function clientes()
 	{
-		$Usuario = $this->loadModel('usuario');
-
-		$datos['clientes'] = $Usuario->get_users();
+		$datos['clientes'] = App\Models\User::all();
 		$this->_view->titulo = "Clientes en SaltaShop";
 
-		$this->_view->setJs(array('jquery.dataTables.min','dataTables.scrollingPagination'));
-		$this->viewMake('admin/clientes', $datos);
+		$this->_view->setJs(array('vendor/datatable1.10.6/jquery.dataTables.min'));
+		$this->viewMake('admin/clientes/clientes', $datos);
 	}
 
 	public function bloquear($cliente_id)
@@ -924,14 +922,19 @@ class adminController extends Controller
 	public function cliente($cliente_id)
 	{
 		$Usuario = $this->loadModel('usuario');
+		try {
+			$u = App\Models\User::findOrFail($cliente_id);	
+		} catch (Exception $e) {
+			$this->redireccionar('error');
+		}
 
-		$datos['cliente'] = $Usuario->get_user($cliente_id);
-		//ordenes de cliente
-		$datos['ordenes'] = $Usuario->get_ordenes($cliente_id);
+		$datos['u'] = $u;
+		$datos['ordenes'] = $u->ordenes()->get();
 		
 		$this->_view->titulo = "Cliente en SaltaShop";
-
-		$this->viewMake('admin/cliente', $datos);
+		$this->_view->setJs(array('vendor/datatable1.10.6/jquery.dataTables.min'));
+		$this->_view->setCss(array('admin/orden_style'));
+		$this->viewMake('admin/clientes/cliente', $datos);
 	}
 // ---------------- Reportes --------------------- //
 

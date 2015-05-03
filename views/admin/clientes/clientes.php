@@ -20,20 +20,24 @@
 								</tr>
 							</thead>
 							<tbody>
-								<?php foreach ($clientes as $cliente): ?>
+								<?php foreach ($clientes as $u): ?>
 									<tr>
-										<td><?php echo $cliente['nombre'].' '.$cliente['apellido']; ?></td>
-										<td><?php echo $cliente['correo']; ?></td>
+										<td><?php echo $u->us_nombre.' '.$u->us_apellido; ?></td>
+										<td><?php echo $u->us_correo; ?></td>
 										<td style="text-align:center;width:5%;">
-											<?php if ($cliente['estado'] == 'A'): ?>
-												<a href="<?php echo BASE_URL.'admin/bloquear/'.$cliente['id']; ?>" style="text-decoration:none;"><i class="icon-ok"></i></a>
+											<?php if ($u->us_estado == 'A'): ?>
+												<a href="<?php echo BASE_URL.'admin/bloquear/'.$u->us_id; ?>" style="text-decoration:none;">
+													<i class="icon-ok"></i>
+												</a>
 											<?php else: ?>
-												<a href="<?php echo BASE_URL.'admin/desbloquear/'.$cliente['id']; ?>" style="text-decoration:none;"><i class="icon-remove"></i></a>
+												<a href="<?php echo BASE_URL.'admin/desbloquear/'.$u->us_id; ?>" style="text-decoration:none;">
+													<i class="icon-remove"></i>
+												</a>
 											<?php endif ?>											
 										</td>
 										<td style="text-align:center;">
 											<div class="btn-group">
-												<a href="<?php echo BASE_URL.'admin/cliente/'.$cliente['id']; ?>" class="btn" title="ver">
+												<a href="<?php echo BASE_URL.'admin/cliente/'.$u->us_id; ?>" class="btn" title="ver">
 													<i class="icon-zoom-in"></i>
 												</a>
 											</div>
@@ -50,23 +54,33 @@
 	</div>
 
 	<script type="text/javascript">
+		var config = {
+			"language": {
+	            "lengthMenu": "Mostrar _MENU_",
+	            "zeroRecords": "No hubo coincidencias",
+	            "info": "Mostrando pagina _PAGE_ de _PAGES_",
+	            "infoEmpty": "",
+	            "infoFiltered": "",
+	            "search": "Buscar",
+	            "paginate": {
+	            	last: "Ultimo",
+	            	previous: "Anterior",
+	            	next: "Siguiente",
+	            	first: "Primero"
+	            }
+	        },       
+	        "fnDrawCallback": function() {
+				$('#tabla-result_length').hide();//entradas por tabla
+
+	            if ( $('.dataTables_paginate a').size() < 4) 
+	            {
+	            	$('.dataTables_paginate').hide();
+	            }
+	        },
+	        info: false
+		};
+
 		$(function() {
-			$('#tabla-result').dataTable({
-					"oLanguage" : {
-						"sLengthMenu" : "Mostrar _MENU_",
-						"sZeroRecords" : "No hubo coincidencias",
-						"sInfo" : "Mostrando _START_ - _END_ de _TOTAL_ registros",
-						"sInfoEmpty" : "Mostrando 0 - 0 de 0 registros",
-						"sInfoFiltered" : "(de _MAX_ registros)",
-						"sSearch": "Buscar:",
-						oPaginate : {
-							"sLast"		: 		"Ultimo",
-							"sFirst"	: 		"Primero",
-							"sPrevious"	: 		"Anterior",
-							"sNext"		: 		"Siguiente"
-						} 						
-					},
-					"sPaginationType": "bootstrap"
-				});
+			$('#tabla-result').DataTable( config );
 		});
 	</script>
