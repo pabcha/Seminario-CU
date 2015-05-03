@@ -905,25 +905,8 @@ class adminController extends Controller
 		$this->viewMake('admin/clientes/clientes', $datos);
 	}
 
-	public function bloquear($cliente_id)
-	{
-		$Usuario = $this->loadModel('usuario');
-		$Usuario->bloquear($cliente_id);
-
-		$this->redireccionar('admin/clientes');
-	}
-
-	public function desbloquear($cliente_id)
-	{
-		$Usuario = $this->loadModel('usuario');
-		$Usuario->desbloquear($cliente_id);
-
-		$this->redireccionar('admin/clientes');
-	}
-
 	public function cliente($cliente_id)
 	{
-		$Usuario = $this->loadModel('usuario');
 		try {
 			$u = App\Models\User::findOrFail($cliente_id);	
 		} catch (Exception $e) {

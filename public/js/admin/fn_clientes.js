@@ -6,7 +6,7 @@ var clientes = (function () {
             "info": "Mostrando pagina _PAGE_ de _PAGES_",
             "infoEmpty": "",
             "infoFiltered": "",
-            "search": "Buscar",
+            "search": "Buscar: ",
             "paginate": {
             	last: "Ultimo",
             	previous: "Anterior",
