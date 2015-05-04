@@ -82,7 +82,7 @@
 									<div class="row-fluid" style="margin-top: 10px;">
 										<?php if ($p['producto_cantidad'] > 0): ?>
 											<input type="hidden" id="id" value="<?= $p['producto_id'] ?>">
-											<button id="addCarro"class="boton large">Agregar al carrito</button>
+											<button id="addCarro"class="boton boton-acept large">Agregar al carrito</button>
 										<?php endif ?>
 									</div>
 								</div>

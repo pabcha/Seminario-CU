@@ -98,4 +98,10 @@ class carritoController extends Controller
 			}
 		}
 	}
+
+	public function drop()
+	{
+		Session::destroy('carrito');
+		$this->redireccionar('carrito');
+	}
 }
