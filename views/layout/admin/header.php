@@ -37,12 +37,12 @@
 							</a>
 							<ul class="dropdown-menu">
 								<li>
-									<a href="<?= BASE_URL.'admin/edit_empleado/'.Session::get('operador')['id']; ?>">
+									<a href="<?= BASE_URL.'admin/mi_cuenta'; ?>">
 										Informacion de Usuario
 									</a>
 								</li>
 								<li>
-									<a href="<?= BASE_URL.'admin/edit_password/'.Session::get('operador')['id']; ?>">
+									<a href="<?= BASE_URL.'admin/edit_Mypassword'; ?>">
 										Cambiar Password
 									</a>
 								</li>

@@ -1211,17 +1211,43 @@ class adminController extends Controller
 	{
 		Session::isAutenticado();
 
-		$this->_view->titulo = 'Marcas de producto';
-		$this->_view->setJs(array(
-			'vendor/datatable1.10.6/jquery.dataTables.min',
-			'common/helpers',
-			'admin/catalogo'
-		));
+		try {
+			$emp = App\Models\Operador::findOrFail(Session::get('operador')['id']);	
+		} catch (Exception $e) {
+			$this->redireccionar('error');
+		}
 
-		$datos['marcas'] = App\Models\Marca::where('producto_marca_estado', '!=', 'B')->get();
-		$datos['page'] = 3;
+		$datos['emp'] = $emp;
+		$this->_view->titulo = "Mi cuenta";
+		$this->viewMake('admin/panel/index', $datos);
+	}
 
-		$this->viewMake('admin/catalogo/marcas', $datos);
+	public function edit_myPassword()
+	{
+		Session::isAutenticado();
+
+		try {
+			$emp = App\Models\Operador::findOrFail(Session::get('operador')['id']);	
+		} catch (Exception $e) {
+			$this->redireccionar('error');
+		}
+
+		$val = new App\Helpers\Validator();
+
+		if ( App\Classes\EmpleadoService::validar_edit_password($val, $emp->op_password) )
+		{
+			App\Classes\EmpleadoService::update_pass(Session::get('operador')['id']);
+
+			Session::set("mensajeExito", "Se ha cambiado la contraseña.");
+			$this->redireccionar('admin/mi_cuenta');
+		}
+
+		$datos['emp'] = $emp;
+		$datos['val'] = $val;
+		$datos['errors'] = $val->show_errors();
+
+		$this->_view->titulo = "Ver empleado en SaltaShop";
+		$this->viewMake('admin/panel/edit_password', $datos);
 	}
 }
 ?>
