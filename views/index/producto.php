@@ -41,8 +41,7 @@
 								<div class="flexslider">
 									<img src="<?= BASE_URL.'storage/uploads/no-image.jpg' ?>" alt="no hay imagen">
 								</div>
-							<?php endif ?>
-								
+							<?php endif ?>								
 						</div>
 
 						<!-- Descripcion Resumen -->
@@ -67,17 +66,17 @@
 							<?php if ($p['producto_cantidad'] > 0): ?>
 								<div class="botones">
 									<div class="row-fluid">
-											<div class="span3">
-												<span style="display: inline-block; margin-top: 10px;">Cantidad:</span>
-											</div>
+										<div class="span3">
+											<span style="display: inline-block; margin-top: 10px;">Cantidad:</span>
+										</div>
 
-											<div class="span6">
-												<div class="btn-cant">
-													<input type="button" class="restar" value="-">
-													<input type="text" class="inputCant" maxlength="2" value="1" id="cantidad">
-													<input type="button" class="sumar" value="+">
-												</div>
+										<div class="span6">
+											<div class="btn-cant">
+												<input type="button" class="restar" value="-">
+												<input type="text" class="inputCant" maxlength="2" value="1" id="cantidad">
+												<input type="button" class="sumar" value="+">
 											</div>
+										</div>
 									</div>
 
 									<div class="row-fluid" style="margin-top: 10px;">

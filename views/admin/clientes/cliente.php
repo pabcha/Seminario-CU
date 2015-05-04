@@ -7,10 +7,6 @@
 			<!-- fin navegacion -->
 
 			<div class="span9">
-				<a href="<?php echo BASE_URL.'admin/clientes'; ?>">
-					<i class="icon-arrow-left"></i> volver a clientes
-				</a>
-
 				<div class="pag-subtitulo">
 					<h3>
 						Cliente 

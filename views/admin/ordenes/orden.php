@@ -124,8 +124,7 @@
 										<?php endforeach ?>
 										</select>										
 
-										<div class="menu-form">
-											<a href="<?php echo BASE_URL.'admin/ordenes'; ?>" class="boton boton-cancel">Salir</a>		
+										<div class="menu-form">											
 											<button class="boton boton-acept" type="submit" style="margin-left: 10px;">Guardar Cambios</button>	
 										</div>										
 									</form>
