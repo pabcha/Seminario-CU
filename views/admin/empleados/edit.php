@@ -10,35 +10,33 @@
 			<div class="span9">
 				<h1 class="pag-titulo">Empleados</h1>
 
-				<?php if ( Session::get("errors") ) : ?>
-				        <?= Session::show("errors"); ?> 
-				<?php endif; ?>
+				<?= $errors ?>
 
 		        <div class="widget">
 					<div class="widget-header">
-						<h3>Añadir empleado</h3>
+						<h3>Editar empleado</h3>
 					</div>
 
 					<div class="widget-content">
-						<form class="form-horizontal" action="<?= BASE_URL.'admin/store_empleado' ?>" method="post">
+						<form class="form-horizontal" action="<?= BASE_URL.'admin/edit_empleado/'.$emp->op_id; ?>" method="post">
 							<div class="control-group">
 								<label for="nombre" class="control-label"><span>*</span> Nombre</label>
 								<div class="controls">
-									<input type="text" class="span11" name="nombre" value="<?= Session::show('nombre') ?>">
+									<input type="text" class="span11" name="nombre" value="<?= $val->set_valor('nombre', $emp->op_nombre) ?>">
 								</div>
 							</div> <!-- /inputNombre -->
 
 							<div class="control-group">
 								<label for="apellido" class="control-label"><span>*</span> Apellido</label>
 								<div class="controls">
-									<input type="text" class="span11" name="apellido" value="<?= Session::show('apellido') ?>">
+									<input type="text" class="span11" name="apellido" value="<?= $val->set_valor('apellido', $emp->op_apellido) ?>">
 								</div>
 							</div> <!-- /inputApellido -->
 
 							<div class="control-group">
 								<label for="dni" class="control-label"><span>*</span> DNI</label>
 								<div class="controls">
-									<input type="text" class="span11" name="dni" value="<?= Session::show('dni') ?>">
+									<input type="text" class="span11" name="dni" value="<?= $val->set_valor('dni', $emp->op_dni) ?>">
 								</div>
 							</div> <!-- /inputDNI -->
 
@@ -46,39 +44,25 @@
 								<label for="genero" class="control-label"><span>*</span> Genero</label>
 								<div class="controls">
 									<select class="span11" name="genero">
-							    		<option value="M" <?= App\Helpers\Vista::is_selected($genero, 'M') ?>>masculino</option>
-							    		<option value="F" <?= App\Helpers\Vista::is_selected($genero, 'F') ?>>femenino</option>
+							    		<option value="M" <?= $val->set_select('genero', $emp->op_genero, $emp->op_genero == 'M') ?>>masculino</option>
+							    		<option value="F" <?= $val->set_select('genero', $emp->op_genero, $emp->op_genero == 'F') ?>>femenino</option>
 							    	</select>
 								</div>
 							</div> <!-- /inputGenero -->
-
-							<div class="control-group">
-								<label for="correo" class="control-label"><span>*</span> Correo</label>
-								<div class="controls">
-									<input type="text" class="span11" name="correo" value="<?= Session::show('correo') ?>">
-								</div>
-							</div> <!-- /inputCorreo -->
-
-							<div class="control-group">
-								<label for="password" class="control-label"><span>*</span> Password</label>
-								<div class="controls">
-									<input type="password" class="span11" name="password" value="">
-								</div>
-							</div> <!-- /inputPassword -->
 
 						    <div class="control-group">
 							    <label class="control-label"><span>*</span> Rol</label>
 							    <div class="controls">
 							    	<select class="span11" name="rol">
-							    		<option value="administrador" <?= App\Helpers\Vista::is_selected($rol, 'administrador');?>>administrador</option>
-							    		<option value="vendedor" <?= App\Helpers\Vista::is_selected($rol, 'vendedor');?>>vendedor</option>
+							    		<option value="administrador" <?= $val->set_select('rol', $emp->op_rol, $emp->op_rol == 'administrador') ?>>administrador</option>
+							    		<option value="vendedor" <?= $val->set_select('rol', $emp->op_rol, $emp->op_rol == 'vendedor') ?>>vendedor</option>
 							    	</select>
 							    </div>
 							</div> <!-- /rol -->
 
 							<div class="control-group">
 								<div class="controls boton-responsive">
-									<button type="submit" class="boton boton-acept">Añadir</button>
+									<button type="submit" class="boton boton-acept">Editar</button>
 								</div>
 							</div> <!-- /inputSubmit -->
 

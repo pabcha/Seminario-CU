@@ -37,8 +37,11 @@
 									<td><?php echo $op->op_rol; ?></td>
 									<td style="text-align:center;">
 										<div class="btn-group">
-											<a href="<?php echo BASE_URL.'admin/empleado/'.$op->op_id; ?>" class="btn" title="ver">
+											<a href="<?php echo BASE_URL.'admin/show_empleado/'.$op->op_id; ?>" class="btn" title="ver">
 												<i class="icon-zoom-in"></i>
+											</a>
+											<a href="<?php echo BASE_URL.'admin/edit_empleado/'.$op->op_id; ?>" class="btn" title="editar">
+												<i class="icon-pencil"></i>
 											</a>
 										</div>
 									</td>									

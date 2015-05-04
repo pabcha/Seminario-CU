@@ -974,6 +974,73 @@ class adminController extends Controller
 
 		$this->redireccionar('admin/add_empleado');
 	}
+
+	public function show_empleado($id)
+	{
+		try {
+			$emp = App\Models\Operador::findOrFail($id);	
+		} catch (Exception $e) {
+			$this->redireccionar('error');
+		}
+
+		$datos['emp'] = $emp;
+		$this->_view->titulo = "Ver empleado en SaltaShop";
+		$this->viewMake('admin/empleados/show', $datos);
+	}
+
+	public function edit_empleado($id)
+	{
+		try {
+			$emp = App\Models\Operador::findOrFail($id);	
+		} catch (Exception $e) {
+			$this->redireccionar('error');
+		}
+
+		$val = new App\Helpers\Validator();
+
+		if ( App\Classes\EmpleadoService::validar_update($val) )
+		{
+			App\Classes\EmpleadoService::update($id);
+
+			Session::set("mensajeExito", "Se ha editado un empleado.");
+			$this->redireccionar('admin/empleados');
+		}		
+
+		$datos['emp'] = $emp;
+		$datos['val'] = $val;
+		$datos['errors'] = $val->show_errors();
+
+		$this->_view->titulo = "Ver empleado en SaltaShop";
+		$this->viewMake('admin/empleados/edit', $datos);
+	}
+
+	public function edit_password($id)
+	{
+		try {
+			$emp = App\Models\Operador::findOrFail($id);	
+		} catch (Exception $e) {
+			$this->redireccionar('error');
+		}
+
+		$val = new App\Helpers\Validator();
+
+		if ( App\Classes\EmpleadoService::validar_edit_password($val, $emp->op_password) )
+		{
+			App\Classes\EmpleadoService::update_pass($id);
+
+			Session::set("mensajeExito", "Se ha cambiado la contraseña.");
+			$this->redireccionar('admin/empleados');
+		}
+
+		$datos['emp'] = $emp;
+		$datos['val'] = $val;
+		$datos['errors'] = $val->show_errors();
+		$datos['id'] = $id;
+
+		$this->_view->titulo = "Ver empleado en SaltaShop";
+		$this->viewMake('admin/empleados/edit_password', $datos);
+	}
+
 // ---------------- Reportes --------------------- //
 
 	public function reportes($filter = '')
