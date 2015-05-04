@@ -19,13 +19,6 @@
 
 					<div class="widget-content">
 						<form class="form-horizontal" action="<?= BASE_URL.'admin/edit_password/'.$id ?>" method="post">
-
-							<div class="control-group">
-								<label for="old_password" class="control-label"><span>*</span> Password actual</label>
-								<div class="controls">
-									<input type="password" class="span11" name="old_password" value="">
-								</div>
-							</div> <!-- /inputPassword -->
 							
 							<div class="control-group">
 								<label for="password" class="control-label"><span>*</span> Nuevo password</label>

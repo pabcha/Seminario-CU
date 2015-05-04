@@ -25,7 +25,7 @@
 			<div class="congratulation-container">
 				<div class="congratulation-message">
 					<p>Sus datos han sido enviados al correo proporcionado en el registro.</p>	
-					<p>¿Desea <a href="<?php echo BASE_URL.'entrar'; ?>">Entrar en SaltaShop</a> o <a href="<?php echo BASE_URL; ?>">volver a inicio</a>?</p>
+					<p>¿Desea <a href="<?php echo BASE_URL.'entrar'; ?>">entrar en SaltaShop</a> o <a href="<?php echo BASE_URL; ?>">volver a inicio</a>?</p>
 				</div>				
 			</div>
 		</div>

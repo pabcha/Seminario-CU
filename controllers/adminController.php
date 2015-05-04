@@ -991,7 +991,7 @@ class adminController extends Controller
 
 		$val = new App\Helpers\Validator();
 
-		if ( App\Classes\EmpleadoService::validar_edit_password($val, $emp->op_password) )
+		if ( App\Classes\EmpleadoService::validate_password($val, $emp->op_password) )
 		{
 			App\Classes\EmpleadoService::update_pass($id);
 

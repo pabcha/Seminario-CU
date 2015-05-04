@@ -83,6 +83,19 @@ class EmpleadoService
 		return $val->validar();
 	}
 
+	public static function validate_password($val, $old_password)
+	{
+		$val->set_content_delimiters('<div class="alerta"><ul class="alert_info">','</ul></div>');
+		$val->set_error_delimiters('<li><i class="icon-remove"></i>','</li>');
+
+		$val->set_reglas('password','password','requerido|min_length[6]|max_length[15]|matches[password2]');
+		$val->set_reglas('password2','password','max_length[15]');
+
+		$val->set_message('matches', 'Los passwords deben coincidir.');
+
+		return $val->validar();
+	}
+
 	public static function update($id)
 	{
 		$emp = Operador::find($id);
