@@ -26,10 +26,10 @@ try{
 	$capsule = new Capsule;
 	$capsule->addConnection([
 	    'driver'    => 'mysql',
-	    'host'      => 'localhost',
-	    'database'  => 'saltashop2',
-	    'username'  => 'root',
-	    'password'  => '4236154',
+	    'host'      => DB_HOST,
+	    'database'  => DB_NAME,
+	    'username'  => DB_USER,
+	    'password'  => DB_PASS,
 	    'charset'   => 'utf8',
 	    'collation' => 'utf8_spanish_ci',
 	    'prefix'    => '',

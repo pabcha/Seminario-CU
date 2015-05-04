@@ -99,12 +99,6 @@
 					            </a>
 							</li>
 							<?php endif; ?>
-							<li>
-								<a href="<?= BASE_URL . 'admin/herramientas'; ?>">
-					                <i class="icon-wrench icon-large"></i> 
-					                Herramientas
-					            </a>
-							</li>
 						</ul>
 					</div>
 				</div>

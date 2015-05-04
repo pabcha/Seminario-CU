@@ -46,9 +46,6 @@
 						</div>
 					</div>
 				</div>
-				<a href="<?php echo BASE_URL.'admin/empleados'; ?>">
-					<i class="icon-arrow-left"></i> volver a clientes
-				</a>	
 			</div>
 		</div>
 	</div>
