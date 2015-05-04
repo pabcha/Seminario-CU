@@ -24,18 +24,13 @@ class indexController extends Controller
 	{
 		$this->_view->titulo = 'Salta Shop';
 		$this->_view->setCss(array('front/estilos_categorias'));
-		//$this->_view->setJs(array('func_index'));
 
 		$datos['ps'] = App\Models\Product::where('producto_estado','A')
 			->orderBy('producto_id', 'desc')
 			->limit(8)
 			->get();
+		$datos['top'] = App\Classes\TiendaService::most_selled(8);
 
-		$datos['top'] = App\Models\Product::where('producto_estado','A')
-			->orderBy('producto_cantidad_comprada', 'desc')
-			->limit(8)
-			->get();
-		
 		$datos['categorias'] = App\Models\Category::where('producto_categoria_padre_id', 0)
 			->where('producto_categoria_estado', 'A')
 			->get();

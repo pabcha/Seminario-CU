@@ -1,6 +1,8 @@
 <?php 
 namespace App\Helpers;
 
+use App\Models\ProductImage;
+
 class Vista
 {
 	public static function loadCss($styles)
@@ -53,6 +55,19 @@ class Vista
 		$img = $producto->getDefaultImg();
 
 		if ( $img )	{
+			return sprintf("src='%sstorage/uploads/%s/%s' alt='%s'",BASE_URL, $src, $img->producto_img_nombre, $img->producto_img_alt);
+		} else {
+			return sprintf("src='%sstorage/uploads/no-image.jpg' alt='no-image'",BASE_URL);
+		}
+	}
+
+	public static function getDefaultImg($producto, $src)
+	{
+		$img = ProductImage::where('producto_id', $producto['producto_id'])
+			->where('producto_img_predeterminado', 'S')
+			->first();
+
+		if ( !empty($img) )	{
 			return sprintf("src='%sstorage/uploads/%s/%s' alt='%s'",BASE_URL, $src, $img->producto_img_nombre, $img->producto_img_alt);
 		} else {
 			return sprintf("src='%sstorage/uploads/no-image.jpg' alt='no-image'",BASE_URL);

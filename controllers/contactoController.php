@@ -16,10 +16,7 @@ class contactoController extends Controller
 			->limit(4)
 			->get();
 
-		$datos['top'] = App\Models\Product::where('producto_estado','A')
-			->orderBy('producto_cantidad_comprada', 'desc')
-			->limit(4)
-			->get();
+		$datos['top'] = App\Classes\TiendaService::most_selled(4);
 		
 
 		$this->_view->renderizar('layout/default/header');

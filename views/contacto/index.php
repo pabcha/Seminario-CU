@@ -80,7 +80,7 @@
 									<span class="precio"><?= App\Helpers\Utils::to_pesos($p['producto_precio']) ?></span>
 								</div>
 								<div class="img-prod">
-									<img <?= App\Helpers\Vista::buildDefaultImg($p, 'thumb_tiny') ?>>
+									<img <?= App\Helpers\Vista::getDefaultImg($p, 'thumb_tiny') ?>>
 								</div>
 							</div>
 						<?php endforeach ?>					

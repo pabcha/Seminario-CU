@@ -47,13 +47,13 @@
 							<h3>Mas Vendidos</h3>
 						</div>
 						<div class="widget-product-content">
-						<?php if ( ! $top->isEmpty() ): ?>
+						<?php if ( !empty($top) ): ?>
 
 							<?php foreach ($top as $p): ?>
 							<div class="span3 centerText <?= App\Helpers\Vista::is_first($j) ?>">
 								
 								<a href="<?= BASE_URL.'index/producto/'.$p['producto_id'] ?>" class="title">	
-									<img <?= App\Helpers\Vista::buildDefaultImg($p, 'thumb_medium') ?>>
+									<img <?= App\Helpers\Vista::getDefaultImg($p, 'thumb_medium') ?>>
 								</a>
 								
 								<a href="<?= BASE_URL.'productos/producto/'.$p['producto_id'] ?>" class="title">
