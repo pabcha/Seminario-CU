@@ -81,7 +81,7 @@ class indexController extends Controller
 	}
 
 	public function producto($producto_id)
-	{
+	{		
 		try 
 		{
 			$producto = App\Models\Product::where("producto_id", $producto_id)
@@ -137,7 +137,9 @@ class indexController extends Controller
 			}
 
 			$producto['cantidad'] = $_POST['cantidad'];
-			$producto['imagen'] = $producto->getDefaultImg()->producto_img_nombre;
+			$producto['imagen'] = (count( $producto->images()->get()) > 0 ) ?
+				$producto->getDefaultImg()->producto_img_nombre :
+				'';
 
 			Carrito::add_producto($producto->toArray());
 

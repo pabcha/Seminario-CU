@@ -70,7 +70,6 @@ $(document).ready(function() {
 	}
 
 	$('#addCarro').click(function (e) {
-
 		var params = {
 			cantidad: $('#cantidad').val()
 		}
