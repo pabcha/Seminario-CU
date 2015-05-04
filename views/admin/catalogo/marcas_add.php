@@ -22,7 +22,7 @@
 								<div class="control-group">
 									<label for="inputNombre" class="control-label"><span>* </span>Nombre</label>
 									<div class="controls">
-										<input type="text" id="inputNombre" class="span11" name="inputNombre" value="<?php $validador->set_valor('inputNombre'); ?>">
+										<input type="text" id="inputNombre" class="span11" name="inputNombre" value="<?= $validador->set_valor('inputNombre'); ?>">
 									</div>
 								</div> <!-- /inputNombre -->
 

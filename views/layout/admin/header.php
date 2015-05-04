@@ -31,20 +31,20 @@
 						</li>
 						<li class="divider-vertical"></li>
 						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+							<a href="" class="dropdown-toggle" data-toggle="dropdown">
 								<i class="icon-cloud"></i>
-								Bienvenido, <?= Session::get('op_nombre'); ?>
+								Bienvenido, <?= Session::get('operador')['nombre']; ?>
 								<b class="caret"></b>
 							</a>
 							<ul class="dropdown-menu">
 								<li>
-									<a href="">
+									<a href="<?= BASE_URL.'admin/edit_empleado/'.Session::get('operador')['id']; ?>">
 										<i class="icon-file"></i>
 										Informacion de Usuario
 									</a>
 								</li>
 								<li>
-									<a href="">
+									<a href="<?= BASE_URL.'admin/edit_password/'.Session::get('operador')['id']; ?>">
 										<i class="icon-key"></i>
 										Cambiar Password
 									</a>

@@ -20,68 +20,55 @@ class adminController extends Controller
 
 	public function index()
 	{
-		$this->_view->titulo = 'Area de administracion';
-
-		if ( Session::get('op_autenticado') ) 
+		if ( Session::get('operador')['autenticado'] ) 
 		{
-			$this->redireccionar('admin/panelcontrol');
+			$this->redireccionar('admin/ordenes');
 		}
 
-		if( $this->getInt('enviar') == 1 ) 
-		{
-			$adminModel = $this->loadModel('admin');
-			$this->_view->datos = $_POST;
-			
-			$row = $adminModel->isOperador(
-				$this->getPostParam('inputCorreo'),
-				$this->getPostParam('inputPassword')
-				);
-
-			if ( !$row ) 
-			{
-				$this->_view->_error = 'Usuario o contraseña incorrectos.';
-				
-				$this->_view->renderizar('layout/admin/header_login');
-				$this->_view->renderizar('admin/index');
-				$this->_view->renderizar('layout/admin/footer');
-				exit;
-			}
-
-			Session::set( 'op_autenticado',true);
-			Session::set( 'op_level',	$adminModel->getRolOperador($row->rol_id)->rol_nombre );
-			Session::set( 'op_nombre',	$row->op_nombre.' '.$row->op_apellido );
-			Session::set( 'op_correo', $row->op_correo );
-			Session::set( 'op_id',	$row->op_id );
-			Session::set( 'op_tiempo',	time() );
-
-			$this->redireccionar('admin/panelcontrol');
-		}		
-
+		$this->_view->titulo = 'Area de administracion';
 		$this->_view->renderizar('layout/admin/header_login');
 		$this->_view->renderizar('admin/index');
 		$this->_view->renderizar('layout/admin/footer');
 	}
 
-	public function panelcontrol()
+	public function logear()
 	{
-		/*if( !Session::get('op_autenticado') )
+		if (Session::get('operador')['autenticado']) 
 		{
 			$this->redireccionar('admin');
 		}
-		Session::acceso('vendedor');*/
 
-		$this->_view->titulo = 'Panel de Control';
-		$this->_view->setCss(array('jquery.jqplot'));
-		$this->_view->setJs(array('jquery.jqplot.min','func_index'));
+		if ( $_SERVER['REQUEST_METHOD'] != 'POST' )
+		{
+			$this->redireccionar('admin');
+		}
 
-		$this->viewMake('admin/panelcontrol');
+		$op = App\Models\Operador::autenticar($_POST['correo'], $_POST['password'])
+				->first();
+
+		if ( !empty($op) )
+		{
+			$_SESSION['operador'] = array(
+				'autenticado' => true,
+				'nombre' => $op->op_nombre,
+				'apellido' => $op->op_apellido,
+				'correo' => $op->op_correo,
+				'id' => $op->op_id,
+				'rol' => $op->op_rol,
+				'tiempo' => time(),
+			);
+
+			$this->redireccionar('admin/ordenes');
+		}
+
+		Session::set('correo', $_POST['correo']);
+		Session::set('errors', "Usuario/Contraseña incorrectos.");
+		$this->redireccionar('admin');
 	}
 
 	public function logout()
 	{
-		$variables = array('op_autenticado','op_level','op_nombre','op_correo','op_id','op_tiempo');
-
-		Session::destroy($variables);
+		Session::destroy('operador');
 		$this->redireccionar('admin');
 	}
 
@@ -663,7 +650,9 @@ class adminController extends Controller
 		
 		$this->_view->titulo = "Ordenes";
 		$this->_view->setCss(array('admin/orden_style'));
-		$this->_view->setJs(array('vendor/datatable1.10.6/jquery.dataTables.min'));
+		$this->_view->setJs(array(
+			'admin/fn_ordenes',
+			'vendor/datatable1.10.6/jquery.dataTables.min'));
 		$datos['page'] = 1;
 
 		$this->viewMake('admin/ordenes/ordenes', $datos);
@@ -675,7 +664,9 @@ class adminController extends Controller
 		
 		$this->_view->titulo = "Ordenes";
 		$this->_view->setCss(array('admin/orden_style'));
-		$this->_view->setJs(array('vendor/datatable1.10.6/jquery.dataTables.min'));
+		$this->_view->setJs(array(
+			'admin/fn_ordenes',
+			'vendor/datatable1.10.6/jquery.dataTables.min'));
 		$datos['page'] = 2;
 
 		$this->viewMake('admin/ordenes/ordenes', $datos);
@@ -687,7 +678,9 @@ class adminController extends Controller
 		
 		$this->_view->titulo = "Ordenes";
 		$this->_view->setCss(array('admin/orden_style'));
-		$this->_view->setJs(array('vendor/datatable1.10.6/jquery.dataTables.min'));
+		$this->_view->setJs(array(
+			'admin/fn_ordenes',
+			'vendor/datatable1.10.6/jquery.dataTables.min'));
 		$datos['page'] = 3;
 
 		$this->viewMake('admin/ordenes/ordenes', $datos);
@@ -699,7 +692,9 @@ class adminController extends Controller
 		
 		$this->_view->titulo = "Ordenes";
 		$this->_view->setCss(array('admin/orden_style'));
-		$this->_view->setJs(array('vendor/datatable1.10.6/jquery.dataTables.min'));
+		$this->_view->setJs(array(
+			'admin/fn_ordenes',
+			'vendor/datatable1.10.6/jquery.dataTables.min'));
 		$datos['page'] = 4;
 
 		$this->viewMake('admin/ordenes/ordenes', $datos);
@@ -711,7 +706,9 @@ class adminController extends Controller
 		
 		$this->_view->titulo = "Ordenes";
 		$this->_view->setCss(array('admin/orden_style'));
-		$this->_view->setJs(array('vendor/datatable1.10.6/jquery.dataTables.min'));
+		$this->_view->setJs(array(
+			'admin/fn_ordenes',
+			'vendor/datatable1.10.6/jquery.dataTables.min'));
 		$datos['page'] = 5;
 
 		$this->viewMake('admin/ordenes/ordenes', $datos);

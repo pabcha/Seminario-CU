@@ -13,4 +13,10 @@ class Operador extends Model {
 	{
 		return $query->where('op_correo', $correo);
 	}
+
+	public function scopeAutenticar($query, $correo, $pass)
+	{
+		return $query->where('op_correo', $correo)
+				->where('op_password', md5($pass));
+	}
 }

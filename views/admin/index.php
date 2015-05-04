@@ -8,30 +8,27 @@
 			<div class="row-fluid">
 				<div class="panel-admin-login span6 offset3">
 
-					<div class="alerta" id="alerta" style="display:none;">
-						<ul class="alert_info">
-						</ul>
-					</div>
-
-					<?php if ( isset($this->_error) ) : ?>
-						<div class="alerta" id="alerta">
+					<?php if ( Session::get("errors") ) : ?>
+						<div class="alerta">
 							<ul class="alert_info">
-			                <?php echo '<li><i class="icon-remove"></i>'.$this->_error.'</li>'; ?>
-				            </ul>
-						</div> 
-			        <?php endif; ?>
+								<li>
+									<i class="icon-remove"></i>
+									<?= Session::show("errors"); ?>
+								</li>
+							</ul>
+						</div>
+					<?php endif; ?>
 
-					<form method="post" action="<?php echo BASE_URL;?>admin"  class="form-horizontal" name="form-admin-login">
-						<input type="hidden" name="enviar" value="1">
+					<form method="post" action="<?php echo BASE_URL.'admin/logear';?>" class="form-horizontal">					
 
 						<div class="control-group">
 							<div class="controls">
-								<input type="text" id="inputCorreo" name="inputCorreo" placeholder="Correo" value="<?php if(isset($this->datos)) echo $this->datos['inputCorreo']; ?>" class="span12">
+								<input type="text" name="correo" placeholder="Correo" value="<?= Session::show('correo') ?>" class="span12">
 							</div>
 						</div>
 						<div class="control-group">
 							<div class="controls">
-								<input type="password" id="inputPassword" name="inputPassword" placeholder="Password" class="span12">
+								<input type="password" name="password" placeholder="Password" class="span12">
 							</div>
 						</div>
 						<div class="control-group">
