@@ -56,7 +56,7 @@
 											</tr>
 											<tr>
 												<td><b>Celular</b></td>
-												<td><?= $u->us_celular; ?></td>
+												<td><?php echo ($u->us_celular == '') ? '-' : $u->us_celular; ?></td>
 											</tr>
 										</tbody>
 									</table>

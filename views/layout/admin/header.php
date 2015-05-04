@@ -26,26 +26,23 @@
 					<ul class="nav pull-right">
 						<li>
 							<a href="<?= BASE_URL; ?>" target="_blank">
-								<i class="icon-briefcase"></i>Ir al negocio
+								Ir al negocio
 							</a>
 						</li>
 						<li class="divider-vertical"></li>
 						<li class="dropdown">
 							<a href="" class="dropdown-toggle" data-toggle="dropdown">
-								<i class="icon-cloud"></i>
 								Bienvenido, <?= Session::get('operador')['nombre']; ?>
 								<b class="caret"></b>
 							</a>
 							<ul class="dropdown-menu">
 								<li>
 									<a href="<?= BASE_URL.'admin/edit_empleado/'.Session::get('operador')['id']; ?>">
-										<i class="icon-file"></i>
 										Informacion de Usuario
 									</a>
 								</li>
 								<li>
 									<a href="<?= BASE_URL.'admin/edit_password/'.Session::get('operador')['id']; ?>">
-										<i class="icon-key"></i>
 										Cambiar Password
 									</a>
 								</li>
@@ -72,9 +69,9 @@
 					<div class="nav-collapse">
 						<ul class="nav" style="height:auto;">
 							<li>
-								<a href="<?= BASE_URL . 'admin/panelcontrol'; ?>">
-					                <i class="icon-home icon-large"></i> 
-					                Panel de Control
+								<a href="<?= BASE_URL . 'admin/ordenes'; ?>">
+					                <i class="icon-shopping-cart icon-large"></i> 
+					                Ordenes
 					            </a>
 							</li>
 							<li>
@@ -88,25 +85,21 @@
 					                <i class="icon-user icon-large"></i> 
 					                Clientes
 					            </a>
-							</li>
-							<li>
-								<a href="<?= BASE_URL . 'admin/ordenes'; ?>">
-					                <i class="icon-shopping-cart icon-large"></i> 
-					                Ordenes
-					            </a>
-							</li>
+							</li>							
 							<li>
 								<a href="<?= BASE_URL . 'admin/reportes'; ?>">
 					                <i class="icon-bar-chart icon-large"></i> 
 					                Reportes
 					            </a>
 							</li>
+							<?php if ( Session::get('operador')['rol'] == 'administrador'): ?>
 							<li>
 								<a href="<?= BASE_URL . 'admin/empleados'; ?>">
 					                <i class="icon-group icon-large"></i> 
 					                Empleados
 					            </a>
 							</li>
+							<?php endif; ?>
 							<li>
 								<a href="<?= BASE_URL . 'admin/herramientas'; ?>">
 					                <i class="icon-wrench icon-large"></i> 

@@ -24,12 +24,14 @@
 		                Reportes
 		            </a>
 				</li>
+				<?php if ( Session::get('operador')['rol'] == 'administrador'): ?>
 				<li>
 					<a href="<?php echo BASE_URL . 'admin/empleados'; ?>">
 		                <i class="icon-group icon-large"></i> 
 		                Empleados
 		            </a>
 				</li>
+				<?php endif; ?>
 				<li>
 					<a href="<?php echo BASE_URL . 'admin/herramientas'; ?>">
 		                <i class="icon-wrench icon-large"></i> 

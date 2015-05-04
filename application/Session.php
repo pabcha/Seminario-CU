@@ -61,144 +61,22 @@ class Session
 			return $mensaje;
 		}
 	}
-
-	public static function acceso( $level )
+	
+	public static function isAutenticado()
 	{
-		if( !Session::get('op_autenticado') ) 
+		if ( !Session::get('operador')['autenticado'] ) 
 		{
-			header('Location: '.BASE_URL.'error/access/5050');
-			exit;
-		}
-
-		Session::tiempo();
-
-		if( Session::getLevel($level) > Session::getLevel(Session::get('op_level')) ) {
-			header('Location: '.BASE_URL.'error/access/5050');
-			exit;	
+			header('location:'. BASE_URL . 'admin');
 		}
 	}
 
-/*	public static function accesoView( $level )
+	public static function soloAdmin()
 	{
-		if( !Session::get('op_autenticado') ) {
-			return false;
-		}
-
-		if( Session::getLevel($level) > Session::getLevel( Session::get('op_level')) ) {
-			return false;
-		}
-
-		return true;
-	}*/
-
-	public static function getLevel( $level )
-	{
-		$role['administrador'] = 5;
-		$role['vendedor'] = 2;
-		$role['usuario'] = 1;
-
-		if( !array_key_exists($level, $role) ) {
-			throw new Exception("Error de acceso. Nivel no encontrado");
-		}
-		else{
-			return $role[$level];
+		if ( Session::get('operador')['rol'] !== 'administrador' )
+		{
+			header('location:'. BASE_URL . 'error/access/5050');
 		}
 	}
-
-	public static function accesoEstricto( array $level, $noAdmin = false )
-	{
-		if( !Session::get('op_autenticado') ) {
-			header('Location: '.BASE_URL.'error/access/5050');
-			exit;	
-		}
-
-		Session::tiempo();
-
-		if( $noAdmin == false ) {
-			if( Session::get('op_level') == 'admin' ) {
-				return;//permite acceso al admin
-			}
-		}
-
-		if( count($level) ) {
-			if( in_array( Session::get('op_level'), $level)) {
-				return;
-			}
-		}
-
-		header('Location: '.BASE_URL.'error/access/5050');
-	}
-
-/*	public static function accesoViewEstricto( array $level, $noAdmin = false )
-	{
-		if( !Session::get('op_autenticado') ) {
-			return false;
-		}
-
-		if( $noAdmin = false ) {
-			if( Session::get('op_level') == 'admin' ) {
-				return true;//permite acceso al admin
-			}
-		}
-
-		if( count($level) ) {
-			if( in_array( Session::get('op_level'), $level)) {
-				return true;
-			}
-		}
-
-		return false;
-	}*/
-
-	public static function tiempo()
-	{
-		if ( !Session::get('op_tiempo') || !defined('SESSION_TIME') ) {
-			throw new Exception("No se ha definido el tiempo de sesion.");
-		}
-
-		if( SESSION_TIME == 0) {
-			return;//tiempo de session indefinido
-		}
-
-		if( time() - Session::get('op_tiempo') > (SESSION_TIME * 60) ) {
-			Session::destroy();//expiro session
-			header('Location: '.BASE_URL.'error/access/8080');		
-		}
-		else {
-			Session::set('op_tiempo', time());
-		}
-	}
-
-/*	public static function tiempo_carrito()
-	{
-		///if ( !Session::get('tiempo_carrito') || !defined('SESSION_TIME_CARRO') ) {
-		if ( Session::get('tiempo_carrito') && defined('SESSION_TIME_CARRO') ) {
-
-			if( SESSION_TIME_CARRO == 0) {
-			return;//tiempo de session indefinido
-			}
-
-			if( time() - Session::get('tiempo_carrito') > (SESSION_TIME_CARRO * 60) ) {
-				Session::destroy( array('carro','tiempo_carrito','contador') );//expiro session
-				//header('Location: '.BASE_URL.'error/access/8080');		
-			}
-			else {
-				Session::set('tiempo_carrito', time());
-			}
-
-		} 
-		/*if( SESSION_TIME_CARRO == 0) {
-			return;//tiempo de session indefinido
-		}
-
-		if( time() - Session::get('tiempo_carrito') > (SESSION_TIME_CARRO * 60) ) {
-			Session::destroy( array('carro','tiempo_carrito','contador') );//expiro session
-			//header('Location: '.BASE_URL.'error/access/8080');		
-		}
-		else {
-			Session::set('tiempo_carrito', time());
-		}*/
-	/*}*/
 }
 
 ?>

@@ -17,7 +17,7 @@ class adminController extends Controller
 		$this->_view->renderizar($str, $data);
 		$this->_view->renderizar('layout/admin/footer');
 	}
-
+//---------------- Entrar ---------------------//
 	public function index()
 	{
 		if ( Session::get('operador')['autenticado'] ) 
@@ -33,10 +33,7 @@ class adminController extends Controller
 
 	public function logear()
 	{
-		if (Session::get('operador')['autenticado']) 
-		{
-			$this->redireccionar('admin');
-		}
+		Session::isAutenticado();
 
 		if ( $_SERVER['REQUEST_METHOD'] != 'POST' )
 		{
@@ -68,19 +65,16 @@ class adminController extends Controller
 
 	public function logout()
 	{
+		Session::isAutenticado();
 		Session::destroy('operador');
 		$this->redireccionar('admin');
 	}
 
-//------*||Categorias de productos|| *------*/
+//---------------- Categorias ---------------------//
 
 	public function categorias()
 	{
-		/*if( !Session::get('op_autenticado') ) 
-		{
-			$this->redireccionar('admin');			
-		}
-		Session::acceso('vendedor');*/
+		Session::isAutenticado();
 		
 		$this->_view->titulo = 'Categorias';
 		$this->_view->setJs(array(
@@ -99,11 +93,7 @@ class adminController extends Controller
 
 	public function categorias_add()
 	{
-		/*if( !Session::get('op_autenticado') ) 
-		{
-			$this->redireccionar('admin');			
-		}
-		Session::acceso('vendedor');*/
+		Session::isAutenticado();
 
 		$this->_view->titulo = 'Añadir categoria';
 		$this->_view->setCss(array('vendor/jquery.treeview'));
@@ -139,11 +129,8 @@ class adminController extends Controller
 
 	public function categorias_update($id_categoria)
 	{
-		/*if( !Session::get('op_autenticado') ) 
-		{
-			$this->redireccionar('admin');			
-		}
-		Session::acceso('vendedor');*/
+		Session::isAutenticado();
+
 		try {
 			$categoria = App\Models\Category::findOrFail($id_categoria);
 
@@ -184,11 +171,7 @@ class adminController extends Controller
 
 	public function categoria($id_categoria)
 	{
-		/*if( !Session::get('op_autenticado') ) 
-		{
-			$this->redireccionar('admin');			
-		}
-		Session::acceso('vendedor');*/
+		Session::isAutenticado();
 
 		try {
 			$datos['c'] = App\Models\Category::findOrFail($id_categoria);
@@ -214,12 +197,7 @@ class adminController extends Controller
 
 	public function categoria_delete( $id_categoria ) 
 	{
-		//die($id_categoria);
-		/*if( !Session::get('op_autenticado') ) 
-		{			
-			$this->redireccionar('admin');
-		}
-		Session::acceso('vendedor');*/
+		Session::isAutenticado();
 
 		try {
 			$categoria = App\Models\Category::findOrFail($id_categoria);
@@ -235,15 +213,12 @@ class adminController extends Controller
 			$this->redireccionar('admin/categorias');
 		}
 	}
-//------*||Marcas de productos||*---------*/
+
+//---------------- Marcas ---------------------//
 
 	public function marcas()
 	{
-		/*if( !Session::get('op_autenticado') ) 
-		{
-			$this->redireccionar('admin');
-		}
-		Session::acceso('vendedor');*/
+		Session::isAutenticado();
 
 		$this->_view->titulo = 'Marcas de producto';
 		$this->_view->setJs(array(
@@ -260,11 +235,7 @@ class adminController extends Controller
 
 	public function marcas_add()
 	{
-		/*if( !Session::get('op_autenticado') ) 
-		{
-			$this->redireccionar('admin');
-		}
-		Session::acceso('vendedor');*/		
+		Session::isAutenticado();	
 
 		$Val = new App\Helpers\Validator();
 
@@ -291,11 +262,7 @@ class adminController extends Controller
 
 	public function marca_update($marca_id)
 	{
-		/*if( !Session::get('op_autenticado') )
-		{
-			$this->redireccionar('admin');
-		}
-		Session::acceso('vendedor');*/
+		Session::isAutenticado();
 
 		try {
 			$marca = App\Models\Marca::findOrFail( $marca_id );
@@ -326,11 +293,7 @@ class adminController extends Controller
 
 	public function marca_delete( $marca_id ) 
 	{
-		/*if( !Session::get('op_autenticado') ) 
-		{			
-			$this->redireccionar('admin');
-		}
-		Session::acceso('vendedor');*/
+		Session::isAutenticado();
 
 		try {
 			$marca = App\Models\Marca::findOrFail( $marca_id );
@@ -346,15 +309,12 @@ class adminController extends Controller
 			$this->redireccionar('admin/marcas');
 		}
 	}
-//------*||Productos||*---------*/
-	//
+
+//---------------- Productos ---------------------//
+
 	public function productos()
 	{
-		/*if( !Session::get('op_autenticado') ) 
-		{
-			$this->redireccionar('admin');
-		}
-		Session::acceso('vendedor');*/
+		Session::isAutenticado();
 
 		$this->_view->titulo = 'Productos de catalogo';
 		$this->_view->setJs(array(
@@ -371,18 +331,7 @@ class adminController extends Controller
 
 	public function productos_add()
 	{
-		/*if( !Session::get('op_autenticado') ) 
-		{
-			$this->redireccionar('admin');
-		}
-		Session::acceso('vendedor');*/		
-
-		/*if ( $datos['marcas']->isEmpty() OR $datos['categorias']->isEmpty() )
-		{
-			//Exigir definir marca y categoria
-			$this->redireccionar('admin/productos');
-		}*/
-			
+		Session::isAutenticado();			
 		
 		$Val = new App\Helpers\Validator();
 
@@ -426,11 +375,7 @@ class adminController extends Controller
 
 	public function producto_update($producto_id)
 	{
-		/*if( !Session::get('op_autenticado') ) 
-		{
-			$this->redireccionar('admin');
-		}
-		Session::acceso('vendedor');*/
+		Session::isAutenticado();
 
 		try {
 			$producto = App\Models\Product::findOrFail($producto_id);
@@ -480,11 +425,7 @@ class adminController extends Controller
 
 	public function producto_update_img($producto_id)
 	{
-		/*if( !Session::get('op_autenticado') ) 
-		{
-			$this->redireccionar('admin');
-		}
-		Session::acceso('vendedor');*/
+		Session::isAutenticado();
 
 		try {
 			$producto = App\Models\Product::findOrFail($producto_id);
@@ -556,11 +497,7 @@ class adminController extends Controller
 
 	public function producto_img_delete($producto_id, $img_id)
 	{
-		/*if( !Session::get('op_autenticado') ) 
-		{
-			$this->redireccionar('admin');
-		}
-		Session::acceso('vendedor');*/
+		Session::isAutenticado();
 
 		try {
 			$producto = App\Models\Product::findOrFail($producto_id);
@@ -595,11 +532,7 @@ class adminController extends Controller
 
 	public function change_img_predeterminada($producto_id, $img_id)
 	{
-		/*if( ! Session::get('op_autenticado') ) 
-		{
-			$this->redireccionar('admin');
-		}
-		Session::acceso('vendedor');*/
+		Session::isAutenticado();
 
 		try {
 			$producto = App\Models\Product::findOrFail($producto_id);
@@ -620,11 +553,7 @@ class adminController extends Controller
 
 	public function producto_delete( $producto_id ) 
 	{
-		/*if( !Session::get('op_autenticado') ) 
-		{			
-			$this->redireccionar('admin');
-		}
-		Session::acceso('vendedor');*/
+		Session::isAutenticado();
 
 		try {
 			$producto = App\Models\Product::findOrFail($producto_id);
@@ -640,10 +569,13 @@ class adminController extends Controller
 			$this->redireccionar('admin/productos');
 		}
 	}
+
 //---------------- Ordenes ---------------------//
 
 	public function ordenes()
 	{
+		Session::isAutenticado();
+
 		$datos['ordenes'] = App\Models\Order::estado('Pedido')
 			->estado('Esperando pago')
 			->get();
@@ -660,6 +592,8 @@ class adminController extends Controller
 
 	public function ordenes_pagadas()
 	{
+		Session::isAutenticado();
+
 		$datos['ordenes'] = App\Models\Order::estado('Pago aceptado')->get();
 		
 		$this->_view->titulo = "Ordenes";
@@ -674,6 +608,8 @@ class adminController extends Controller
 
 	public function ordenes_enviadas()
 	{
+		Session::isAutenticado();
+
 		$datos['ordenes'] = App\Models\Order::estado('Enviado')->get();
 		
 		$this->_view->titulo = "Ordenes";
@@ -688,6 +624,8 @@ class adminController extends Controller
 
 	public function ordenes_finalizadas()
 	{
+		Session::isAutenticado();
+
 		$datos['ordenes'] = App\Models\Order::estado('Recibido')->get();
 		
 		$this->_view->titulo = "Ordenes";
@@ -702,6 +640,8 @@ class adminController extends Controller
 
 	public function ordenes_canceladas()
 	{
+		Session::isAutenticado();
+
 		$datos['ordenes'] = App\Models\Order::estado('Cancelado')->get();
 		
 		$this->_view->titulo = "Ordenes";
@@ -716,6 +656,8 @@ class adminController extends Controller
 
 	public function orden($orden_id)
 	{
+		Session::isAutenticado();
+
 		try {
 			$o = App\Models\Order::findOrFail($orden_id);			
 			
@@ -783,6 +725,8 @@ class adminController extends Controller
 
 	public function orden_historia($orden_id)
 	{
+		Session::isAutenticado();
+
 		try 
 		{
 			$o = App\Models\Order::findOrFail($orden_id);
@@ -804,6 +748,8 @@ class adminController extends Controller
 
 	public function orden_correo($orden_id)
 	{
+		Session::isAutenticado();
+
 		try 
 		{
 			$o = App\Models\Order::findOrFail($orden_id);
@@ -856,6 +802,8 @@ class adminController extends Controller
 
 	public function orden_nota($orden_id)
 	{
+		Session::isAutenticado();
+
 		try 
 		{
 			$o = App\Models\Order::findOrFail($orden_id);
@@ -889,10 +837,13 @@ class adminController extends Controller
 			$this->redireccionar('error');
 		};
 	}
-// ---------------- Clientes --------------------- //
+
+//---------------- Clientes ---------------------//
 
 	public function clientes()
 	{
+		Session::isAutenticado();
+
 		$datos['clientes'] = App\Models\User::all();
 		$this->_view->titulo = "Clientes en SaltaShop";
 
@@ -904,6 +855,8 @@ class adminController extends Controller
 
 	public function cliente($cliente_id)
 	{
+		Session::isAutenticado();
+
 		try {
 			$u = App\Models\User::findOrFail($cliente_id);	
 		} catch (Exception $e) {
@@ -925,6 +878,9 @@ class adminController extends Controller
 
 	public function empleados()
 	{
+		Session::isAutenticado();
+		Session::soloAdmin();
+
 		$datos['operadores'] = App\Models\Operador::all();
 		$this->_view->titulo = "Empleados en SaltaShop";
 		$this->_view->setJs(array(
@@ -936,6 +892,9 @@ class adminController extends Controller
 
 	public function add_empleado()
 	{
+		Session::isAutenticado();
+		Session::soloAdmin();
+
 		$datos['genero'] = (Session::get('genero')) ? Session::show('genero') : '';
 		$datos['rol'] = (Session::get('rol')) ? Session::show('rol') : '';
 
@@ -945,6 +904,9 @@ class adminController extends Controller
 
 	public function store_empleado()
 	{
+		Session::isAutenticado();
+		Session::soloAdmin();
+
 		if ( $_SERVER['REQUEST_METHOD'] != 'POST' )
 		{
 			$this->redireccionar('admin/empleados');
@@ -974,6 +936,8 @@ class adminController extends Controller
 
 	public function show_empleado($id)
 	{
+		Session::isAutenticado();
+
 		try {
 			$emp = App\Models\Operador::findOrFail($id);	
 		} catch (Exception $e) {
@@ -987,6 +951,9 @@ class adminController extends Controller
 
 	public function edit_empleado($id)
 	{
+		Session::isAutenticado();
+		Session::soloAdmin();
+
 		try {
 			$emp = App\Models\Operador::findOrFail($id);	
 		} catch (Exception $e) {
@@ -1013,6 +980,9 @@ class adminController extends Controller
 
 	public function edit_password($id)
 	{
+		Session::isAutenticado();
+		Session::soloAdmin();
+
 		try {
 			$emp = App\Models\Operador::findOrFail($id);	
 		} catch (Exception $e) {
@@ -1038,10 +1008,12 @@ class adminController extends Controller
 		$this->viewMake('admin/empleados/edit_password', $datos);
 	}
 
-// ---------------- Reportes --------------------- //
+//---------------- Reportes --------------------- //
 
 	public function reportes($filter = '')
 	{
+		Session::isAutenticado();
+
 		$this->_view->titulo = "Reportes en SaltaShop";
 
 		$this->_view->setJs(array('common/helpers'));
@@ -1057,6 +1029,8 @@ class adminController extends Controller
 
 	public function month() 
 	{
+		Session::isAutenticado();
+
 		$orders = App\Models\Order::whereRaw("MONTH(ord_fecha) = MONTH(now())")
 					->where('ord_estado', '!=', 'Cancelado')
 					->orderBy('ord_fecha')
@@ -1077,6 +1051,8 @@ class adminController extends Controller
 
 	public function day7()
 	{
+		Session::isAutenticado();
+
 		$orders = App\Models\Order::whereRaw("DATEDIFF(now(), ord_fecha) < ?", [7])
 					->where('ord_estado', '!=', 'Cancelado')
 					->orderBy('ord_fecha')
@@ -1097,6 +1073,8 @@ class adminController extends Controller
 
 	public function last_month() 
 	{
+		Session::isAutenticado();
+
 		$orders = App\Models\Order::whereRaw("MONTH(ord_fecha) = MONTH(now()) - 1")
 					->where('ord_estado', '!=', 'Cancelado')
 					->orderBy('ord_fecha')
@@ -1117,6 +1095,8 @@ class adminController extends Controller
 
 	public function year() 
 	{
+		Session::isAutenticado();
+
 		$orders = App\Models\Order::whereRaw("YEAR(ord_fecha) = YEAR(now())")
 					->where('ord_estado', '!=', 'Cancelado')
 					->orderBy('fecha')
@@ -1137,6 +1117,8 @@ class adminController extends Controller
 
 	public function stock($filter = 'low_stock')
 	{
+		Session::isAutenticado();
+
 		if ($filter == 'out_stock') 
 		{
 			$this->out_stock();
@@ -1149,6 +1131,8 @@ class adminController extends Controller
 
 	public function low_stock()
 	{
+		Session::isAutenticado();
+
 		$products = App\Models\Product::where('producto_cantidad','<=',7)->get();
 		
 		$datos['products'] = $products;
@@ -1161,6 +1145,8 @@ class adminController extends Controller
 
 	public function out_stock()
 	{
+		Session::isAutenticado();
+
 		$products = App\Models\Product::where('producto_cantidad',0)->get();
 		
 		$datos['products'] = $products;
@@ -1173,6 +1159,8 @@ class adminController extends Controller
 
 	public function build_pdf()
 	{
+		Session::isAutenticado();
+
 		if ( $_SERVER['REQUEST_METHOD'] === 'POST' ) {
 
 			$data = array(
@@ -1198,6 +1186,8 @@ class adminController extends Controller
 
 	public function build_csv()
 	{
+		Session::isAutenticado();
+
 		if ( $_SERVER['REQUEST_METHOD'] === 'POST' ) {
 
 			$data = array(
@@ -1213,6 +1203,25 @@ class adminController extends Controller
 		} else {
 			die("Ups! ocurrio un problema.");
 		}
+	}
+
+//---------------- Panel ---------------------//
+
+	public function mi_cuenta()
+	{
+		Session::isAutenticado();
+
+		$this->_view->titulo = 'Marcas de producto';
+		$this->_view->setJs(array(
+			'vendor/datatable1.10.6/jquery.dataTables.min',
+			'common/helpers',
+			'admin/catalogo'
+		));
+
+		$datos['marcas'] = App\Models\Marca::where('producto_marca_estado', '!=', 'B')->get();
+		$datos['page'] = 3;
+
+		$this->viewMake('admin/catalogo/marcas', $datos);
 	}
 }
 ?>
