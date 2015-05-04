@@ -46,14 +46,13 @@
 										Cambiar Password
 									</a>
 								</li>
+								<li>
+									<a href="<?= BASE_URL.'admin/logout' ?>">
+										<i class="icon-signout"></i>
+										Salir
+									</a>
+								</li>
 							</ul>
-						</li>						
-						<li class="divider-vertical"></li>
-						<li>
-							<a href="<?= BASE_URL.'admin/logout' ?>">
-								<i class="icon-signout"></i>
-								Salir
-							</a>
 						</li>
 						<li class="divider-vertical"></li>
 					</ul>
