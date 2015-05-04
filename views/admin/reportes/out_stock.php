@@ -30,7 +30,13 @@
 								<tr>
 									<td><?= $product['producto_nombre'] ?></td>
 									<td><?= $product['producto_cantidad'] ?></td>
-									<td></td>
+									<td>
+										<div class="btn-group">
+											<a href="<?php echo BASE_URL.'admin/producto_update/'.$product['producto_id']; ?>" class="btn" title="ver">
+												<i class="icon-zoom-in"></i>
+											</a>
+										</div>
+									</td>
 								</tr>
 								<?php endforeach ?>
 							<?php else: ?>

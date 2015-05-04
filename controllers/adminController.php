@@ -1032,13 +1032,13 @@ class adminController extends Controller
 		Session::isAutenticado();
 
 		$orders = App\Models\Order::whereRaw("MONTH(ord_fecha) = MONTH(now())")
-					->where('ord_estado', '!=', 'Cancelado')
-					->orderBy('ord_fecha')
-					->groupBy('ord_fecha')
 					->select(Capsule::raw('date(ord_fecha) as fecha'),
 						Capsule::raw('sum(ord_total) as total_ventas'),
 						Capsule::raw('count(ord_id) as cantidad_ordenes'),
 						Capsule::raw('sum(ord_cantidad_vendida) as cantidad_vendida'))
+					->where('ord_estado', '!=', 'Cancelado')
+					->orderBy('fecha')
+					->groupBy('fecha')					
 					->get();
 
 		$Fechas = new App\Helpers\Fechas();
@@ -1054,15 +1054,15 @@ class adminController extends Controller
 		Session::isAutenticado();
 
 		$orders = App\Models\Order::whereRaw("DATEDIFF(now(), ord_fecha) < ?", [7])
-					->where('ord_estado', '!=', 'Cancelado')
-					->orderBy('ord_fecha')
-					->groupBy('ord_fecha')
 					->select(Capsule::raw('date(ord_fecha) as fecha'),
 						Capsule::raw('sum(ord_total) as total_ventas'),
 						Capsule::raw('count(ord_id) as cantidad_ordenes'),
 						Capsule::raw('sum(ord_cantidad_vendida) as cantidad_vendida'))
+					->where('ord_estado', '!=', 'Cancelado')
+					->orderBy('fecha')
+					->groupBy('fecha')
 					->get();
-		
+
 		$Fechas = new App\Helpers\Fechas();
 		$fechas = $Fechas->get_last_days(7);
 
@@ -1076,13 +1076,13 @@ class adminController extends Controller
 		Session::isAutenticado();
 
 		$orders = App\Models\Order::whereRaw("MONTH(ord_fecha) = MONTH(now()) - 1")
-					->where('ord_estado', '!=', 'Cancelado')
-					->orderBy('ord_fecha')
-					->groupBy('ord_fecha')
+					->where('ord_estado', '!=', 'Cancelado')					
 					->select(Capsule::raw('date(ord_fecha) as fecha'),
 						Capsule::raw('sum(ord_total) as total_ventas'),
 						Capsule::raw('count(ord_id) as cantidad_ordenes'),
 						Capsule::raw('sum(ord_cantidad_vendida) as cantidad_vendida'))
+					->orderBy('fecha')
+					->groupBy('fecha')
 					->get();
 
 		$Fechas = new App\Helpers\Fechas();
@@ -1099,12 +1099,12 @@ class adminController extends Controller
 
 		$orders = App\Models\Order::whereRaw("YEAR(ord_fecha) = YEAR(now())")
 					->where('ord_estado', '!=', 'Cancelado')
-					->orderBy('fecha')
-					->groupBy('fecha')
 					->select(Capsule::raw('MONTH(ord_fecha) as fecha'),
 						Capsule::raw('sum(ord_total) as total_ventas'),
 						Capsule::raw('count(ord_id) as cantidad_ordenes'),
 						Capsule::raw('sum(ord_cantidad_vendida) as cantidad_vendida'))
+					->orderBy('fecha')
+					->groupBy('fecha')					
 					->get();
 
 		$Fechas = new App\Helpers\Fechas();
@@ -1133,7 +1133,9 @@ class adminController extends Controller
 	{
 		Session::isAutenticado();
 
-		$products = App\Models\Product::where('producto_cantidad','<=',7)->get();
+		$products = App\Models\Product::where('producto_cantidad', '<=', 7)
+			->where('producto_cantidad', '>', 0)
+			->get();
 		
 		$datos['products'] = $products;
 		$datos['page'] = 2;
@@ -1147,7 +1149,7 @@ class adminController extends Controller
 	{
 		Session::isAutenticado();
 
-		$products = App\Models\Product::where('producto_cantidad',0)->get();
+		$products = App\Models\Product::where('producto_cantidad', 0)->get();
 		
 		$datos['products'] = $products;
 		$datos['page'] = 2;
