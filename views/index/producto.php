@@ -91,8 +91,8 @@
 					</div>
 				</div>
 
-				<div class="row-fluid description">
-					<h3>Descripcion</h3>
+				<div class="row-fluid description" style="border: 1px solid #E4DEDE;padding: 10px 25px;">
+					<h3 style="margin:0">Descripcion</h3>
 					<p><?= nl2br( htmlspecialchars($p['producto_descripcion']) ) ?></p>				
 				</div>
 			</div>

@@ -37,7 +37,8 @@
 				
 					<ul class="menu-top">
 						<?php if ( isset($_SESSION['usuario']) && $_SESSION['usuario']['autenticado'] ): ?>
-							<li><a href="<?= BASE_URL.'entrar/salir'; ?>">Salir</a></li>							
+							<li><a href="<?= BASE_URL.'micuenta'; ?>">Mi cuenta</a></li>
+							<li><a href="<?= BASE_URL.'entrar/salir'; ?>">Salir</a></li>
 						<?php else: ?>
 							<li><a href="<?= BASE_URL.'entrar'; ?>">Entrar</a></li>
 							<li><a href="<?= BASE_URL.'registro'; ?>">Registrate</a></li>
@@ -60,14 +61,10 @@
 				<!-- /top menu -->
 
 				<div class="contacto">
-					<div class="num-tel">
-						<span class="llame">Llame:</span>
-						<span class="tel">0387-154-589687</span>
-					</div>
 					<div class="red-social-header">
 						<span class="siga">Seguinos:</span>
 						<i class="icon-facebook"></i>
-						<a href="https://twitter.com/intent/user?screen_name=salta_shop"><i class="icon-twitter"></i></a>
+						<i class="icon-twitter"></i>
 						<i class="icon-google-plus"></i>
 					</div>
 				</div>
@@ -100,8 +97,6 @@
 					<ul class="menu nav-collapse collapse">
 						<li><a href="<?= BASE_URL; ?>">Inicio</a></li>
 						<li><a href="<?= BASE_URL.'carrito'; ?>">Mi carrito</a></li>
-						<li><a href="<?= BASE_URL.'micuenta'; ?>">Mi cuenta</a></li>
-						<li><a href="<?= BASE_URL.'contacto'; ?>">Informacion</a></li>
 						<li><a href="<?= BASE_URL.'contacto'; ?>">Contactanos</a></li>
 					</ul>					
 				</div>
