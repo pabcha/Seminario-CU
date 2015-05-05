@@ -40,15 +40,13 @@
 					</div>
 				</div>
 				<!-- /Productos Nuevos -->
-
+				<?php if ( !empty($top) ): ?>
 				<div class="row-fluid">
 					<div class="widget-product">
 						<div class="widget-product-header">
 							<h3>Mas Vendidos</h3>
 						</div>
 						<div class="widget-product-content">
-						<?php if ( !empty($top) ): ?>
-
 							<?php foreach ($top as $p): ?>
 							<div class="span3 centerText <?= App\Helpers\Vista::is_first($j) ?>">
 								
@@ -63,17 +61,13 @@
 								<span class="precio">
 									<?= App\Helpers\Utils::to_pesos($p['producto_precio']) ?>
 								</span>
-
 							</div>
-							<?php endforeach ?>
-
-						<?php else: ?>
-							<?php echo "No se encontraron productos." ?>
-						<?php endif ?>					
+							<?php endforeach ?>											
 						</div>
 					</div>		
 				</div>
 				<!-- /Mas vendidos -->
+				<?php endif ?>
 				
 			</div>	
 			<!-- /span9 -->	

@@ -45,54 +45,50 @@
 					</div>
 				</div>
 				
-				<div class="span3">	
-					<!-- Productos en ofertas -->
-					<div class="header-menu">
-						<span>Novedad</span>
-					</div>
-					<div class="wrap-ofertas">
-					<?php if ( ! $ps->isEmpty() ): ?>
-						<?php foreach ($ps as $p): ?>
-							<div class="prod-oferta">
-								<div class="nom-prod-oferta">
-									<span class="nom">
-										<?= $p['producto_nombre']  ?>
-									</span>
-									<span class="precio"><?= App\Helpers\Utils::to_pesos($p['producto_precio']) ?></span>
+				<div class="span3">
+					<?php if ( ! $ps->isEmpty() ): ?>	
+						<!-- Productos en ofertas -->
+						<div class="header-menu">
+							<span>Novedad</span>
+						</div>
+						<div class="wrap-ofertas">						
+							<?php foreach ($ps as $p): ?>
+								<div class="prod-oferta">
+									<div class="nom-prod-oferta">
+										<span class="nom">
+											<?= $p['producto_nombre']  ?>
+										</span>
+										<span class="precio"><?= App\Helpers\Utils::to_pesos($p['producto_precio']) ?></span>
+									</div>
+									<div class="img-prod">
+										<img <?= App\Helpers\Vista::buildDefaultImg($p, 'thumb_tiny') ?>>
+									</div>
 								</div>
-								<div class="img-prod">
-									<img <?= App\Helpers\Vista::buildDefaultImg($p, 'thumb_tiny') ?>>
-								</div>
-							</div>
-						<?php endforeach ?>
-					<?php else: ?>
-						<?php echo "No se encontraron productos." ?>
-					<?php endif ?>	
-					</div>
+							<?php endforeach ?>						
+						</div>
+					<?php endif ?>
 
-					<!-- Productos mas comprados -->
-					<div class="header-menu">
-						<span>Mas vendidos</span>
-					</div>
-					<div class="wrap-ofertas">
 					<?php if ( !empty($top) ): ?>
-						<?php foreach ($top as $p): ?>
-							<div class="prod-oferta">
-								<div class="nom-prod-oferta">
-									<span class="nom">
-										<?= $p['producto_nombre']  ?>
-									</span>
-									<span class="precio"><?= App\Helpers\Utils::to_pesos($p['producto_precio']) ?></span>
+						<!-- Productos mas comprados -->
+						<div class="header-menu">
+							<span>Mas vendidos</span>
+						</div>
+						<div class="wrap-ofertas">					
+							<?php foreach ($top as $p): ?>
+								<div class="prod-oferta">
+									<div class="nom-prod-oferta">
+										<span class="nom">
+											<?= $p['producto_nombre']  ?>
+										</span>
+										<span class="precio"><?= App\Helpers\Utils::to_pesos($p['producto_precio']) ?></span>
+									</div>
+									<div class="img-prod">
+										<img <?= App\Helpers\Vista::getDefaultImg($p, 'thumb_tiny') ?>>
+									</div>
 								</div>
-								<div class="img-prod">
-									<img <?= App\Helpers\Vista::getDefaultImg($p, 'thumb_tiny') ?>>
-								</div>
-							</div>
-						<?php endforeach ?>
-					<?php else: ?>
-						<?php echo "No se encontraron productos." ?>
-					<?php endif ?>					
-					</div>
+							<?php endforeach ?>										
+						</div>
+					<?php endif ?>
 				</div>
 				<!-- /Barra derecha -->
 
