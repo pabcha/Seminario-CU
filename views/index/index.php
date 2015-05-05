@@ -15,7 +15,7 @@
 						
 						<div class="widget-product-content">
 						<?php if ( ! $ps->isEmpty() ): ?>
-							<?php foreach ($ps as $p): ?>
+							<?php foreach ($ps as $p): ?>								
 								<div class="span3 centerText <?= App\Helpers\Vista::is_first($i) ?>">
 									
 									<a href="<?= BASE_URL.'index/producto/'.$p['producto_id'] ?>" class="title">
@@ -31,6 +31,9 @@
 									</span>
 
 								</div>
+								<?php if ($i == 5): ?>
+									<div style="clear:both"></div>
+								<?php endif ?>
 							<?php endforeach ?>
 						<?php else: ?>
 							<?php echo "No se encontraron productos." ?>

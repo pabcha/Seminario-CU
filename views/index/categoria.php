@@ -67,6 +67,9 @@
 									</span>
 
 								</div>
+								<?php if ($i == 5): ?>
+									<div style="clear:both"></div>
+								<?php endif ?>
 							<?php endforeach ?>
 						<?php else: ?>
 							<?php echo "No se encontraron productos." ?>
