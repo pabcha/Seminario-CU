@@ -1,8 +1,6 @@
 <?php
 require 'vendor/autoload.php';
 
-use Illuminate\Database\Capsule\Manager as Capsule;
-
 define('DS', DIRECTORY_SEPARATOR);
 define('ROOT', realpath(dirname(__FILE__)) . DS);
 define('APP_PATH', ROOT . 'application' . DS);
@@ -16,27 +14,7 @@ try{
 	require_once APP_PATH . 'View.php';
 	require_once APP_PATH . 'DataBase.php';
 	require_once APP_PATH . 'Session.php';
-
-	$whoops = new \Whoops\Run;
-	$whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
-	$whoops->register();
-
-	Kint::enabled(true);
-
-	$capsule = new Capsule;
-	$capsule->addConnection([
-	    'driver'    => 'mysql',
-	    'host'      => DB_HOST,
-	    'database'  => DB_NAME,
-	    'username'  => DB_USER,
-	    'password'  => DB_PASS,
-	    'charset'   => 'utf8',
-	    'collation' => 'utf8_spanish_ci',
-	    'prefix'    => '',
-	]);
-
-	$capsule->setAsGlobal();
-	$capsule->bootEloquent();
+	require_once APP_PATH . 'init.php';	
 
 	Session::init();
 	Bootstrap::run(new Request);

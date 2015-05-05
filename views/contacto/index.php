@@ -51,6 +51,7 @@
 						<span>Novedad</span>
 					</div>
 					<div class="wrap-ofertas">
+					<?php if ( ! $ps->isEmpty() ): ?>
 						<?php foreach ($ps as $p): ?>
 							<div class="prod-oferta">
 								<div class="nom-prod-oferta">
@@ -64,6 +65,9 @@
 								</div>
 							</div>
 						<?php endforeach ?>
+					<?php else: ?>
+						<?php echo "No se encontraron productos." ?>
+					<?php endif ?>	
 					</div>
 
 					<!-- Productos mas comprados -->
@@ -71,6 +75,7 @@
 						<span>Mas vendidos</span>
 					</div>
 					<div class="wrap-ofertas">
+					<?php if ( !empty($top) ): ?>
 						<?php foreach ($top as $p): ?>
 							<div class="prod-oferta">
 								<div class="nom-prod-oferta">
@@ -83,7 +88,10 @@
 									<img <?= App\Helpers\Vista::getDefaultImg($p, 'thumb_tiny') ?>>
 								</div>
 							</div>
-						<?php endforeach ?>					
+						<?php endforeach ?>
+					<?php else: ?>
+						<?php echo "No se encontraron productos." ?>
+					<?php endif ?>					
 					</div>
 				</div>
 				<!-- /Barra derecha -->
