@@ -55,9 +55,9 @@ class ProductImage extends Model {
 					//ancho y alto minimo de 642px
 					list($ancho, $alto) = getimagesize($file['tmp_name']);
 
-					if ($ancho < 642 && $alto < 642) 
+					if ($ancho < 542 && $alto < 542) 
 					{
-						$Validator->additional_errors("El ancho y alto minimo debe ser 642px.");
+						$Validator->additional_errors("El ancho y alto minimo debe ser 542px.");
 					}
 
 					/*if ($ancho != $alto) 
