@@ -10,8 +10,6 @@ class recuperarController extends Controller
 
 	public function index()
 	{
-		$Usuario = $this->loadModel('usuario');
-
 		if (Session::get('usuario')['autenticado']) 
 		{
 			$this->redireccionar('index');
