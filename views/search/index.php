@@ -40,8 +40,10 @@
 										<span class="precio">
 											<?= App\Helpers\Utils::to_pesos($p['producto_precio']) ?>
 										</span>
-
 									</div>
+									<?php if ($i == 5): ?>
+										<div style="clear:both"></div>
+									<?php endif ?>
 								<?php endforeach ?>								
 							<?php else: ?>
 								<p class="not-found">No se encontraron resultados.</p>
