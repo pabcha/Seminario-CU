@@ -16,10 +16,10 @@ class carritoController extends Controller
 
 		$this->_view->titulo = 'Mi carrito - Salta Shop';
 		$this->_view->setCss(array('front/estilos_categorias',
-			'vendor/notifit'));
+			'vendor/notifIt'));
 		$this->_view->setJs(array('common/helpers',
 			'front/fn_carro',
-			'vendor/notifit'));
+			'vendor/notifIt'));
 
 		$this->_view->renderizar('layout/default/header');
 		$this->_view->renderizar('carrito/index', $datos);

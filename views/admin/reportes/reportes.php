@@ -4,12 +4,12 @@
 			<div class="row-fluid">
 
 				<!-- navegacion -->
-				<?php require_once ROOT.'views\layout\admin\left-bar.php'; ?>
+				<?php require_once ROOT.'views/layout/admin/left-bar.php'; ?>
 				<!-- fin navegacion -->
 
 				<div class="span9">
 
-					<?php require_once ROOT.'views\admin\reportes\common\header-content.php'; ?>
+					<?php require_once ROOT.'views/admin/reportes/common/header-content.php'; ?>
 					<!-- /header-content -->
 
 					<div class="row-fluid">

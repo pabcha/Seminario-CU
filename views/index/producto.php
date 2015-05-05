@@ -2,7 +2,7 @@
 <div class="conten-prin">
 	<div class="container">
 		<div class="row-fluid">
-			<?php include_once ROOT.'views\layout\default\leftbar.php'; ?>	
+			<?php include_once ROOT.'views/layout/default/leftbar.php'; ?>	
 			<div class="span3"></div>
 
 			<!-- Articulos -->

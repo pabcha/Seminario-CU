@@ -4,11 +4,11 @@
 		<div class="row-fluid">
 
 			<!-- navegacion -->
-			<?php require_once ROOT.'views\layout\admin\left-bar.php'; ?>
+			<?php require_once ROOT.'views/layout/admin/left-bar.php'; ?>
 			<!-- /navegacion -->
 
 			<div class="span9">
-				<?php require_once ROOT.'views\admin\catalogo\catalogo_menu.php'; ?>
+				<?php require_once ROOT.'views/admin/catalogo/catalogo_menu.php'; ?>
 				<!-- /nav catalogo -->
 
 				<?php if ( Session::get("mensajeExito") ) : ?>

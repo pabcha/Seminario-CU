@@ -5,7 +5,7 @@
 			<div class="row-fluid">
 
 				<!-- navegacion -->
-				<?php require_once ROOT.'views\layout\admin\left-bar.php'; ?>
+				<?php require_once ROOT.'views/layout/admin/left-bar.php'; ?>
 				<!-- fin navegacion -->
 
 				<!-- fin navegacion -->

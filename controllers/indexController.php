@@ -93,10 +93,10 @@ class indexController extends Controller
 			$this->_view->setJs(array('vendor/jquery.flexslider-min',
 				'common/helpers',
 				'front/fn_producto',
-				'vendor/notifit'));
+				'vendor/notifIt'));
 			$this->_view->setCss(array('vendor/flexslider',
 				'front/estilos_categorias',
-				'vendor/notifit'));
+				'vendor/notifIt'));
 
 			$datos['p'] = $producto;
 			$datos['imagenes'] = $imagenes;
