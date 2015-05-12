@@ -782,11 +782,11 @@ class adminController extends Controller
 			    	'message' => $mensaje
 			    );
 
-			    $html = App\Helpers\Email::get_template('new_notification', $data);
+			    /*$html = App\Helpers\Email::get_template('new_notification', $data);
 			    $Mailer = new PHPMailer();
 			    $subject = 'Notificación de estado de tu pedido';
 
-			    App\Helpers\Email::send($u->us_correo, $html, $Mailer, $subject);
+			    App\Helpers\Email::send($u->us_correo, $html, $Mailer, $subject);*/
 
 				Session::set("mensajeExito", "El mensaje se ha enviado al correo electrónico del cliente.");
 				$this->redireccionar('admin/orden_historia/'.$o->ord_id);
@@ -1013,6 +1013,7 @@ class adminController extends Controller
 	public function reportes($filter = '')
 	{
 		Session::isAutenticado();
+		Session::soloAdmin();
 
 		$this->_view->titulo = "Reportes en SaltaShop";
 
@@ -1030,6 +1031,7 @@ class adminController extends Controller
 	public function month() 
 	{
 		Session::isAutenticado();
+		Session::soloAdmin();
 
 		$orders = App\Models\Order::whereRaw("MONTH(ord_fecha) = MONTH(now())")
 					->select(Capsule::raw('date(ord_fecha) as fecha'),
@@ -1052,6 +1054,7 @@ class adminController extends Controller
 	public function day7()
 	{
 		Session::isAutenticado();
+		Session::soloAdmin();
 
 		$orders = App\Models\Order::whereRaw("DATEDIFF(now(), ord_fecha) < ?", [7])
 					->select(Capsule::raw('date(ord_fecha) as fecha'),
@@ -1074,6 +1077,7 @@ class adminController extends Controller
 	public function last_month() 
 	{
 		Session::isAutenticado();
+		Session::soloAdmin();
 
 		$orders = App\Models\Order::whereRaw("MONTH(ord_fecha) = MONTH(now()) - 1")
 					->where('ord_estado', '!=', 'Cancelado')					
@@ -1096,6 +1100,7 @@ class adminController extends Controller
 	public function year() 
 	{
 		Session::isAutenticado();
+		Session::soloAdmin();
 
 		$orders = App\Models\Order::whereRaw("YEAR(ord_fecha) = YEAR(now())")
 					->where('ord_estado', '!=', 'Cancelado')
@@ -1118,6 +1123,7 @@ class adminController extends Controller
 	public function stock($filter = 'low_stock')
 	{
 		Session::isAutenticado();
+		Session::soloAdmin();
 
 		if ($filter == 'out_stock') 
 		{
@@ -1132,6 +1138,7 @@ class adminController extends Controller
 	public function low_stock()
 	{
 		Session::isAutenticado();
+		Session::soloAdmin();
 
 		$products = App\Models\Product::where('producto_cantidad', '<=', 7)
 			->where('producto_cantidad', '>', 0)
@@ -1148,6 +1155,7 @@ class adminController extends Controller
 	public function out_stock()
 	{
 		Session::isAutenticado();
+		Session::soloAdmin();
 
 		$products = App\Models\Product::where('producto_cantidad', 0)->get();
 		
@@ -1162,6 +1170,7 @@ class adminController extends Controller
 	public function build_pdf()
 	{
 		Session::isAutenticado();
+		Session::soloAdmin();
 
 		if ( $_SERVER['REQUEST_METHOD'] === 'POST' ) {
 
@@ -1189,6 +1198,7 @@ class adminController extends Controller
 	public function build_csv()
 	{
 		Session::isAutenticado();
+		Session::soloAdmin();
 
 		if ( $_SERVER['REQUEST_METHOD'] === 'POST' ) {
 

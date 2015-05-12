@@ -85,13 +85,13 @@
 					                Clientes
 					            </a>
 							</li>							
+							<?php if ( Session::get('operador')['rol'] == 'administrador'): ?>
 							<li>
 								<a href="<?= BASE_URL . 'admin/reportes'; ?>">
 					                <i class="icon-bar-chart icon-large"></i> 
 					                Reportes
 					            </a>
-							</li>
-							<?php if ( Session::get('operador')['rol'] == 'administrador'): ?>
+							</li>							
 							<li>
 								<a href="<?= BASE_URL . 'admin/empleados'; ?>">
 					                <i class="icon-group icon-large"></i> 
@@ -99,6 +99,12 @@
 					            </a>
 							</li>
 							<?php endif; ?>
+							<li>
+								<a href="<?= BASE_URL.'admin/logout' ?>">
+									<i class="icon-signout"></i>
+									Salir
+								</a>
+							</li>
 						</ul>
 					</div>
 				</div>

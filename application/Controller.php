@@ -41,28 +41,6 @@ abstract class Controller
 		}
 	}
 
-/*	protected function getLibraryFlexible( $libreria,$root )
-	{
-		$rutaLibreria = ROOT . 'libs' . DS . $root . DS .$libreria . '.php';
-
-		if(is_readable( $rutaLibreria )){
-			require_once $rutaLibreria;
-		}else{
-			throw new Exception("Error de libreria");
-		}
-	}*/
-
-	//Sanear los datos enviados por POST
-	//Filtra el texto
-/*	protected function getTexto($clave)
-	{
-		if( isset($_POST[$clave]) && !empty($_POST[$clave])) {
-			$_POST[$clave] = htmlspecialchars( $_POST[$clave], ENT_QUOTES );
-			return $_POST[$clave];
-		}
-		return '';
-	}*/
-
 	protected function getInt($clave)
 	{
 		if( isset($_POST[$clave]) && !empty($_POST[$clave])) {
@@ -114,19 +92,6 @@ abstract class Controller
 			exit;
 		}
 	}
-
-/*	protected function getSql($clave)//evitar inyecciones sql
-    {
-        if(isset($_POST[$clave]) && !empty($_POST[$clave])){
-            $_POST[$clave] = strip_tags($_POST[$clave]);
-            
-            if(!get_magic_quotes_gpc()){
-                $_POST[$clave] = mysql_real_escape_string($_POST[$clave]);
-            }
-            
-            return trim($_POST[$clave]);
-        }
-    }*/
     
     protected function getAlphaNum($clave)//solo acepta caracteres de
     {
@@ -135,40 +100,6 @@ abstract class Controller
             return trim($_POST[$clave]);
         }
     }
-
-/*    public function validarEmail($email) 
-    {
-    	if ( !filter_var($email, FILTER_VALIDATE_EMAIL) ) {
-    		return false;
-    	}
-    	return true;
-    }*/
-
-    /*
-    *Funciones validar inputs
-    *
-    */
-
- /*   protected function notAlphaNum( $clave )//no pasan 
-    {
-        if ( strlen($_POST[$clave]) < 2 ) {
-        	return false;
-        } elseif( !preg_match("/^[a-zA-Z0-9 ]+$/", $_POST[$clave] ) ) {
-        	return false;
-        } else {
-        	return true;
-        }
-    }*/
-    
-/*    protected function getFloat($clave)
-	{
-		if( isset($_POST[$clave]) && !empty($_POST[$clave])) {
-			$_POST[$clave] = filter_input(INPUT_POST, $clave, FILTER_VALIDATE_FLOAT);
-			return $_POST[$clave];
-		}
-		return 0;
-	}*/
-
 }
 
 ?>

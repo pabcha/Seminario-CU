@@ -126,11 +126,11 @@ class cajaController extends Controller
 		$datos['pago'] = Session::get('temp')['forma_pago'];
 
 		//send an email
-	    $html = Email::get_template('new_order', $datos);
+	    /*$html = Email::get_template('new_order', $datos);
 	    $Mailer = new PHPMailer();
 	    $subject = 'Confirmacion de orden en saltashop';
 
-	    Email::send($u->us_correo, $html, $Mailer, $subject);
+	    Email::send($u->us_correo, $html, $Mailer, $subject);*/
 
 
 		//finalizado la insercion el carrito se tiene que vaciar
